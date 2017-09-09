@@ -26,6 +26,11 @@ public class SwitchScene : MonoBehaviour {
         //}
 
         //DontDestroyOnLoad(this);
+
+        GameObject UIRoot = GameObject.Find("Canvas");
+        Object dialogPrefab = Resources.Load("EasyMenu/_Prefabs/Dialog") as Object;
+        GameObject dialog = Instantiate(dialogPrefab) as GameObject;
+        dialog.transform.SetParent(UIRoot.transform, false);
     }
 
     public void OnValueChanged1(bool bCheck)

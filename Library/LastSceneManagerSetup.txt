@@ -1,10 +1,10 @@
 sceneSetups:
-- path: Assets/ManageScene.unity
+- path: Assets/Scenes/ManageScene.unity
   isLoaded: 1
   isActive: 1
-- path: Assets/toggle1.unity
+- path: Assets/Scenes/toggle1.unity
   isLoaded: 1
   isActive: 0
-- path: Assets/toggle2.unity
+- path: Assets/Scenes/toggle2.unity
   isLoaded: 0
   isActive: 0
