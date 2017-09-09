@@ -5,10 +5,13 @@ using UnityEngine.UI;
 
 public class SwitchScene : MonoBehaviour {
 
-    static bool bFlag = false;
-
+    //static bool bFlag = false;
+    //
     //public Toggle toggle1;
     //public Toggle toggle2;
+
+    GameObject UIRoot;
+    Object dialogPrefab;
 
     // Use this for initialization
     void Start()
@@ -29,8 +32,10 @@ public class SwitchScene : MonoBehaviour {
 
         GameObject UIRoot = GameObject.Find("Canvas");
         Object dialogPrefab = Resources.Load("EasyMenu/_Prefabs/Dialog") as Object;
-        GameObject dialog = Instantiate(dialogPrefab) as GameObject;
-        dialog.transform.SetParent(UIRoot.transform, false);
+
+        System.Timers.Timer t = new System.Timers.Timer(3000);
+        t.Elapsed += OnTimer;
+        t.Start();
     }
 
     public void OnValueChanged1(bool bCheck)
@@ -64,5 +69,16 @@ public class SwitchScene : MonoBehaviour {
     public void StartGame(string strName)
     {
         SceneManager.LoadScene(strName, LoadSceneMode.Single);
+    }
+
+    void OnTimer(System.Object source, System.Timers.ElapsedEventArgs e)
+    {
+        System.Timers.Timer t = (System.Timers.Timer)source;
+        t.Stop();
+        Debug.Log("OnTimer");
+
+
+        GameObject dialog = Instantiate(dialogPrefab) as GameObject;
+        dialog.transform.SetParent(UIRoot.transform, false);
     }
 }
