@@ -2,9 +2,9 @@ sceneSetups:
 - path: Assets/Scenes/ManageScene.unity
   isLoaded: 1
   isActive: 1
-- path: Assets/Scenes/toggle1.unity
+- path: Assets/Scenes/TxScene.unity
   isLoaded: 1
   isActive: 0
-- path: Assets/Scenes/toggle2.unity
+- path: Assets/Scenes/CtSecne.unity
   isLoaded: 0
   isActive: 0
