@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameMain : MonoBehaviour
@@ -30,16 +31,25 @@ public class GameMain : MonoBehaviour
         {
             Debug.Log("OnTimer");
 
-            //m_myGame.NextTurn();
+            m_myGame.NextTurn();
 
             GameObject UIRoot = GameObject.Find("Canvas");
 
             GameObject dialog = Instantiate(Resources.Load("EasyMenu/_Prefabs/Dialog"), UIRoot.transform) as GameObject;
+
+            Text txTitle = dialog.transform.Find("Title").GetComponent<Text>();
+            txTitle.text = "Title";
+
+            Text txContent = dialog.transform.Find("Content").GetComponent<Text>();
+            txContent.text = "Contentsdfgdsfgsdfgssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss";
+
             GameObject ButtonObj = Instantiate(Resources.Load("EasyMenu/_Prefabs/Button"), dialog.transform) as GameObject;
+            ButtonObj.transform.position = txContent.transform.position - new Vector3(10,10,0);
+            //GameObject ButtonObj1 = Instantiate(Resources.Load("EasyMenu/_Prefabs/Button"), dialog.transform) as GameObject;
             Button Btn = ButtonObj.GetComponent<Button>();
             Btn.onClick.AddListener
                 (
-                delegate () 
+                delegate ()
                 {
                     this.OnClick(ButtonObj);
                 }
@@ -47,8 +57,9 @@ public class GameMain : MonoBehaviour
 
             //Invoke("OnTimer", 1.0F);
         }
-        catch (System.Exception e)
+        catch (EndGameException )
         {
+            SceneManager.LoadScene("EndScene");
             return;
         }
 

@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class MyGame
 {
+    public void NextTurn()
+    {
+        //throw new EndGameException();
+    }
+}
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+public class EndGameException : System.Exception
+{
+
 }
