@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/ManageScene.unity
+- path: Assets/Scenes/ManagerScene.unity
   isLoaded: 1
   isActive: 1
 - path: Assets/Scenes/TxScene.unity
