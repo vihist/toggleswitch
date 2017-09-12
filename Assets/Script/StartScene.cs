@@ -19,4 +19,9 @@ public class StartScene : MonoBehaviour {
 	{
 		SceneManager.LoadSceneAsync("ManagerScene");
 	}
+
+	public void OnButtonQuit()
+	{
+		Application.Quit ();
+	}
 }
