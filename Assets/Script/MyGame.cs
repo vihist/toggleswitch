@@ -6,26 +6,53 @@ public class MyGame
 {
 	public delegate void DelegMsgBox(string strTitle, string strContent, ArrayList arrOption);
 	public delegate void DelegOnBtnClick();
-	public DelegMsgBox m_delegMsgBox;
+	public DelegMsgBox m_delegPopMsgBox;
 
-	public struct MsgBox
+    public struct Option
 	{
 		public string strDesc;
-		public DelegOnBtnClick delegOnBtnClick;
+        public DelegOnBtnClick delegOnBtnClick;
 	};
+
+    public MyGame()
+    {
+        m_bEnd = false;
+        m_ListMessageBox = new List<MessageBox>();
+    }
 
     public void NextTurn()
     {
-		ArrayList arrObject = new ArrayList();
-		arrObject.Add (new MsgBox{strDesc = "2222", delegOnBtnClick = OnBtnClick});
+        if (m_bEnd)
+        {
+            throw new EndGameException();
+        }
 
-		m_delegMsgBox ("111", "22222", arrObject);
-        //throw new EndGameException();
+        ArrayList arrObject = new ArrayList();
+		arrObject.Add (new Option { strDesc = "2222", delegOnBtnClick = OnBtnClick});
+
+        //MessageBox msgBox = new MessageBox("333", "444", arrObject);
+
+        m_delegPopMsgBox("333", "444", arrObject);
+
+        //m_delegMsgBox ("111", "22222", arrObject);
+
+        
     }
 
 	public void OnBtnClick()
 	{
-	}
+        m_bEnd = true;
+    }
+
+    private class MessageBox
+    {
+        string strTitile;
+        string strContent;
+        ArrayList arrOption;
+    }
+
+    private bool m_bEnd;
+    private List<MessageBox> m_ListMessageBox;
 }
 
 public class EndGameException : System.Exception

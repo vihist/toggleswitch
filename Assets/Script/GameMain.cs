@@ -1,10 +1,10 @@
 ﻿
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
+using System.Collections.Generic;
 
 public class GameMain : MonoBehaviour
 {
@@ -22,8 +22,10 @@ public class GameMain : MonoBehaviour
 
     public void Awake()
     {
+        m_ListDialog = new List<GameObject>();
+
         m_myGame = new MyGame();
-		m_myGame.m_delegMsgBox = this.MsgBox;
+		m_myGame.m_delegPopMsgBox = this.MsgBox;
 
         Invoke("OnTimer", 1.0F);  //2秒后，没0.3f调用一次
     }
@@ -32,11 +34,7 @@ public class GameMain : MonoBehaviour
     {
         try
         {
-            Debug.Log("OnTimer");
-
             m_myGame.NextTurn();
-
-            //Invoke("OnTimer", 1.0F);
         }
         catch (EndGameException )
         {
@@ -67,20 +65,32 @@ public class GameMain : MonoBehaviour
 
 		for(int i=0; i<arrOption.Count; i++)
 		{
-			MyGame.MsgBox msgBox = (MyGame.MsgBox) arrOption[i];
+			MyGame.Option option = (MyGame.Option) arrOption[i];
 			Button Btn = dialog.transform.Find("Button"+i).GetComponent<Button>();
 
 			Text txBtn = Btn.transform.Find("Text").GetComponent<Text>();
-			txBtn.text = msgBox.strDesc;
+			txBtn.text = option.strDesc;
 
 			Btn.onClick.AddListener ( delegate () 
 				{
-					msgBox.delegOnBtnClick();
-					Invoke("OnTimer", 2F);
-				}
+                    option.delegOnBtnClick();
+
+                    m_ListDialog.Remove(dialog);
+                    Destroy(dialog);
+    
+                    if (m_ListDialog.Count == 0)
+                    {
+                        Invoke("OnTimer", 1F);
+                    }
+                }
 			);
 		}
-	}
+
+        m_ListDialog.Add(dialog);
+
+    }
 
     private MyGame m_myGame;
+    private List<GameObject> m_ListDialog;
+
 }
