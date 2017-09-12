@@ -6,7 +6,7 @@ public class MyGame
 {
     public void NextTurn()
     {
-        //throw new EndGameException();
+        throw new EndGameException();
     }
 }
 

@@ -9,6 +9,7 @@ public class SwitchScene : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+		SceneManager.LoadSceneAsync("TxScene", LoadSceneMode.Additive);
     }
 
     // Update is called once per frame

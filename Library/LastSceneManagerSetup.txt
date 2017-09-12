@@ -1,10 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/ManagerScene.unity
+- path: Assets/Scenes/StartScene.unity
   isLoaded: 1
   isActive: 1
-- path: Assets/Scenes/TxScene.unity
-  isLoaded: 1
-  isActive: 0
-- path: Assets/Scenes/CtSecne.unity
-  isLoaded: 0
-  isActive: 0
