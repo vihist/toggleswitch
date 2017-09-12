@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
 
 public class GameMain : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class GameMain : MonoBehaviour
     public void Awake()
     {
         m_myGame = new MyGame();
+		m_myGame.m_delegMsgBox = this.MsgBox;
+
         Invoke("OnTimer", 1.0F);  //2秒后，没0.3f调用一次
     }
 
@@ -33,28 +36,6 @@ public class GameMain : MonoBehaviour
 
             m_myGame.NextTurn();
 
-            GameObject UIRoot = GameObject.Find("Canvas");
-
-            GameObject dialog = Instantiate(Resources.Load("EasyMenu/_Prefabs/Dialog"), UIRoot.transform) as GameObject;
-
-            Text txTitle = dialog.transform.Find("Title").GetComponent<Text>();
-            txTitle.text = "Title";
-
-            Text txContent = dialog.transform.Find("Content").GetComponent<Text>();
-            txContent.text = "Contentsdfgdsfgsdfgssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss";
-
-            GameObject ButtonObj = Instantiate(Resources.Load("EasyMenu/_Prefabs/Button"), dialog.transform) as GameObject;
-            ButtonObj.transform.position = txContent.transform.position - new Vector3(10,10,0);
-            //GameObject ButtonObj1 = Instantiate(Resources.Load("EasyMenu/_Prefabs/Button"), dialog.transform) as GameObject;
-            Button Btn = ButtonObj.GetComponent<Button>();
-            Btn.onClick.AddListener
-                (
-                delegate ()
-                {
-                    this.OnClick(ButtonObj);
-                }
-                );
-
             //Invoke("OnTimer", 1.0F);
         }
         catch (EndGameException )
@@ -65,11 +46,40 @@ public class GameMain : MonoBehaviour
 
     }
 
-    public void OnClick(GameObject sender)
+    public void OnClick()
     {
-        Debug.Log("OnClick" + sender);
+        Debug.Log("OnClick");
 
     }
+
+	public void MsgBox(string strTitle, string strContent, ArrayList arrOption)
+	{
+		GameObject UIRoot = GameObject.Find("Canvas");
+
+
+		GameObject dialog = Instantiate(Resources.Load(String.Format("EasyMenu/_Prefabs/Dialog_{0}Btn", arrOption.Count)), UIRoot.transform) as GameObject;
+
+		Text txTitle = dialog.transform.Find("Title").GetComponent<Text>();
+		txTitle.text = strTitle;
+
+		Text txContent = dialog.transform.Find("Content").GetComponent<Text>();
+		txContent.text = strContent;
+
+		for(int i=0; i<arrOption.Count; i++)
+		{
+			MyGame.MsgBox msgBox = (MyGame.MsgBox) arrOption[i];
+			Button Btn = dialog.transform.Find("Button"+i).GetComponent<Button>();
+
+			Text txBtn = Btn.transform.Find("Text").GetComponent<Text>();
+			txBtn.text = msgBox.strDesc;
+
+			Btn.onClick.AddListener ( delegate () 
+				{
+					msgBox.delegOnBtnClick();
+				}
+			);
+		}
+	}
 
     private MyGame m_myGame;
 }
