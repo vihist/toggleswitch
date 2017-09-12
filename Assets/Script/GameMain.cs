@@ -76,6 +76,7 @@ public class GameMain : MonoBehaviour
 			Btn.onClick.AddListener ( delegate () 
 				{
 					msgBox.delegOnBtnClick();
+					Invoke("OnTimer", 2F);
 				}
 			);
 		}
