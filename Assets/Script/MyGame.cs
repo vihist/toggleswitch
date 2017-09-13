@@ -20,19 +20,21 @@ public class MyGame
         m_ListMessageBox = new List<MessageBox>();
     }
 
+	public bool IsEnd()
+	{
+		return m_bEnd;
+	}
+
     public void NextTurn()
     {
-        if (m_bEnd)
-        {
-            throw new EndGameException();
-        }
-
         ArrayList arrObject = new ArrayList();
 		arrObject.Add (new Option { strDesc = "2222", delegOnBtnClick = OnBtnClick});
 
+		m_ListMessageBox.Add (new MessageBox{strTitile = "111", strContent = "222", arrOption = arrObject});
+
         //MessageBox msgBox = new MessageBox("333", "444", arrObject);
 
-        m_delegPopMsgBox("333", "444", arrObject);
+        //m_delegPopMsgBox("333", "444", arrObject);
 
         //m_delegMsgBox ("111", "22222", arrObject);
 
@@ -42,17 +44,19 @@ public class MyGame
 	public void OnBtnClick()
 	{
         m_bEnd = true;
+
+
     }
 
-    private class MessageBox
+    public class MessageBox
     {
-        string strTitile;
-        string strContent;
-        ArrayList arrOption;
+        public string strTitile;
+		public string strContent;
+		public ArrayList arrOption;
     }
 
     private bool m_bEnd;
-    private List<MessageBox> m_ListMessageBox;
+    public List<MessageBox> m_ListMessageBox;
 }
 
 public class EndGameException : System.Exception

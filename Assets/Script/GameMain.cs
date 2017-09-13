@@ -22,38 +22,52 @@ public class GameMain : MonoBehaviour
 
     public void Awake()
     {
-        m_ListDialog = new List<GameObject>();
 
         m_myGame = new MyGame();
-		m_myGame.m_delegPopMsgBox = this.MsgBox;
 
-        Invoke("OnTimer", 1.0F);  //2秒后，没0.3f调用一次
+		StartCoroutine(OnTimer());  
     }
 
-    private void OnTimer()
+	private IEnumerator OnTimer()
     {
-        try
-        {
-            m_myGame.NextTurn();
-        }
-        catch (EndGameException )
-        {
-            SceneManager.LoadScene("EndScene");
-            return;
-        }
+		while(!m_myGame.IsEnd())
+		{
+			m_myGame.NextTurn();
 
+			foreach(MyGame.MessageBox msgbox in m_myGame.m_ListMessageBox)
+			{
+				CheckDialog Dialog = MsgBox(msgbox.strTitile, msgbox.strContent, msgbox.arrOption);
+
+				yield return StartCoroutine(Dialog.IsChecked());
+			}
+
+			yield return new WaitForSeconds(m_fWaitTime);
+		}
+
+		SceneManager.LoadScene ("EndScene");
+		yield break;
     }
 
-    public void OnClick()
-    {
-        Debug.Log("OnClick");
+	public class CheckDialog
+	{
+		public GameObject dialog;
+		public bool bCheck;
+		public IEnumerator IsChecked()
+		{
+			while(!bCheck) 
+			{
+				yield return null; 
+			}
+			yield break;
+		}
+	}
 
-    }
-
-	public void MsgBox(string strTitle, string strContent, ArrayList arrOption)
+	public CheckDialog MsgBox(string strTitle, string strContent, ArrayList arrOption)
 	{
 		GameObject UIRoot = GameObject.Find("Canvas");
 
+
+		CheckDialog ckDialog = new CheckDialog ();
 
 		GameObject dialog = Instantiate(Resources.Load(String.Format("EasyMenu/_Prefabs/Dialog_{0}Btn", arrOption.Count)), UIRoot.transform) as GameObject;
 
@@ -62,6 +76,9 @@ public class GameMain : MonoBehaviour
 
 		Text txContent = dialog.transform.Find("Content").GetComponent<Text>();
 		txContent.text = strContent;
+
+		ckDialog.dialog = dialog;
+		ckDialog.bCheck = false;
 
 		for(int i=0; i<arrOption.Count; i++)
 		{
@@ -75,22 +92,18 @@ public class GameMain : MonoBehaviour
 				{
                     option.delegOnBtnClick();
 
-                    m_ListDialog.Remove(dialog);
                     Destroy(dialog);
     
-                    if (m_ListDialog.Count == 0)
-                    {
-                        Invoke("OnTimer", 1F);
-                    }
-                }
-			);
+					ckDialog.dialog = null;
+					ckDialog.bCheck = true;
+					Debug.Log("OnClick");
+                });
 		}
 
-        m_ListDialog.Add(dialog);
+		return ckDialog;
 
     }
 
     private MyGame m_myGame;
-    private List<GameObject> m_ListDialog;
-
+	private float m_fWaitTime;
 }
