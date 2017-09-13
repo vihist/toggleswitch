@@ -20,10 +20,11 @@ public class GameMain : MonoBehaviour
 		
 	}
 
-    public void Awake()
+    void Awake()
     {
 
         m_myGame = new MyGame();
+        m_fWaitTime = 3.0F;
 
 		StartCoroutine(OnTimer());  
     }
@@ -48,7 +49,7 @@ public class GameMain : MonoBehaviour
 		yield break;
     }
 
-	public class CheckDialog
+	private class CheckDialog
 	{
 		public GameObject dialog;
 		public bool bCheck;
@@ -62,14 +63,14 @@ public class GameMain : MonoBehaviour
 		}
 	}
 
-	public CheckDialog MsgBox(string strTitle, string strContent, ArrayList arrOption)
+	private CheckDialog MsgBox(string strTitle, string strContent, ArrayList arrOption)
 	{
 		GameObject UIRoot = GameObject.Find("Canvas");
 
 
 		CheckDialog ckDialog = new CheckDialog ();
 
-		GameObject dialog = Instantiate(Resources.Load(String.Format("EasyMenu/_Prefabs/Dialog_{0}Btn", arrOption.Count)), UIRoot.transform) as GameObject;
+		GameObject dialog = Instantiate(Resources.Load(String.Format("EasyMenu/_Prefabs/Dialog_{0}Btn", 1)), UIRoot.transform) as GameObject;
 
 		Text txTitle = dialog.transform.Find("Title").GetComponent<Text>();
 		txTitle.text = strTitle;

@@ -27,39 +27,48 @@ public class MyGame
 
     public void NextTurn()
     {
-        ArrayList arrObject = new ArrayList();
-		arrObject.Add (new Option { strDesc = "2222", delegOnBtnClick = OnBtnClick});
+        m_ListMessageBox.Clear();
 
-		m_ListMessageBox.Add (new MessageBox{strTitile = "111", strContent = "222", arrOption = arrObject});
+        MessageBox testMsg = new TestMessage();
+        testMsg.RegeditOption();
 
-        //MessageBox msgBox = new MessageBox("333", "444", arrObject);
-
-        //m_delegPopMsgBox("333", "444", arrObject);
-
-        //m_delegMsgBox ("111", "22222", arrObject);
-
-        
+        m_ListMessageBox.Add (testMsg);
+  
     }
 
-	public void OnBtnClick()
-	{
-        m_bEnd = true;
-
-
-    }
-
-    public class MessageBox
+    public abstract class MessageBox
     {
+        public MessageBox()
+        {
+            arrOption = new ArrayList();
+        }
+
         public string strTitile;
 		public string strContent;
 		public ArrayList arrOption;
+
+        public abstract void RegeditOption();
+    }
+
+    class TestMessage : MessageBox
+    {
+        public TestMessage()
+        {
+            strTitile = "test title";
+            strContent = "test content";    
+        }
+
+        public override void RegeditOption()
+        {
+            arrOption.Add(new Option { strDesc = "2222", delegOnBtnClick = OnOption1 });
+        }
+
+        private void OnOption1()
+        {
+            Console.WriteLine("OnOption1");
+        }
     }
 
     private bool m_bEnd;
     public List<MessageBox> m_ListMessageBox;
-}
-
-public class EndGameException : System.Exception
-{
-
 }
