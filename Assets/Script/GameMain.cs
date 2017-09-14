@@ -35,7 +35,7 @@ public class GameMain : MonoBehaviour
 		{
 			m_myGame.NextTurn();
 
-			foreach(MyGame.MessageBox msgbox in m_myGame.m_ListMessageBox)
+			foreach(MessageBox msgbox in m_myGame.m_ListMessageBox)
 			{
 				CheckDialog Dialog = MsgBox(msgbox.strTitile, msgbox.strContent, msgbox.arrOption);
 
@@ -83,7 +83,7 @@ public class GameMain : MonoBehaviour
 
 		for(int i=0; i<arrOption.Count; i++)
 		{
-			MyGame.Option option = (MyGame.Option) arrOption[i];
+			Option option = (Option) arrOption[i];
 			Button Btn = dialog.transform.Find("Button"+i).GetComponent<Button>();
 
 			Text txBtn = Btn.transform.Find("Text").GetComponent<Text>();
@@ -91,13 +91,15 @@ public class GameMain : MonoBehaviour
 
 			Btn.onClick.AddListener ( delegate () 
 				{
+                    Debug.Log("OnClick");
+
                     option.delegOnBtnClick();
 
                     Destroy(dialog);
     
 					ckDialog.dialog = null;
 					ckDialog.bCheck = true;
-					Debug.Log("OnClick");
+					
                 });
 		}
 
