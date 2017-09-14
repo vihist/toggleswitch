@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Script\EndScene.cs" />
      <Compile Include="Assets\Script\GameMain.cs" />
+     <Compile Include="Assets\Script\MsgFactory.cs" />
      <Compile Include="Assets\Script\MyGame.cs" />
      <Compile Include="Assets\Script\StartScene.cs" />
      <Compile Include="Assets\Script\SwitchScene.cs" />

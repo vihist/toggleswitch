@@ -18,6 +18,7 @@ public class MyGame
     {
         m_bEnd = false;
         m_ListMessageBox = new List<MessageBox>();
+		m_msgFactory = new MsgFactory ();
     }
 
 	public bool IsEnd()
@@ -29,8 +30,7 @@ public class MyGame
     {
         m_ListMessageBox.Clear();
 
-        MessageBox testMsg = new TestMessage();
-        testMsg.RegeditOption();
+		MessageBox testMsg = m_msgFactory.CreatePdt ();
 
         m_ListMessageBox.Add (testMsg);
   
@@ -50,7 +50,7 @@ public class MyGame
         public abstract void RegeditOption();
     }
 
-    class TestMessage : MessageBox
+    public class TestMessage : MessageBox
     {
         public TestMessage()
         {
@@ -70,5 +70,6 @@ public class MyGame
     }
 
     private bool m_bEnd;
+	private MsgFactory m_msgFactory;
     public List<MessageBox> m_ListMessageBox;
 }
