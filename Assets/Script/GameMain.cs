@@ -5,32 +5,75 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 public class GameMain : MonoBehaviour
 {
+	void Awake()
+	{
+
+		m_myGame = new MyGame();
+		m_fWaitTime = 3.0F;
+
+		StartCoroutine(OnTimer());  
+	}
+
 	// Use this for initialization
 	void Start ()
     {
-		
+
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-		
+		OnRefreshData ();
+		OnKeyBoard ();
 	}
 
-    void Awake()
-    {
+	private void OnRefreshData()
+	{
+		GameObject UIRoot = GameObject.Find("ResInfo");
 
-        m_myGame = new MyGame();
-        m_fWaitTime = 3.0F;
+		Text txTitle = UIRoot.transform.Find("TX").GetComponent<Text>();
+		txTitle.text = "111";
+	}
 
-		StartCoroutine(OnTimer());  
-    }
+	private void OnKeyBoard()
+	{
+		if (Input.GetKeyDown (KeyCode.Escape))  
+		{  
+			GameObject UIRoot = GameObject.Find("Canvas");
+			GameObject dialog = Instantiate(Resources.Load("EasyMenu/_Prefabs/Dialog_Esc"), UIRoot.transform) as GameObject;
+
+			Button btnSave = dialog.transform.Find("Save").GetComponent<Button>();
+			btnSave.onClick.AddListener ( delegate () 
+				{
+					OnSave();
+					Destroy(dialog);
+				});
+
+			Button btnQuit = dialog.transform.Find("Quit").GetComponent<Button>();
+			btnQuit.onClick.AddListener ( delegate () 
+				{
+					Application.Quit();
+				});
+		} 
+	}
+
+	private void OnSave()
+	{
+		if (!Directory.Exists(@".\save"))
+		{
+			Directory.CreateDirectory(@".\save");
+		}
+
+		string json = JsonUtility.ToJson (m_myGame.GetGameData ());
+		File.WriteAllText (@"\save\game.save", json);
+	}
 
 	private IEnumerator OnTimer()
-    {
+	{
 		while(!m_myGame.IsEnd())
 		{
 			m_myGame.NextTurn();
@@ -50,7 +93,7 @@ public class GameMain : MonoBehaviour
 
 		SceneManager.LoadScene ("EndScene");
 		yield break;
-    }
+	}
 
 	private class CheckDialog
 	{

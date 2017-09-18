@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System;
+using UnityEngine;
 
 public class MyGame
 {
@@ -12,7 +13,8 @@ public class MyGame
         m_bEnd = false;
         m_ListMessageBox = new List<MessageBox>();
         m_msgGenerater = new Generater ();
-
+		m_GameData = new GameData ();
+		m_GameData.tx = 010;
         m_msgGenerater.Register(typeof(TestMessage));
     }
 
@@ -32,7 +34,19 @@ public class MyGame
         } 
     }
 
+	public GameData GetGameData()
+	{
+		return m_GameData;
+	}
+
     private bool m_bEnd;
 	private Generater m_msgGenerater;
+	private GameData m_GameData;
     public List<MessageBox> m_ListMessageBox;
+}
+
+[Serializable]
+public class GameData
+{
+	public int tx;
 }
