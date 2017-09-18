@@ -28,7 +28,6 @@ public class MyGame
 		MessageBox testMsg =  m_msgGenerater.Generate () as MessageBox;
         if (testMsg != null)
         {
-            testMsg.RegeditOption();
             m_ListMessageBox.Add(testMsg);
         } 
     }

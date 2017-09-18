@@ -35,11 +35,14 @@ public class GameMain : MonoBehaviour
 		{
 			m_myGame.NextTurn();
 
-			foreach(MessageBox msgbox in m_myGame.m_ListMessageBox)
+			for(int i=0; i<m_myGame.m_ListMessageBox.Count; i++)
 			{
+				MessageBox msgbox = m_myGame.m_ListMessageBox[i];
 				CheckDialog Dialog = MsgBox(msgbox.strTitile, msgbox.strContent, msgbox.arrOption);
 
 				yield return StartCoroutine(Dialog.IsChecked());
+
+				m_myGame.m_ListMessageBox.InsertRange(i+1, msgbox.m_listNext);
 			}
 
 			yield return new WaitForSeconds(m_fWaitTime);
@@ -92,8 +95,7 @@ public class GameMain : MonoBehaviour
 			Btn.onClick.AddListener ( delegate () 
 				{
                     Debug.Log("OnClick");
-
-                    option.delegOnBtnClick();
+					option.delegOnBtnClick();
 
                     Destroy(dialog);
     

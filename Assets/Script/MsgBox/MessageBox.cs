@@ -14,11 +14,18 @@ public abstract class MessageBox
     public MessageBox()
     {
         arrOption = new ArrayList();
+		m_listNext = new List<MessageBox> ();
     }
+
 
     public string strTitile;
     public string strContent;
     public ArrayList arrOption;
 
-    public abstract void RegeditOption();
+	protected void NextMsgBox(MessageBox msgBox)
+	{
+		m_listNext.Add (msgBox);
+	}
+
+	public List<MessageBox> m_listNext;
 }
