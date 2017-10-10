@@ -3,7 +3,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameFrame : MonoBehaviour
+public class GameFrame
 {
 	public static GameFrame GetInstance()
 	{
@@ -23,7 +23,7 @@ public class GameFrame : MonoBehaviour
 
 	public void OnSave()
 	{
-		string strSavePath = Application.persistentDataPath + "//save";
+		string strSavePath = GetSavePath ();
 		Debug.Log(strSavePath);
 		if (!Directory.Exists(strSavePath))
 		{
@@ -31,11 +31,16 @@ public class GameFrame : MonoBehaviour
 		}
 
 		string json = JsonUtility.ToJson (Global.GetMyGame().GetGameData ());
-		File.WriteAllText (Application.persistentDataPath + "\\save\\game.save", json);
+		File.WriteAllText (GetSavePath() + "/game.save", json);
 	}
 
 	public void OnLoad()
 	{
+		string strSavePath = GetSavePath();
+		Debug.Log(strSavePath);
+
+		string json = File.ReadAllText (GetSavePath() + "/game.save");
+		Global.SetMyGame (JsonUtility.FromJson<MyGame>(json));
 		SceneManager.LoadSceneAsync("MainScene");
 	}
 
@@ -52,6 +57,11 @@ public class GameFrame : MonoBehaviour
 	public void OnReturn()
 	{
 		SceneManager.LoadSceneAsync ("StartScene");
+	}
+
+	private string GetSavePath()
+	{
+		return Application.persistentDataPath + "/save";
 	}
 
 	private static GameFrame m_Instance;

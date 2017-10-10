@@ -75,7 +75,7 @@ public class MainScene : MonoBehaviour
 			Button btnQuit = dialog.transform.Find("Quit").GetComponent<Button>();
 			btnQuit.onClick.AddListener ( delegate () 
 				{
-					GameFrame.GetInstance().OnQuit();
+					GameFrame.GetInstance().OnReturn();
 				});
 		} 
 	}
