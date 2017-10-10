@@ -17,6 +17,6 @@ public class EndScene : MonoBehaviour {
 
 	public void OnReturnButton()
 	{
-		SceneManager.LoadSceneAsync("StartScene");
+		GameFrame.GetInstance ().OnReturn ();
 	}
 }

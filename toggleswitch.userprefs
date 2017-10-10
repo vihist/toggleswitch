@@ -1,12 +1,18 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/GameMain.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/EndScene.cs">
     <Files>
-      <File FileName="Assets/Script/GameMain.cs" Line="68" Column="39" />
-      <File FileName="Assets/Script/SwitchScene.cs" Line="17" Column="6" />
-      <File FileName="Assets/Script/StartScene.cs" Line="24" Column="3" />
-      <File FileName="Assets/Script/EndScene.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/MyGame.cs" Line="30" Column="66" />
+      <File FileName="Assets/Script/GameMain.cs" Line="24" Column="36" />
+      <File FileName="Assets/Script/SwitchScene.cs" Line="12" Column="3" />
+      <File FileName="Assets/Script/StartScene.cs" Line="30" Column="38" />
+      <File FileName="Assets/Script/EndScene.cs" Line="16" Column="3" />
+      <File FileName="Assets/Script/MyGame.cs" Line="46" Column="2" />
+      <File FileName="Assets/Script/Generater.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/MsgBox/TestMessage.cs" Line="35" Column="1" />
+      <File FileName="Assets/Script/GameFrame.cs" Line="37" Column="22" />
+      <File FileName="Assets/Script/Global.cs" Line="3" Column="20" />
+      <File FileName="Assets/Script/MsgBox/MessageBox.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/CheckDialog.cs" Line="41" Column="8" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

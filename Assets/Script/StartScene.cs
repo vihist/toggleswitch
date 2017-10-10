@@ -17,11 +17,16 @@ public class StartScene : MonoBehaviour {
 
 	public void OnButtonNew()
 	{
-		SceneManager.LoadSceneAsync("ManagerScene");
+		GameFrame.GetInstance ().OnNew ();
 	}
 
 	public void OnButtonQuit()
 	{
-		Application.Quit ();
+		GameFrame.GetInstance().OnQuit();
+	}
+
+	public void OnButtonLoad()
+	{
+		GameFrame.GetInstance ().OnLoad ();
 	}
 }
