@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 class CheckDialog : MonoBehaviour
 {
-	public CheckDialog(string strTitle, string strContent, ArrayList arrOption)
+	public void Initial(string strTitle, string strContent, ArrayList arrOption)
 	{
 		GameObject UIRoot = GameObject.Find("Canvas");
 

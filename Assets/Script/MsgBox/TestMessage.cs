@@ -18,6 +18,7 @@ public class TestMessage : MessageBox
 
 	private void  OnOption1()
     {
+		Global.GetGameData ().tx = 1000;
 		NextMsgBox (new TestMessage2());
     }
 }
@@ -39,6 +40,6 @@ public class TestMessage2 : MessageBox
 
 	private void  OnOption1()
 	{
-		Console.WriteLine("OnOption1");
+		GameFrame.GetInstance ().OnEnd();
 	}
 }

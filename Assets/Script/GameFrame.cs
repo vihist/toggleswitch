@@ -40,7 +40,7 @@ public class GameFrame
 		Debug.Log(strSavePath);
 
 		string json = File.ReadAllText (GetSavePath() + "/game.save");
-		Global.SetMyGame (JsonUtility.FromJson<MyGame>(json));
+		Global.SetMyGame (new MyGame(JsonUtility.FromJson<GameData>(json)));
 		SceneManager.LoadSceneAsync("MainScene");
 	}
 

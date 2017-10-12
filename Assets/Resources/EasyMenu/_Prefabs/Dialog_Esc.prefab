@@ -157,7 +157,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Q
 --- !u!114 &114476821061597470
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -217,7 +217,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: S
 --- !u!114 &114902161289484378
 MonoBehaviour:
   m_ObjectHideFlags: 1

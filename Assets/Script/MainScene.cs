@@ -55,7 +55,7 @@ public class MainScene : MonoBehaviour
 		GameObject UIRoot = GameObject.Find("ResInfo");
 
 		Text txTitle = UIRoot.transform.Find("TX").GetComponent<Text>();
-		txTitle.text = "111";
+		txTitle.text = Global.GetGameData ().tx.ToString();
 	}
 
 	private void OnKeyBoard()
@@ -89,7 +89,9 @@ public class MainScene : MonoBehaviour
 			for(int i=0; i<Global.GetMyGame().m_ListMessageBox.Count; i++)
 			{
 				MessageBox msgbox = Global.GetMyGame().m_ListMessageBox[i];
-				CheckDialog Dialog = new CheckDialog (msgbox.strTitile, msgbox.strContent, msgbox.arrOption);
+
+				CheckDialog Dialog = GameObject.Find ("Canvas").AddComponent<CheckDialog> ();
+				Dialog.Initial (msgbox.strTitile, msgbox.strContent, msgbox.arrOption);
 
 				yield return StartCoroutine(Dialog.IsChecked());
 

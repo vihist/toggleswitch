@@ -12,6 +12,11 @@ public class Global
 		return m_myGame;
 	}
 
+	public static GameData GetGameData()
+	{
+		return m_myGame.GetGameData ();
+	}
+
 	private static MyGame m_myGame; 
 }
 

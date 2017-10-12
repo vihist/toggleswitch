@@ -8,15 +8,20 @@ public class MyGame
 	public delegate void DelegMsgBox(string strTitle, string strContent, ArrayList arrOption);
 	public DelegMsgBox m_delegPopMsgBox;
 
-    public MyGame()
-    {
-        m_bEnd = false;
-        m_ListMessageBox = new List<MessageBox>();
-        m_msgGenerater = new Generater ();
-		m_GameData = new GameData ();
-		m_GameData.tx = 010;
-        m_msgGenerater.Register(typeof(TestMessage));
-    }
+	public MyGame(GameData gameData = null)
+	{
+		m_bEnd = false;
+		m_ListMessageBox = new List<MessageBox>();
+		m_msgGenerater = new Generater ();
+
+		m_GameData = gameData;
+		if (m_GameData == null) 
+		{
+			m_GameData = new GameData ();
+		}
+
+		m_msgGenerater.Register(typeof(TestMessage));
+	}
 
 	public bool IsEnd()
 	{
@@ -48,5 +53,10 @@ public class MyGame
 [Serializable]
 public class GameData
 {
+	public GameData()
+	{
+		tx = 10;
+	}
+
 	public int tx;
 }
