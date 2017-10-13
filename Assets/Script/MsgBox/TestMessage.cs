@@ -40,6 +40,6 @@ public class TestMessage2 : MessageBox
 
 	private void  OnOption1()
 	{
-		GameFrame.GetInstance ().OnEnd();
+		//GameFrame.GetInstance ().OnEnd();
 	}
 }

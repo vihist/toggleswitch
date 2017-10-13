@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -14,8 +15,10 @@ public class Generater
         listEventType.Add(Td);
     }
 
-    public Object Generate()
+	public ArrayList Generate()
     {
+		ArrayList arrList = new ArrayList ();
+
         foreach (Type Td in listEventType)
         {
 
@@ -26,10 +29,10 @@ public class Generater
                 continue;
             }
 
-            return Activator.CreateInstance(Td);
+			arrList.Add(Activator.CreateInstance(Td));
         }
 
-        return default(Type);
+		return arrList;
     }
 
     private List<Type> listEventType;

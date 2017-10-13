@@ -1,6 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System;
+
 using UnityEngine;
 
 public class MyGame
@@ -21,6 +22,7 @@ public class MyGame
 		}
 
 		m_msgGenerater.Register(typeof(TestMessage));
+		m_msgGenerater.Register (typeof(JsMsgBox));
 	}
 
 	public bool IsEnd()
@@ -32,11 +34,16 @@ public class MyGame
     {
         m_ListMessageBox.Clear();
 
-		MessageBox testMsg =  m_msgGenerater.Generate () as MessageBox;
-        if (testMsg != null)
-        {
-            m_ListMessageBox.Add(testMsg);
-        } 
+		ArrayList lstMsgBox = m_msgGenerater.Generate ();
+
+		foreach(object obj in lstMsgBox)
+		{
+			MessageBox testMsg =  obj as MessageBox;
+			if (testMsg != null)
+			{
+				m_ListMessageBox.Add(testMsg);
+			} 
+		}
     }
 
 	public GameData GetGameData()
