@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Tools
 {
@@ -6,7 +7,7 @@ namespace Tools
 	{
 		public static bool Calc (int iRate)
 		{
-			Random ran=new Random();
+			System.Random ran=new System.Random();
 			int RandKey=ran.Next(1,100);
 			if(RandKey <= iRate)
 			{
@@ -15,6 +16,48 @@ namespace Tools
 
 			return false;
 		}
+	}
+
+	public class Cvs
+	{
+		public Cvs(string filename)
+		{
+			//读取csv二进制文件  
+			TextAsset binAsset = Resources.Load (filename, typeof(TextAsset)) as TextAsset;         
+
+			//读取每一行的内容  
+			string [] lineArray = binAsset.text.Split ('\r');  
+
+			m_colIndex = lineArray [0].Replace("ID,", "").Split (',');
+
+			m_rowIndex = new string[lineArray.Length-1];
+			m_ArrayData = new string [lineArray.Length-1][]; 
+
+			for(int i =0; i < lineArray.Length-1; i++)  
+			{  
+				string[] raw = lineArray[i+1].Split (',');  
+				m_rowIndex[i] = raw [0];
+
+				m_ArrayData [i] = new string[raw.Length - 1];
+				Array.Copy (raw, 1, m_ArrayData[i], 0, raw.Length-1);
+			}  
+		}
+
+		public string Get(string row, string column)
+		{
+			#if UNITY_EDITOR_OSX
+			return row+"_"+column;
+			#else
+			int iRow = Array.FindIndex (m_rowIndex, s=>s==row);
+			int iCol = Array.FindIndex (m_colIndex, s=>s==column);
+
+			return m_ArrayData [iRow] [iCol];
+			#endif
+		}
+
+		private string[] m_rowIndex;
+		private string[] m_colIndex;
+		private string[][] m_ArrayData;
 	}
 }
 

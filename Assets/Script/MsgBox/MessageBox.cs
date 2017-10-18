@@ -28,4 +28,5 @@ public abstract class MessageBox
 	}
 
 	public List<MessageBox> m_listNext;
+	protected static Tools.Cvs m_cvs = new Tools.Cvs ("text/msgdef");
 }

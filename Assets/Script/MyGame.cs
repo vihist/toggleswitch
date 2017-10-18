@@ -60,6 +60,7 @@ public class MyGame
 [Serializable]
 public class GameData
 {
+
 	public GameData()
 	{
 		tx = 10;
