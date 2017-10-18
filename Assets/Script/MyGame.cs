@@ -21,7 +21,7 @@ public class MyGame
 			m_GameData = new GameData ();
 		}
 
-		m_msgGenerater.Register(typeof(TestMessage));
+		//m_msgGenerater.Register(typeof(TestMessage));
 		m_msgGenerater.Register (typeof(JsMsgBox));
 	}
 
@@ -63,8 +63,74 @@ public class GameData
 
 	public GameData()
 	{
-		tx = 10;
+		tm = 10;
+		fk = 10;
+		wb = 10;
+
+		sag = new List<Office> {new Office("chx"), new Office("tiw"), new Office("ysdf")};
+		factionList = new List<Faction> {new Faction("sid"), new Faction("hug"), new Faction("xug")};
+
+		m_OfficeDict = new Dictionary<string, Office> ();
+		foreach(Office office in sag)
+		{
+			m_OfficeDict.Add (office.GetName(), office);
+		}
+
+		m_FactionDict = new Dictionary<string, Faction> ();
+		foreach(Faction faction in factionList)
+		{
+			m_FactionDict.Add (faction.GetName (), faction);
+		}
 	}
 
-	public int tx;
+	public void Init()
+	{
+		m_OfficeDict["chx"].m_faction = "sid";
+	}
+
+	public int tm;
+	public int fk;
+	public int wb;
+	public List<Office> sag;
+	public List<Office> juq;
+	public List<Faction> factionList;
+	public Dictionary<string, Office> m_OfficeDict;
+	public Dictionary<string, Faction> m_FactionDict;
+}
+
+[Serializable]
+public class Office
+{
+	public Office(string name)
+	{
+		m_name = name;
+	}
+
+	public string GetName()
+	{
+		return m_name;
+	}
+
+	[SerializeField]
+	public string m_name;
+
+	[SerializeField]
+	public string m_faction;
+}
+
+[Serializable]
+public class Faction
+{
+	public Faction(string strIcon)
+	{	
+		m_name = strIcon;	
+	}
+
+	public string GetName()
+	{
+		return m_name;
+	}
+
+	[SerializeField]
+	private string m_name;
 }

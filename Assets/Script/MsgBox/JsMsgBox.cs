@@ -12,12 +12,13 @@ public class JsMsgBox : MessageBox
 
 	public static bool PreCondition()
 	{
-		return Tools.Probability.Calc(50);
+		return Tools.Probability.Calc(100);
 	}
 
 	private void  OnOption1()
 	{
-		Global.GetGameData ().tx = 2000;
+		Global.GetGameData ().tm = 2000;
+		Global.GetGameData ().Init ();
 		//NextMsgBox (new TestMessage2());
 	}
 }

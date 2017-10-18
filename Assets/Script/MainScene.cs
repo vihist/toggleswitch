@@ -55,7 +55,7 @@ public class MainScene : MonoBehaviour
 		GameObject UIRoot = GameObject.Find("ResInfo");
 
 		Text txTitle = UIRoot.transform.Find("TX").GetComponent<Text>();
-		txTitle.text = Global.GetGameData ().tx.ToString();
+		txTitle.text = Global.GetGameData ().tm.ToString();
 	}
 
 	private void OnKeyBoard()

@@ -18,7 +18,7 @@ public class TestMessage : MessageBox
 
 	private void  OnOption1()
     {
-		Global.GetGameData ().tx = 1000;
+		Global.GetGameData ().tm = 1000;
 		NextMsgBox (new TestMessage2());
     }
 }
@@ -27,7 +27,7 @@ public class TestMessage2 : MessageBox
 {
 	public TestMessage2()
 	{
-		strTitile = m_cvs;
+		strTitile = "test title2";
 		strContent = "test content2";
 
 		arrOption.Add(new Option { strDesc = "2222", delegOnBtnClick = OnOption1 });
