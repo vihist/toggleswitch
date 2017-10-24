@@ -42,8 +42,8 @@ MonoBehaviour:
     y: 30
     width: 1183
     height: 701
-  m_MinSize: {x: 679, y: 492}
-  m_MaxSize: {x: 14002, y: 14042}
+  m_MinSize: {x: 681, y: 492}
+  m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
   controlID: 23
 --- !u!114 &3
@@ -64,8 +64,8 @@ MonoBehaviour:
     y: 0
     width: 298
     height: 701
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 277, y: 71}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -234,7 +234,7 @@ MonoBehaviour:
   m_MinSize: {x: 404, y: 221}
   m_MaxSize: {x: 8004, y: 4021}
   vertical: 0
-  controlID: 59
+  controlID: 69
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -443,7 +443,7 @@ MonoBehaviour:
   m_LastProjectPath: /Users/fang/Documents/GitHub/toggleswitch
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 11}
+    scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 28250000
     m_LastClickedID: 9512
     m_ExpandedIDs: 00000000bc240000fe240000062500004225000000ca9a3bffffff7f
@@ -592,7 +592,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 2a93faff2695fafff4a2faffcaabfaffb4b4faff72cefaffdcd4faff8edcfaff44e7faff54e7faff18f2faffc6f5faff0cf7faff74fefaff6604fbff7606fbff700ffbffbe1efbffec1efbffda20fbffec25fbfffc2afbff4042fbff6e42fbff7644fbff2458fbffac5afbfff25efbff0674fbff3474fbffee86fbff0687fbff0a87fbffb89cfbffe69cfbff2ea5fbffa4a7fbff94adfbff8cb1fbff06bcfbff4ec5fbff4ac7fbff78cafbff02ccfbff0ad1fbff2ad9fbff66dafbffd6defbff5e01fcff1c0afcff004afefff450feff8293feff6097feff78b2feffb0b4fefffa77ffffb4d4ffff5cd9ffffc0dbffffdedfffff68e2ffffbce4ffff9ee5ffffa6e7ffffa4e8ffff0aeaffff70ebffff6ef0ffffbef1ffffd2f2ffffe2fbffff00000000822500004629000072290000fa2900004e2a00001e2e0000262e00003c2e00004634000056340000763400007e340000c4340000b2380000c2380000ea3800001839000030390000064000001040000028450000324500003c45000036460000c24800000a4a0000764a00009e4a0000e64b0000c24d0000564e00004e5e00004e6100000a620000b66f00008a750000ec760000007b0000647b00008c7b0000927c0000208d00004e8d0000
+    m_ExpandedIDs: d05bfdff245ffdff8060fdfff461fdff6663fdff5e64fdff9065fdff0a67fdff3e6bfdff7e6cfdff266efdff4c59ffff2ebeffff58bfffff02c1ffff34c2ffffa2c3ffff10c5ffff32c6ffff72ddffffa8e9ffffa0f3ffffe2fbffff0000000080250000a8250000823800008a380000923800009a380000aa380000ba380000c4380000d8380000e8380000f838000008390000203900005e3b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -611,7 +611,7 @@ MonoBehaviour:
       m_ClientGUIView: {fileID: 4}
     m_SearchString: 
   m_ExpandedScenes:
-  - ChaoTScene
+  - StartScene
   m_CurrenRootInstanceID: 0
   m_Locked: 0
   m_CurrentSortingName: TransformSorting
@@ -642,14 +642,14 @@ MonoBehaviour:
     width: 639
     height: 409
   m_SceneLighting: 1
-  lastFramingTime: 6251.809855997562
+  lastFramingTime: 2372.150323987007
   m_2DMode: 1
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0, y: 1, z: 90}
+    m_Target: {x: 319.5, y: 196, z: 0}
     speed: 2
-    m_Value: {x: 0, y: 1, z: 90}
+    m_Value: {x: 319.5, y: 196, z: 0}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -676,14 +676,14 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 114.385155
+    m_Target: 356.19095
     speed: 2
-    m_Value: 114.385155
+    m_Value: 356.19095
   m_Ortho:
     m_Target: 1
     speed: 2
     m_Value: 1
-  m_LastSceneViewRotation: {x: 0.08717229, y: -0.89959055, z: 0.21045254, w: 0.3726226}
+  m_LastSceneViewRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
