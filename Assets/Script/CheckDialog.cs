@@ -11,6 +11,7 @@ class CheckDialog : MonoBehaviour
 		GameObject UIRoot = GameObject.Find("Canvas");
 
 		dialog = Instantiate(Resources.Load(String.Format("EasyMenu/_Prefabs/Dialog_{0}Btn", arrOption.Count)), UIRoot.transform) as GameObject;
+		dialog.transform.SetAsFirstSibling(); 
 
 		Text txTitle = dialog.transform.Find("Title").GetComponent<Text>();
 		txTitle.text = strTitle;

@@ -19,7 +19,8 @@ public class MainScene : MonoBehaviour
 	void Start ()
     {
 		OnUiInit ();
-		SceneManager.LoadSceneAsync("TxScene", LoadSceneMode.Additive);
+		SceneManager.LoadSceneAsync ("TianXScene", LoadSceneMode.Additive);
+
 	}
 	
 	// Update is called once per frame
@@ -31,23 +32,23 @@ public class MainScene : MonoBehaviour
 
 	public void OnValueChanged1(bool bCheck)
 	{
-		Debug.Log("toggle1" + bCheck);
+		//Debug.Log("toggle1" + bCheck);
 
 		if (bCheck)
 		{
-			SceneManager.UnloadSceneAsync("CtScene");
-			SceneManager.LoadSceneAsync("TxScene", LoadSceneMode.Additive);
+			SceneManager.UnloadSceneAsync("ChaoTScene");
+			SceneManager.LoadSceneAsync("TianXScene", LoadSceneMode.Additive);
 		}
 	}
 
 	public void OnValueChanged2(bool bCheck)
 	{
-		Debug.Log("toggle2" + bCheck);
+		//Debug.Log("toggle2" + bCheck);
 
 		if(bCheck)
 		{
-			SceneManager.UnloadSceneAsync("TxScene");
-			SceneManager.LoadSceneAsync("CtScene", LoadSceneMode.Additive);
+			SceneManager.UnloadSceneAsync("TianXScene");
+			SceneManager.LoadSceneAsync("ChaoTScene", LoadSceneMode.Additive);
 		}
 	}
 
