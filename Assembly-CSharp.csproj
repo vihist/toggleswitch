@@ -49,6 +49,7 @@
      <Compile Include="Assets\Script\CheckDialog.cs" />
      <Compile Include="Assets\Script\EndScene.cs" />
      <Compile Include="Assets\Script\GameFrame.cs" />
+     <Compile Include="Assets\Script\GameScene.cs" />
      <Compile Include="Assets\Script\Generater.cs" />
      <Compile Include="Assets\Script\Global.cs" />
      <Compile Include="Assets\Script\MainScene.cs" />
@@ -58,6 +59,7 @@
      <Compile Include="Assets\Script\MyGame.cs" />
      <Compile Include="Assets\Script\StartScene.cs" />
      <Compile Include="Assets\Script\Tools.cs" />
+     <None Include="Assets\Resources\text\uidesc.txt" />
      <None Include="Assets\Resources\text\msgdef.txt" />
  <Reference Include="UnityEngine.Analytics">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>

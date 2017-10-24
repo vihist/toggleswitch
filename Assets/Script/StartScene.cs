@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.IO;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
@@ -6,12 +7,24 @@ using UnityEngine;
 public class StartScene : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
-		
+	void Start () 
+	{
+
+/*		string json = File.ReadAllText (Application.persistentDataPath + "/game.env");
+		if (json == null) 
+		{
+			Global.SetEnv (new GameEnv());
+		}
+		else
+		{
+			Global.SetEnv (JsonUtility.FromJson<GameEnv>(json));
+		}
+*/
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 		
 	}
 

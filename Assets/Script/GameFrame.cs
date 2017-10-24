@@ -43,7 +43,7 @@ public class GameFrame
 		Global.SetMyGame (new MyGame(JsonUtility.FromJson<GameData>(json)));
 		SceneManager.LoadSceneAsync("MainScene");
 	}
-
+		
 	public void OnEnd()
 	{
 		SceneManager.LoadSceneAsync ("EndScene");

@@ -17,7 +17,18 @@ public class Global
 		return m_myGame.GetGameData ();
 	}
 
-	private static MyGame m_myGame; 
+	public static GameEnv GetEnv()
+	{
+		return m_GameEnv;
+	}
+
+	public static void SetEnv(GameEnv env )
+	{
+		m_GameEnv = env;
+	}
+
+	private static MyGame m_myGame = null; 
+	private static GameEnv m_GameEnv = null;
 }
 
 

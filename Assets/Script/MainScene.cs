@@ -18,6 +18,7 @@ public class MainScene : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+		OnUiInit ();
 		SceneManager.LoadSceneAsync("TxScene", LoadSceneMode.Additive);
 	}
 	
@@ -54,8 +55,9 @@ public class MainScene : MonoBehaviour
 	{
 		GameObject UIRoot = GameObject.Find("ResInfo");
 
-		Text txTitle = UIRoot.transform.Find("TX").GetComponent<Text>();
-		txTitle.text = Global.GetGameData ().tm.ToString();
+		UIRoot.transform.Find ("TM").transform.Find ("value").GetComponent<Text> ().text = Global.GetGameData ().tm.ToString();
+		UIRoot.transform.Find ("FK").transform.Find ("value").GetComponent<Text> ().text = Global.GetGameData ().fk.ToString();
+		UIRoot.transform.Find ("WB").transform.Find ("value").GetComponent<Text> ().text = Global.GetGameData ().wb.ToString();
 	}
 
 	private void OnKeyBoard()
@@ -103,6 +105,19 @@ public class MainScene : MonoBehaviour
 
 		GameFrame.GetInstance ().OnEnd();
 		yield break;
+	}
+
+	private void OnUiInit()
+	{
+		GameObject ResInfo = GameObject.Find("ResInfo");
+
+		ResInfo.transform.Find("TM").GetComponent<Text>().text = UIFrame.GetUiDesc ("TM");
+		ResInfo.transform.Find("FK").GetComponent<Text>().text = UIFrame.GetUiDesc ("FK");
+		ResInfo.transform.Find("WB").GetComponent<Text>().text = UIFrame.GetUiDesc ("WB");
+
+		GameObject TogglePanel = GameObject.Find ("TogglePanel");
+		TogglePanel.transform.Find("TianX").transform.Find("Label").GetComponent<Text>().text = UIFrame.GetUiDesc ("TianX");
+		TogglePanel.transform.Find("ChaoT").transform.Find("Label").GetComponent<Text>().text = UIFrame.GetUiDesc ("ChaoT");
 	}
 
 

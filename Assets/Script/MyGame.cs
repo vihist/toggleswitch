@@ -88,6 +88,8 @@ public class GameData
 		m_OfficeDict["chx"].m_faction = "sid";
 	}
 
+	public string lang;
+
 	public int tm;
 	public int fk;
 	public int wb;
@@ -133,4 +135,25 @@ public class Faction
 
 	[SerializeField]
 	private string m_name;
+}
+
+[Serializable]
+public class GameEnv
+{
+	public GameEnv()
+	{
+		m_lang = "CHI";
+	}
+
+	public String GetLang()
+	{
+		return m_lang;
+	}
+
+	public void SetLang(String lang)
+	{
+		m_lang = lang;
+	}
+
+	private string m_lang;
 }
