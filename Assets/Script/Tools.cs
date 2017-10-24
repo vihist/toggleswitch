@@ -45,15 +45,23 @@ namespace Tools
 
 		public string Get(string row, string column)
 		{
-			#if UNITY_EDITOR_OSX
-			return row+"_"+column;
-			#else
-			int iRow = Array.FindIndex (m_rowIndex, s=>s==row);
-			int iCol = Array.FindIndex (m_colIndex, s=>s==column);
+            try
+            {
+#if UNITY_EDITOR_OSX
+			    return row+"_"+column;
+#else
+                int iRow = Array.FindIndex(m_rowIndex, s => s == row);
+                int iCol = Array.FindIndex(m_colIndex, s => s == column);
 
-			return m_ArrayData [iRow] [iCol];
-			#endif
-		}
+                return m_ArrayData[iRow][iCol];
+#endif
+            }
+            catch(Exception e)
+            {
+                Debug.Log(row + "," + column);
+                throw;
+            }
+        }
 
 		private string[] m_rowIndex;
 		private string[] m_colIndex;
