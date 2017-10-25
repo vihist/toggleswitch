@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -66,4 +68,3 @@ public class GameFrame
 
 	private static GameFrame m_Instance;
 }
-

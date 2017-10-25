@@ -1,5 +1,7 @@
 ﻿using System;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Tools
 {
@@ -67,5 +69,28 @@ namespace Tools
 		private string[] m_colIndex;
 		private string[][] m_ArrayData;
 	}
-}
+		
+	[Serializable]
+	public class SerialDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
+	{
+		[SerializeField]
+		List<TKey> keys;
+		[SerializeField]
+		List<TValue> values;
 
+		public void OnBeforeSerialize()
+		{
+			keys = new List<TKey>(this.Keys);
+			values = new List<TValue>(this.Values);
+		}
+
+		public void OnAfterDeserialize()
+		{
+			var count = Math.Min(keys.Count, values.Count);
+			for (var i = 0; i < count; ++i)
+			{
+				this.Add(keys[i], values[i]);
+			}
+		}
+	}
+}

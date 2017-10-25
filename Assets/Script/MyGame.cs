@@ -67,25 +67,28 @@ public class GameData
 		fk = 10;
 		wb = 10;
 
-		sag = new List<Office> {new Office("chx"), new Office("tiw"), new Office("ysdf")};
-		factionList = new List<Faction> {new Faction("sid"), new Faction("hug"), new Faction("xug")};
+		m_OfficeDict = new Tools.SerialDictionary<string, Office> ();
 
-		m_OfficeDict = new Dictionary<string, Office> ();
+		List<Office> sag = new List<Office> {new Office("ChengX"), new Office("TaiW"), new Office("YuSDF")};
 		foreach(Office office in sag)
 		{
 			m_OfficeDict.Add (office.GetName(), office);
 		}
 
+		/*factionList = new List<Faction> {new Faction("sid"), new Faction("hug"), new Faction("xug")};
 		m_FactionDict = new Dictionary<string, Faction> ();
 		foreach(Faction faction in factionList)
 		{
 			m_FactionDict.Add (faction.GetName (), faction);
 		}
+
+		perList = new List<Persion> ();
+		m_PersionDict = new Dictionary<string, Persion>*/
 	}
 
 	public void Init()
 	{
-		m_OfficeDict["chx"].m_faction = "sid";
+		
 	}
 
 	public string lang;
@@ -93,11 +96,17 @@ public class GameData
 	public int tm;
 	public int fk;
 	public int wb;
-	public List<Office> sag;
+/*	public List<Office> sag;
 	public List<Office> juq;
 	public List<Faction> factionList;
-	public Dictionary<string, Office> m_OfficeDict;
-	public Dictionary<string, Faction> m_FactionDict;
+	public List<Persion> perList;
+*/
+	[SerializeField]
+	public Tools.SerialDictionary<string, Office> m_OfficeDict;
+/*	public Dictionary<string, Faction> m_FactionDict;
+	public Dictionary<string, Persion> m_PersionDict;
+
+	public Releation m_Releation;*/
 }
 
 [Serializable]
@@ -115,9 +124,6 @@ public class Office
 
 	[SerializeField]
 	public string m_name;
-
-	[SerializeField]
-	public string m_faction;
 }
 
 [Serializable]
@@ -156,4 +162,90 @@ public class GameEnv
 	}
 
 	private string m_lang;
+}
+
+[Serializable]
+public class Persion
+{
+	[SerializeField]
+	public string m_name;
+
+	[SerializeField]
+	public string m_faction;
+
+	[SerializeField]
+	public int m_score;
+}
+
+[Serializable]
+public class Releation
+{
+	public Releation()
+	{
+		m_list = new List<ELEMENT> ();
+	}
+
+	public void Set(String office, String persion)
+	{
+		Boolean bfind = false;
+		for(int i=0; i<m_list.Count; i++)
+		{
+			ELEMENT elem = m_list [i];
+			if (elem.persion == persion)
+			{
+				elem.persion = null;
+			}
+
+			if (elem.office == office) 
+			{
+				elem.persion = persion;
+				bfind = true;
+			}
+		}
+		if(!bfind)
+		{
+			m_list.Add (new ELEMENT(office, persion));
+		}
+	}
+
+	public String GetPersionByOffice(String office)
+	{
+		for(int i=0; i<m_list.Count; i++)
+		{
+			if (m_list[i].office == office)
+			{
+				return m_list[i].persion;
+			}
+		}
+
+		return null;
+	}
+
+	public String GetOfficeByPersion(String persion)
+	{
+		for(int i=0; i<m_list.Count; i++)
+		{
+			if (m_list[i].persion == persion)
+			{
+				return m_list[i].office;
+			}
+		}
+
+		return null;
+	}
+
+	struct ELEMENT
+	{
+		public ELEMENT(String office, String persion)
+		{
+			this.office = office;
+			this.persion = persion;
+		}
+
+		public String office;
+		public String persion;
+	}
+
+	List<ELEMENT> m_list;
+
 }
