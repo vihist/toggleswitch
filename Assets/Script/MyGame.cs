@@ -19,6 +19,7 @@ public class MyGame
 		if (m_GameData == null) 
 		{
 			m_GameData = new GameData ();
+			m_GameData.Init ();
 		}
 
 		//m_msgGenerater.Register(typeof(TestMessage));
@@ -58,16 +59,23 @@ public class MyGame
 }
 
 [Serializable]
-public class GameData
+public class GameData : ISerializationCallbackReceiver
 {
 
 	public GameData()
+	{
+		m_OfficeDict = new Tools.SerialDictionary<string, Office> ();
+		m_FactionDict = new Dictionary<string, Faction> ();
+		m_PersionDict = new Dictionary<string, Persion> ();
+	}
+
+	public void Init()
 	{
 		tm = 10;
 		fk = 10;
 		wb = 10;
 
-		m_OfficeDict = new Tools.SerialDictionary<string, Office> ();
+
 
 		List<Office> sag = new List<Office> {new Office("ChengX"), new Office("TaiW"), new Office("YuSDF")};
 		foreach(Office office in sag)
@@ -75,38 +83,67 @@ public class GameData
 			m_OfficeDict.Add (office.GetName(), office);
 		}
 
-		/*factionList = new List<Faction> {new Faction("sid"), new Faction("hug"), new Faction("xug")};
-		m_FactionDict = new Dictionary<string, Faction> ();
+		List<Faction> factionList = new List<Faction> {new Faction("sid"), new Faction("hug"), new Faction("xug")};
+
 		foreach(Faction faction in factionList)
 		{
 			m_FactionDict.Add (faction.GetName (), faction);
 		}
 
-		perList = new List<Persion> ();
-		m_PersionDict = new Dictionary<string, Persion>*/
+		List<Persion> persionList = new List<Persion> (){new Persion("zh"), new Persion("wa"), new Persion("li")};
+
+		foreach(Persion persion in persionList)
+		{
+			m_PersionDict.Add (persion.GetName(), persion);
+		}
 	}
 
-	public void Init()
+	public void OnBeforeSerialize()
 	{
-		
+		serialOffice = new List<Office> (m_OfficeDict.Values);
+		serialFaction = new List<Faction> (m_FactionDict.Values);
+		serialPersion = new List<Persion> (m_PersionDict.Values);
 	}
 
-	public string lang;
+	public void OnAfterDeserialize()
+	{
+		foreach(Office office in serialOffice)
+		{
+			m_OfficeDict.Add (office.GetName (), office);
+		}
+
+		foreach (Faction faction in serialFaction) 
+		{
+			m_FactionDict.Add (faction.GetName(), faction);
+		}
+
+		foreach (Persion persion in serialPersion)
+		{
+			m_PersionDict.Add (persion.GetName (), persion);
+		}
+	}
+
 
 	public int tm;
 	public int fk;
 	public int wb;
-/*	public List<Office> sag;
-	public List<Office> juq;
-	public List<Faction> factionList;
-	public List<Persion> perList;
-*/
-	[SerializeField]
-	public Tools.SerialDictionary<string, Office> m_OfficeDict;
-/*	public Dictionary<string, Faction> m_FactionDict;
+
+
+	public Dictionary<string, Office>  m_OfficeDict;
+	public Dictionary<string, Faction> m_FactionDict;
 	public Dictionary<string, Persion> m_PersionDict;
 
-	public Releation m_Releation;*/
+	public Releation m_Releation;
+
+	[SerializeField]
+	private List<Office> serialOffice;
+
+	[SerializeField]
+	private List<Faction> serialFaction;
+
+	[SerializeField]
+	private List<Persion> serialPersion;
+
 }
 
 [Serializable]
@@ -167,13 +204,17 @@ public class GameEnv
 [Serializable]
 public class Persion
 {
-	[SerializeField]
+	public Persion(String name)
+	{
+		m_name = name;
+	}
+
+	public string GetName()
+	{
+		return m_name;
+	}
+
 	public string m_name;
-
-	[SerializeField]
-	public string m_faction;
-
-	[SerializeField]
 	public int m_score;
 }
 
