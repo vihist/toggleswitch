@@ -8,12 +8,12 @@ public class ChaoTScene : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        GameObject sanGong= GameObject.Find("SanG");
-        sanGong.transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc("SanG");
+		GameObject sanGong= GameObject.Find(OFFICE_GROUP.SanG.ToString());
+		sanGong.transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc(OFFICE_GROUP.SanG.ToString());
 
-        sanGong.transform.Find("ChengX").transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc("ChengX");
-        sanGong.transform.Find("TaiW").transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc("TaiW");
-        sanGong.transform.Find("YuSDF").transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc("YuSDF");
+		sanGong.transform.Find(OFFICE.ChengX.ToString()).transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc(OFFICE.ChengX.ToString());
+		sanGong.transform.Find(OFFICE.TaiW.ToString()).transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc(OFFICE.TaiW.ToString());
+		sanGong.transform.Find(OFFICE.YuSDF.ToString()).transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc(OFFICE.YuSDF.ToString());
 
         GameObject jiuQing = GameObject.Find("JiuQ");
         jiuQing.transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc("JiuQ");
@@ -31,6 +31,20 @@ public class ChaoTScene : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-		
+		RefreshOfficeResposne (OFFICE_GROUP.SanG, OFFICE.ChengX);
+		RefreshOfficeResposne (OFFICE_GROUP.SanG, OFFICE.TaiW);
+		RefreshOfficeResposne (OFFICE_GROUP.SanG, OFFICE.YuSDF);
+	}
+
+	private void RefreshOfficeResposne(OFFICE_GROUP enofficeGroup, OFFICE enOffice)
+	{
+		Persion persion = Global.GetGameData ().m_officeResponse.GetPersionByOffice(enOffice.ToString());
+
+		if (persion != null) 
+		{
+			Transform officeChengx = GameObject.Find (enofficeGroup.ToString ()).transform.Find (enOffice.ToString ());
+			officeChengx.Find ("Persion").transform.Find ("Text").GetComponent<Text> ().text = persion.GetName ();
+            officeChengx.Find ("Persion").transform.Find ("Score").transform.Find("Text").GetComponent<Text> ().text = persion.GetScore ();
+		}
 	}
 }

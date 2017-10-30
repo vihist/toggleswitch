@@ -18,7 +18,7 @@ public class JsMsgBox : MessageBox
 	private void  OnOption1()
 	{
 		Global.GetGameData ().tm = 2000;
-		Global.GetGameData ().Init ();
+		//Global.GetGameData ().Init ();
 		//NextMsgBox (new TestMessage2());
 	}
 }

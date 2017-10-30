@@ -58,6 +58,26 @@ public class MyGame
     public List<MessageBox> m_ListMessageBox;
 }
 
+enum OFFICE_GROUP
+{
+	SanG,
+	JiuQ
+}
+
+enum OFFICE
+{
+	ChengX,
+	TaiW,
+	YuSDF,
+}
+
+enum FACTION
+{
+    ShiDF,
+    XunG,
+    HuanG,
+}
+
 [Serializable]
 public class GameData : ISerializationCallbackReceiver
 {
@@ -67,6 +87,8 @@ public class GameData : ISerializationCallbackReceiver
 		m_OfficeDict = new Tools.SerialDictionary<string, Office> ();
 		m_FactionDict = new Dictionary<string, Faction> ();
 		m_PersionDict = new Dictionary<string, Persion> ();
+		m_officeResponse = new OfficeResponse ();
+        m_factionReleation = new FactionReleation();
 	}
 
 	public void Init()
@@ -75,15 +97,13 @@ public class GameData : ISerializationCallbackReceiver
 		fk = 10;
 		wb = 10;
 
-
-
-		List<Office> sag = new List<Office> {new Office("ChengX"), new Office("TaiW"), new Office("YuSDF")};
+		List<Office> sag = new List<Office> {new Office(OFFICE.ChengX.ToString()), new Office(OFFICE.TaiW.ToString()), new Office(OFFICE.YuSDF.ToString())};
 		foreach(Office office in sag)
 		{
 			m_OfficeDict.Add (office.GetName(), office);
 		}
 
-		List<Faction> factionList = new List<Faction> {new Faction("sid"), new Faction("hug"), new Faction("xug")};
+        List<Faction> factionList = new List<Faction> {new Faction(FACTION.ShiDF.ToString()), new Faction(FACTION.HuanG.ToString()), new Faction(FACTION.XunG.ToString())};
 
 		foreach(Faction faction in factionList)
 		{
@@ -96,6 +116,10 @@ public class GameData : ISerializationCallbackReceiver
 		{
 			m_PersionDict.Add (persion.GetName(), persion);
 		}
+
+		InitOfficeResponse ();
+        InitFactionReleation();
+		
 	}
 
 	public void OnBeforeSerialize()
@@ -124,16 +148,38 @@ public class GameData : ISerializationCallbackReceiver
 	}
 
 
+	private void InitOfficeResponse()
+	{
+		List<Persion> listPersion = new List<Persion> (m_PersionDict.Values);
+		listPersion.Sort ((p1,p2)=> -(p1.m_score.CompareTo(p2.m_score)));
+
+		m_officeResponse.Set (OFFICE.ChengX.ToString (), listPersion [0].GetName ());
+		m_officeResponse.Set (OFFICE.TaiW.ToString (),   listPersion [1].GetName ());
+		m_officeResponse.Set (OFFICE.YuSDF.ToString (),  listPersion [2].GetName ());
+	}
+
+    private void InitFactionReleation()
+    {
+        Persion persion = m_officeResponse.GetPersionByOffice(OFFICE.ChengX.ToString());
+        m_factionReleation.Set(persion.GetName(), FACTION.ShiDF.ToString());
+
+        persion = m_officeResponse.GetPersionByOffice(OFFICE.YuSDF.ToString());
+        m_factionReleation.Set(persion.GetName(), FACTION.ShiDF.ToString());
+
+        persion = m_officeResponse.GetPersionByOffice(OFFICE.TaiW.ToString());
+        m_factionReleation.Set(persion.GetName(), FACTION.XunG.ToString());
+    }
+
 	public int tm;
 	public int fk;
 	public int wb;
-
 
 	public Dictionary<string, Office>  m_OfficeDict;
 	public Dictionary<string, Faction> m_FactionDict;
 	public Dictionary<string, Persion> m_PersionDict;
 
-	public Releation m_Releation;
+	public OfficeResponse m_officeResponse;
+    public FactionReleation m_factionReleation;
 
 	[SerializeField]
 	private List<Office> serialOffice;
@@ -207,6 +253,7 @@ public class Persion
 	public Persion(String name)
 	{
 		m_name = name;
+		m_score = ran.Next(1,100);
 	}
 
 	public string GetName()
@@ -214,14 +261,20 @@ public class Persion
 		return m_name;
 	}
 
+    public String GetScore()
+    {
+        return m_score.ToString();
+    }
+
 	public string m_name;
-	public int m_score;
+    public int m_score;
+	private static System.Random ran=new System.Random();
 }
 
 [Serializable]
-public class Releation
+public class OfficeResponse
 {
-	public Releation()
+	public OfficeResponse()
 	{
 		m_list = new List<ELEMENT> ();
 	}
@@ -249,32 +302,36 @@ public class Releation
 		}
 	}
 
-	public String GetPersionByOffice(String office)
+	public Persion GetPersionByOffice(String office)
 	{
 		for(int i=0; i<m_list.Count; i++)
 		{
 			if (m_list[i].office == office)
 			{
-				return m_list[i].persion;
+                String str = m_list[i].persion;
+
+                Persion persion = Global.GetGameData().m_PersionDict[str];
+                return persion;
 			}
 		}
 
 		return null;
 	}
 
-	public String GetOfficeByPersion(String persion)
+	public Office GetOfficeByPersion(String persion)
 	{
 		for(int i=0; i<m_list.Count; i++)
 		{
 			if (m_list[i].persion == persion)
 			{
-				return m_list[i].office;
+				return Global.GetGameData().m_OfficeDict[m_list[i].office];
 			}
 		}
 
 		return null;
 	}
 
+	[Serializable]
 	struct ELEMENT
 	{
 		public ELEMENT(String office, String persion)
@@ -283,10 +340,91 @@ public class Releation
 			this.persion = persion;
 		}
 
+		[SerializeField]
 		public String office;
+
+		[SerializeField]
 		public String persion;
 	}
 
-	List<ELEMENT> m_list;
+	[SerializeField]
+	private List<ELEMENT> m_list;
+
+}
+
+[Serializable]
+public class FactionReleation
+{
+    public FactionReleation()
+    {
+        m_list = new List<ELEMENT> ();
+    }
+
+    public void Set(String persionName, String factionName)
+    {
+        for(int i=0; i<m_list.Count; i++)
+        {
+            ELEMENT elem = m_list [i];
+            if (elem.fationName == factionName)
+            {
+                elem.persionList.Add(persionName);
+                return;
+            }
+        }
+
+        ELEMENT elem2 = new ELEMENT(factionName);
+        elem2.persionList.Add(persionName);
+        m_list.Add (elem2);
+    }
+
+    public List<Persion> GetPersionByOffice(String factionName)
+    {
+        List<Persion> persionList = new List<Persion>();
+        for(int i=0; i<m_list.Count; i++)
+        {
+            if (m_list[i].fationName == factionName)
+            {
+                foreach (string persionName in m_list[i].persionList)
+                {
+                    persionList.Add(Global.GetGameData().m_PersionDict[persionName]);
+                }
+                break;
+            }
+        }
+
+        return persionList;
+    }
+
+    public Faction GetFactionByPersion(String persion)
+    {
+        for(int i=0; i<m_list.Count; i++)
+        {
+            if (m_list[i].persionList.Contains(persion))
+            {
+                return Global.GetGameData().m_FactionDict[m_list[i].fationName];
+            }
+        }
+
+        return null;
+    }
+
+    [Serializable]
+    struct ELEMENT
+    {
+        public ELEMENT(String name)
+        {
+            fationName = name;
+            persionList = new List<string>();
+        }
+
+        [SerializeField]
+        public String fationName;
+
+        [SerializeField]
+        public List<String> persionList;
+    }
+
+    [SerializeField]
+    private List<ELEMENT> m_list;
 
 }
