@@ -7,17 +7,52 @@ namespace Tools
 {
 	public class Probability
 	{
-		public static bool Calc (int iRate)
-		{
-			System.Random ran=new System.Random();
-			int RandKey=ran.Next(1,100);
-			if(RandKey <= iRate)
-			{
-				return true;
-			}
+        public static bool IsProbOccur(double prob)
+        {
+            int prb = (int)(prob * 10000);
 
-			return false;
-		}
+            System.Random ra = new System.Random(seed++);
+            int result = ra.Next(1, 10000);
+            if (result <= prb)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public static int GetRandomNum(int min, int max)
+        {
+
+            System.Random ra = new System.Random(seed + (int)DateTime.Now.Ticks);
+            seed += 100;
+            return ra.Next(min, max);
+
+        }
+
+        public static int GetGaussianRandomNum(int min, int max)
+        {
+            System.Random ra = new System.Random(seed + (int)DateTime.Now.Ticks);
+            seed += 100;
+
+            int[] iResult = { ra.Next(min, max), ra.Next(min, max), ra.Next(min, max) };
+
+            return (iResult[0] + iResult[1] + iResult[2]) / 3;
+        }
+
+        public static bool Calc(int iRate)
+        {
+            System.Random ran = new System.Random(seed++);
+            int RandKey = ran.Next(1, 100);
+            if (RandKey <= iRate)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        static int seed = 1;
 	}
 
 	public class Cvs

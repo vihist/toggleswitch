@@ -45,6 +45,9 @@ public class ChaoTScene : MonoBehaviour {
 			Transform officeChengx = GameObject.Find (enofficeGroup.ToString ()).transform.Find (enOffice.ToString ());
 			officeChengx.Find ("Persion").transform.Find ("Text").GetComponent<Text> ().text = persion.GetName ();
             officeChengx.Find ("Persion").transform.Find ("Score").transform.Find("Text").GetComponent<Text> ().text = persion.GetScore ();
-		}
+
+            officeChengx.Find("Persion").transform.Find("Faction").transform.Find("Text").GetComponent<Text>().text 
+                = UIFrame.GetUiDesc(Global.GetGameData().m_factionReleation.GetFactionByPersion(persion.GetName()).GetName());
+        }
 	}
 }

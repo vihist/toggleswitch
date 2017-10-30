@@ -19,7 +19,9 @@ public class GameFrame
 
 	public void OnNew()
 	{
-		Global.SetMyGame (new MyGame ());
+        Global.SetMyGame (new MyGame ());
+        Global.GetGameData().Init();
+
 		SceneManager.LoadSceneAsync("MainScene");
 	}
 
