@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,30 +12,39 @@ public class ChaoTScene : MonoBehaviour {
 		GameObject sanGong= GameObject.Find(OFFICE_GROUP.SanG.ToString());
 		sanGong.transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc(OFFICE_GROUP.SanG.ToString());
 
-		sanGong.transform.Find(OFFICE.ChengX.ToString()).transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc(OFFICE.ChengX.ToString());
-		sanGong.transform.Find(OFFICE.TaiW.ToString()).transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc(OFFICE.TaiW.ToString());
-		sanGong.transform.Find(OFFICE.YuSDF.ToString()).transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc(OFFICE.YuSDF.ToString());
+        for (int i=0; i<3; i++)
+        {
+            OFFICE eOffice = (OFFICE)i;
+            sanGong.transform.Find(eOffice.ToString()).transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc(eOffice.ToString());
 
-        GameObject jiuQing = GameObject.Find("JiuQ");
-        jiuQing.transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc("JiuQ");
-        jiuQing.transform.Find("TaiC").transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc("TaiC");
-        jiuQing.transform.Find("TaiP").transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc("TaiP");
-        jiuQing.transform.Find("WeiW").transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc("WeiW");
-        jiuQing.transform.Find("GuangL").transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc("GuangL");
-        jiuQing.transform.Find("TingW").transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc("TingW");
-        jiuQing.transform.Find("DaH").transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc("DaH");
-        jiuQing.transform.Find("ZhongZ").transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc("ZhongZ");
-        jiuQing.transform.Find("DaS").transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc("DaS");
-        jiuQing.transform.Find("ShaoF").transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc("ShaoF");
+        }
+
+        GameObject jiuQing = GameObject.Find(OFFICE_GROUP.JiuQ.ToString());
+        jiuQing.transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc(OFFICE_GROUP.JiuQ.ToString());
+
+        for (int i = 3; i < Enum.GetValues(typeof(OFFICE)).Length; i++)
+        {
+            OFFICE eOffice = (OFFICE)i;
+            jiuQing.transform.Find(eOffice.ToString()).transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc(eOffice.ToString());
+        }
+
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
-		RefreshOfficeResposne (OFFICE_GROUP.SanG, OFFICE.ChengX);
-		RefreshOfficeResposne (OFFICE_GROUP.SanG, OFFICE.TaiW);
-		RefreshOfficeResposne (OFFICE_GROUP.SanG, OFFICE.YuSDF);
-	}
+        for (int i = 0; i < 3; i++)
+        {
+            OFFICE eOffice = (OFFICE)i;
+            RefreshOfficeResposne(OFFICE_GROUP.SanG, eOffice);
+        }
+
+        for (int i = 3; i < Enum.GetValues(typeof(OFFICE)).Length; i++)
+        {
+            OFFICE eOffice = (OFFICE)i;
+            RefreshOfficeResposne(OFFICE_GROUP.JiuQ, eOffice);
+        }
+    }
 
 	private void RefreshOfficeResposne(OFFICE_GROUP enofficeGroup, OFFICE enOffice)
 	{

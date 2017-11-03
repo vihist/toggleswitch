@@ -68,6 +68,16 @@ enum OFFICE
 	ChengX,
 	TaiW,
 	YuSDF,
+
+    TaiC,
+    TaiP,
+    WeiW,
+    GuangL,
+    TingW,
+    DaH,
+    ZhongZ,
+    DaS,
+    ShaoF,
 }
 
 enum FACTION
@@ -96,25 +106,23 @@ public class GameData : ISerializationCallbackReceiver
 		fk = 10;
 		wb = 10;
 
-		List<Office> sag = new List<Office> {new Office(OFFICE.ChengX.ToString()), new Office(OFFICE.TaiW.ToString()), new Office(OFFICE.YuSDF.ToString())};
-		foreach(Office office in sag)
-		{
-			m_OfficeDict.Add (office.GetName(), office);
-		}
+        foreach (OFFICE eOffice in Enum.GetValues(typeof(OFFICE)))
+        {
+            Office office = new Office(eOffice.ToString());
+            m_OfficeDict.Add(office.GetName(), office);
+        }
 
-        List<Faction> factionList = new List<Faction> {new Faction(FACTION.ShiDF.ToString()), new Faction(FACTION.HuanG.ToString()), new Faction(FACTION.XunG.ToString())};
+        foreach (FACTION eFaction in Enum.GetValues(typeof(FACTION)))
+        {
+            Faction faction = new Faction(eFaction.ToString());
+            m_FactionDict.Add(faction.GetName(), faction);
+        }
 
-		foreach(Faction faction in factionList)
-		{
-			m_FactionDict.Add (faction.GetName (), faction);
-		}
-
-		List<Persion> persionList = new List<Persion> (){new Persion(StaticData.GetRandomFullName()), new Persion(StaticData.GetRandomFullName()), new Persion(StaticData.GetRandomFullName()) };
-
-		foreach(Persion persion in persionList)
-		{
-			m_PersionDict.Add (persion.GetName(), persion);
-		}
+        for(int i=0; i< m_OfficeDict.Count; i++)
+        {
+            Persion persion = new Persion(StaticData.GetRandomFullName());
+            m_PersionDict.Add(persion.GetName(), persion);
+        }
 
 		InitOfficeResponse ();
         InitFactionReleation();
@@ -152,9 +160,11 @@ public class GameData : ISerializationCallbackReceiver
 		List<Persion> listPersion = new List<Persion> (m_PersionDict.Values);
 		listPersion.Sort ((p1,p2)=> -(p1.m_score.CompareTo(p2.m_score)));
 
-		m_officeResponse.Set (OFFICE.ChengX.ToString (), listPersion [0].GetName ());
-		m_officeResponse.Set (OFFICE.TaiW.ToString (),   listPersion [1].GetName ());
-		m_officeResponse.Set (OFFICE.YuSDF.ToString (),  listPersion [2].GetName ());
+        for (int i = 0; i< Enum.GetValues(typeof(OFFICE)).Length; i++)
+        {
+            OFFICE eOffice = (OFFICE)i;
+            m_officeResponse.Set(eOffice.ToString(), listPersion[i].GetName());
+        }
 	}
 
     private void InitFactionReleation()
@@ -167,6 +177,15 @@ public class GameData : ISerializationCallbackReceiver
 
         persion = m_officeResponse.GetPersionByOffice(OFFICE.TaiW.ToString());
         m_factionReleation.Set(persion.GetName(), FACTION.XunG.ToString());
+
+        foreach(String name in m_PersionDict.Keys)
+        {
+            if(m_factionReleation.GetFactionByPersion(name) == null)
+            {
+                FACTION eFaction = (FACTION)(Tools.Probability.GetRandomNum(0, 2));
+                m_factionReleation.Set(name, eFaction.ToString());
+            }
+        }
     }
 
 	public int tm;
@@ -396,12 +415,19 @@ public class FactionReleation
 
     public Faction GetFactionByPersion(String persion)
     {
-        for(int i=0; i<m_list.Count; i++)
+        try
         {
-            if (m_list[i].persionList.Contains(persion))
+            for (int i = 0; i < m_list.Count; i++)
             {
-                return Global.GetGameData().m_FactionDict[m_list[i].fationName];
+                if (m_list[i].persionList.Contains(persion))
+                {
+                    return Global.GetGameData().m_FactionDict[m_list[i].fationName];
+                }
             }
+        }
+        catch (Exception)
+        {
+
         }
 
         return null;
