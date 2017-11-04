@@ -25,7 +25,7 @@ namespace Tools
         {
 
             System.Random ra = new System.Random(seed + (int)DateTime.Now.Ticks);
-            seed += 100;
+            seed += 1000;
             return ra.Next(min, max);
 
         }
@@ -33,7 +33,7 @@ namespace Tools
         public static int GetGaussianRandomNum(int min, int max)
         {
             System.Random ra = new System.Random(seed + (int)DateTime.Now.Ticks);
-            seed += 100;
+            seed += 1000;
 
             int[] iResult = { ra.Next(min, max), ra.Next(min, max), ra.Next(min, max) };
 
@@ -98,6 +98,11 @@ namespace Tools
                 Debug.Log(row + "," + column);
                 throw;
             }
+        }
+
+        public int RowLength()
+        {
+            return m_rowIndex.Length;
         }
 
 		private string[] m_rowIndex;
