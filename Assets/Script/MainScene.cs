@@ -59,7 +59,8 @@ public class MainScene : MonoBehaviour
 		UIRoot.transform.Find ("TM").transform.Find ("value").GetComponent<Text> ().text = Global.GetGameData ().tm.ToString();
 		UIRoot.transform.Find ("FK").transform.Find ("value").GetComponent<Text> ().text = Global.GetGameData ().fk.ToString();
 		UIRoot.transform.Find ("WB").transform.Find ("value").GetComponent<Text> ().text = Global.GetGameData ().wb.ToString();
-	}
+        UIRoot.transform.Find("Time").GetComponent<Text>().text = Global.GetGameData().m_Date.ToString();
+    }
 
 	private void OnKeyBoard()
 	{

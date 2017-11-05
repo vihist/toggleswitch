@@ -91,6 +91,7 @@
     <Compile Include="Assets\Script\MsgBox\TestMessage.cs" />
     <Compile Include="Assets\Script\MyGame.cs" />
     <Compile Include="Assets\Script\StartScene.cs" />
+    <Compile Include="Assets\Script\TianXScene.cs" />
     <Compile Include="Assets\Script\Tools.cs" />
   </ItemGroup>
   <ItemGroup>

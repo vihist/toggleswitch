@@ -44,6 +44,8 @@ public class MyGame
 				m_ListMessageBox.Add(testMsg);
 			} 
 		}
+
+        m_GameData.m_Date.Increase();
     }
 
 	public GameData GetGameData()
@@ -87,13 +89,31 @@ enum FACTION
     HuanG,
 }
 
+enum ZHOUMING
+{
+    Youzhou,
+    Jizhou,
+    Bingzhou,
+    Yuzhou,
+    Yanzhou,
+    Qingzhou,
+    Xuzhou,
+    Yangzhou,
+    Yongzhou,
+    Liangzhou,
+    Jingzhou,
+    Sizhou,
+    Yizhou
+}
+
 [Serializable]
 public class GameData : ISerializationCallbackReceiver
 {
 
 	public GameData()
 	{
-		m_OfficeDict = new Tools.SerialDictionary<string, Office> ();
+        m_Date = new GameDate();
+        m_OfficeDict = new Tools.SerialDictionary<string, Office> ();
 		m_FactionDict = new Dictionary<string, Faction> ();
 		m_PersionDict = new Dictionary<string, Persion> ();
 		m_officeResponse = new OfficeResponse ();
@@ -191,8 +211,9 @@ public class GameData : ISerializationCallbackReceiver
 	public int tm;
 	public int fk;
 	public int wb;
+    public GameDate m_Date;
 
-	public Dictionary<string, Office>  m_OfficeDict;
+    public Dictionary<string, Office>  m_OfficeDict;
 	public Dictionary<string, Faction> m_FactionDict;
 	public Dictionary<string, Persion> m_PersionDict;
 
@@ -465,5 +486,107 @@ public class FactionReleation
 
     [SerializeField]
     private List<ELEMENT> m_list;
+}
 
+[Serializable]
+public class GameDate
+{
+    public GameDate()
+    {
+        _year = 1;
+        _month = 1;
+        _day = 1;
+    }
+
+    public void Increase()
+    {
+        if (_day == 30)
+        {
+            if (_month == 12)
+            {
+                _year++;
+                _month = 1;
+            }
+            else
+            {
+                _month++;
+            }
+            _day = 1;
+        }
+        else
+        {
+            _day++;
+        }
+    }
+
+    public int year
+    {
+        get
+        {
+            return _year;
+        }
+    }
+
+    public int month
+    {
+        get
+        {
+            return _month;
+        }
+    }
+
+    public int day
+    {
+        get
+        {
+            return _day;
+        }
+    }
+
+    public override string ToString()
+    {
+        return _year.ToString() + "年" + _month + "月" + _day + "日";
+    }
+
+    public bool Is(string str)
+    {
+        string[] arr = str.Split('/');
+        if (arr.Length < 3)
+        {
+            throw new Exception();
+        }
+
+        if (arr[0] != "*")
+        {
+            if (Convert.ToInt16(arr[0]) != _year)
+            {
+                return false;
+            }
+        }
+
+        if (arr[1] != "*")
+        {
+            if (Convert.ToInt16(arr[1]) != _month)
+            {
+                return false;
+            }
+        }
+
+        if (arr[2] != "*")
+        {
+            if (Convert.ToInt16(arr[2]) != _day)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    [SerializeField]
+    private int _year;
+    [SerializeField]
+    private int _month;
+    [SerializeField]
+    private int _day;
 }
