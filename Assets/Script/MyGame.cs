@@ -80,6 +80,20 @@ enum OFFICE
     ZhongZ,
     DaS,
     ShaoF,
+
+	Youzhou=ZHOUMING.Youzhou,
+	Jizhou=ZHOUMING.Jizhou,
+	Bingzhou=ZHOUMING.Bingzhou,
+	Yuzhou=ZHOUMING.Yuzhou,
+	Yanzhou=ZHOUMING.Yanzhou,
+	Qingzhou=ZHOUMING.Qingzhou,
+	Xuzhou=ZHOUMING.Xuzhou,
+	Yangzhou=ZHOUMING.Yangzhou,
+	Yongzhou=ZHOUMING.Yongzhou,
+	Liangzhou=ZHOUMING.Liangzhou,
+	Jingzhou=ZHOUMING.Jingzhou,
+	Sizhou=ZHOUMING.Sizhou,
+	Yizhou=ZHOUMING.Yizhou
 }
 
 enum FACTION
@@ -91,7 +105,7 @@ enum FACTION
 
 enum ZHOUMING
 {
-    Youzhou,
+    Youzhou=255,
     Jizhou,
     Bingzhou,
     Yuzhou,
@@ -141,6 +155,12 @@ public class GameData : ISerializationCallbackReceiver
         for(int i=0; i< m_OfficeDict.Count; i++)
         {
             Persion persion = new Persion(Persion.GetRandomFullName());
+			if (m_PersionDict.ContainsKey (persion.GetName ())) 
+			{
+				i--;
+				continue;
+			}
+
             m_PersionDict.Add(persion.GetName(), persion);
         }
 
@@ -180,10 +200,11 @@ public class GameData : ISerializationCallbackReceiver
 		List<Persion> listPersion = new List<Persion> (m_PersionDict.Values);
 		listPersion.Sort ((p1,p2)=> -(p1.m_score.CompareTo(p2.m_score)));
 
-        for (int i = 0; i< Enum.GetValues(typeof(OFFICE)).Length; i++)
+		int i = 0;
+		foreach (OFFICE eOffice in Enum.GetValues(typeof(OFFICE)))
         {
-            OFFICE eOffice = (OFFICE)i;
             m_officeResponse.Set(eOffice.ToString(), listPersion[i].GetName());
+			i++;
         }
 	}
 

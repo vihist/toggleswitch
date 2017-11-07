@@ -22,7 +22,7 @@ public class ChaoTScene : MonoBehaviour {
         GameObject jiuQing = GameObject.Find(OFFICE_GROUP.JiuQ.ToString());
         jiuQing.transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc(OFFICE_GROUP.JiuQ.ToString());
 
-        for (int i = 3; i < Enum.GetValues(typeof(OFFICE)).Length; i++)
+        for (int i = 3; i < 9; i++)
         {
             OFFICE eOffice = (OFFICE)i;
             jiuQing.transform.Find(eOffice.ToString()).transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc(eOffice.ToString());
@@ -39,7 +39,7 @@ public class ChaoTScene : MonoBehaviour {
             RefreshOfficeResposne(OFFICE_GROUP.SanG, eOffice);
         }
 
-        for (int i = 3; i < Enum.GetValues(typeof(OFFICE)).Length; i++)
+        for (int i = 3; i < 3+9; i++)
         {
             OFFICE eOffice = (OFFICE)i;
             RefreshOfficeResposne(OFFICE_GROUP.JiuQ, eOffice);
@@ -52,11 +52,11 @@ public class ChaoTScene : MonoBehaviour {
 
 		if (persion != null) 
 		{
-			Transform officeChengx = GameObject.Find (enofficeGroup.ToString ()).transform.Find (enOffice.ToString ());
-			officeChengx.Find ("Persion").transform.Find ("Text").GetComponent<Text> ().text = persion.GetName ();
-            officeChengx.Find ("Persion").transform.Find ("Score").transform.Find("Text").GetComponent<Text> ().text = persion.GetScore ();
+			Transform officeGameObj = GameObject.Find (enofficeGroup.ToString ()).transform.Find (enOffice.ToString ());
+			officeGameObj.Find ("Persion").transform.Find ("Text").GetComponent<Text> ().text = persion.GetName ();
 
-            officeChengx.Find("Persion").transform.Find("Faction").transform.Find("Text").GetComponent<Text>().text 
+			officeGameObj.Find ("Persion").transform.Find ("Score").transform.Find("Text").GetComponent<Text> ().text = persion.GetScore ();
+			officeGameObj.Find ("Persion").transform.Find ("Faction").transform.Find("Text").GetComponent<Text>().text 
                 = UIFrame.GetUiDesc(Global.GetGameData().m_factionReleation.GetFactionByPersion(persion.GetName()).GetName());
         }
 	}
