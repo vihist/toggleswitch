@@ -22,7 +22,7 @@ public class ChaoTScene : MonoBehaviour {
         GameObject jiuQing = GameObject.Find(OFFICE_GROUP.JiuQ.ToString());
         jiuQing.transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc(OFFICE_GROUP.JiuQ.ToString());
 
-        for (int i = 3; i < 9; i++)
+        for (int i = 3; i < 3+9; i++)
         {
             OFFICE eOffice = (OFFICE)i;
             jiuQing.transform.Find(eOffice.ToString()).transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc(eOffice.ToString());
