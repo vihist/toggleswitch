@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 224943729216749832}
   - component: {fileID: 222911988446849040}
   - component: {fileID: 114635812884092708}
+  - component: {fileID: 114938078756830624}
   m_Layer: 5
   m_Name: Dialog_1Btn
   m_TagString: Untagged
@@ -291,6 +292,22 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114938078756830624
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1157126197690288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a870c89de0dd35341b2ab52e5497906d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Local_Pointer_Position: {x: 0, y: 0}
+  Panel_Local_Position: {x: 0, y: 0, z: 0}
+  targetObject: {fileID: 0}
+  parentRectTransform: {fileID: 0}
+  targetRectTransform: {fileID: 0}
 --- !u!222 &222042142932472776
 CanvasRenderer:
   m_ObjectHideFlags: 1
