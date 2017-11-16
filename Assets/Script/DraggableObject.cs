@@ -19,12 +19,8 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IPointerDownHandler
 
     private void Awake()
     {
-        panelRectTransform = transform.parent as RectTransform;
+        panelRectTransform = transform as RectTransform;
         parentRectTransform = panelRectTransform.parent as RectTransform;
-        if (parentRectTransform == null)
-        {
-            parentRectTransform = GameObject.Find("Canvas").GetComponent<Canvas>().transform as RectTransform;
-        }
     }
 
     public void OnPointerDown(PointerEventData data)

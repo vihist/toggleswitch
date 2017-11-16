@@ -94,7 +94,7 @@ public class MainScene : MonoBehaviour
 			{
 				MessageBox msgbox = Global.GetMyGame().m_ListMessageBox[i];
 
-				CheckDialog Dialog = GameObject.Find ("Canvas").AddComponent<CheckDialog> ();
+				CheckDialog Dialog = GameObject.Find ("Background").AddComponent<CheckDialog> ();
 				Dialog.Initial (msgbox.strTitile, msgbox.strContent, msgbox.arrOption);
 
 				yield return StartCoroutine(Dialog.IsChecked());

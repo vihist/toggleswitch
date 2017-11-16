@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Script\ChaoTScene.cs" />
      <Compile Include="Assets\Script\CheckDialog.cs" />
+     <Compile Include="Assets\Script\DraggableObject.cs" />
      <Compile Include="Assets\Script\EndScene.cs" />
      <Compile Include="Assets\Script\GameFrame.cs" />
      <Compile Include="Assets\Script\GameScene.cs" />
