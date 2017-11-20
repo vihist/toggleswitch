@@ -8,9 +8,10 @@ class CheckDialog : MonoBehaviour
 {
 	public void Initial(string strTitle, string strContent, ArrayList arrOption)
 	{
-		GameObject UIRoot = GameObject.Find("Background");
+        GameObject UIRoot = GameObject.Find("Canvas").transform.Find("Background").gameObject;
 
-		dialog = Instantiate(Resources.Load(String.Format("EasyMenu/_Prefabs/Dialog_{0}Btn", arrOption.Count)), UIRoot.transform) as GameObject;
+
+        dialog = Instantiate(Resources.Load(String.Format("EasyMenu/_Prefabs/Dialog_{0}Btn", arrOption.Count)), UIRoot.transform) as GameObject;
 		dialog.transform.SetAsFirstSibling(); 
 
 		Text txTitle = dialog.transform.Find("Title").GetComponent<Text>();
