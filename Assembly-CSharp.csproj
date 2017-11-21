@@ -54,6 +54,7 @@
      <Compile Include="Assets\Script\GameScene.cs" />
      <Compile Include="Assets\Script\Generater.cs" />
      <Compile Include="Assets\Script\Global.cs" />
+     <Compile Include="Assets\Script\HouGScene.cs" />
      <Compile Include="Assets\Script\MainScene.cs" />
      <Compile Include="Assets\Script\MsgBox\JsMsgBox.cs" />
      <Compile Include="Assets\Script\MsgBox\MessageBox.cs" />

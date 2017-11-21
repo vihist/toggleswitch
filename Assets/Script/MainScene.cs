@@ -19,7 +19,9 @@ public class MainScene : MonoBehaviour
 	void Start ()
     {
 		OnUiInit ();
-		SceneManager.LoadSceneAsync ("TianXScene", LoadSceneMode.Additive);
+
+		m_currSceneName = "TianXScene";
+		SceneManager.LoadSceneAsync (m_currSceneName, LoadSceneMode.Additive);
 
 	}
 	
@@ -36,8 +38,10 @@ public class MainScene : MonoBehaviour
 
 		if (bCheck)
 		{
-			SceneManager.UnloadSceneAsync("ChaoTScene");
-			SceneManager.LoadSceneAsync("TianXScene", LoadSceneMode.Additive);
+			SceneManager.UnloadSceneAsync(m_currSceneName);
+
+			m_currSceneName = "TianXScene";
+			SceneManager.LoadSceneAsync(m_currSceneName, LoadSceneMode.Additive);
 		}
 	}
 
@@ -47,8 +51,21 @@ public class MainScene : MonoBehaviour
 
 		if(bCheck)
 		{
-			SceneManager.UnloadSceneAsync("TianXScene");
-			SceneManager.LoadSceneAsync("ChaoTScene", LoadSceneMode.Additive);
+			SceneManager.UnloadSceneAsync(m_currSceneName);
+
+			m_currSceneName = "ChaoTScene";
+			SceneManager.LoadSceneAsync(m_currSceneName, LoadSceneMode.Additive);
+		}
+	}
+
+	public void OnValueChanged3(bool bCheck)
+	{
+		if(bCheck)
+		{
+			SceneManager.UnloadSceneAsync(m_currSceneName);
+
+			m_currSceneName = "HouGScene";
+			SceneManager.LoadSceneAsync(m_currSceneName, LoadSceneMode.Additive);
 		}
 	}
 
@@ -125,4 +142,5 @@ public class MainScene : MonoBehaviour
 
 
 	private float m_fWaitTime;
+	private String m_currSceneName;
 }

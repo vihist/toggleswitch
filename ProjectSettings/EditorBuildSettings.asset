@@ -20,3 +20,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EndScene.unity
     guid: 97b361c32284849a099f5b71ef238d77
+  - enabled: 1
+    path: Assets/Scenes/HouGScene.unity
+    guid: 22be22da975204003ac7594cef859a81
