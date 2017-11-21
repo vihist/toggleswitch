@@ -96,6 +96,14 @@ enum OFFICE
 	Yizhou=ZHOUMING.Yizhou
 }
 
+enum FEIPIN
+{
+    HuangH,
+    GuiF1,
+    GuiF2,
+    GuiF3,
+}
+
 enum FACTION
 {
     ShiDF,
@@ -128,11 +136,16 @@ public class GameData : ISerializationCallbackReceiver
 	{
         m_Date = new GameDate();
         m_OfficeDict = new Tools.SerialDictionary<string, Office> ();
-		m_FactionDict = new Dictionary<string, Faction> ();
-		m_PersionDict = new Dictionary<string, Persion> ();
-		m_officeResponse = new OfficeResponse ();
+        m_HougongOfficeDict = new Dictionary<string, Office>();
+        m_FactionDict = new Dictionary<string, Faction> ();
+
+		m_MaleDict = new Dictionary<string, Persion> ();
+        m_FemaleDict = new Dictionary<string, Persion>();
+
+        m_officeResponse = new OfficeResponse ();
         m_factionReleation = new FactionReleation();
-	}
+        m_HougongOfficeResponse = new OfficeResponse();
+    }
 
 	public void Init()
 	{
@@ -154,17 +167,29 @@ public class GameData : ISerializationCallbackReceiver
 
         for(int i=0; i< m_OfficeDict.Count; i++)
         {
-            Persion persion = new Persion(Persion.GetRandomFullName());
-			if (m_PersionDict.ContainsKey (persion.GetName ())) 
+            Persion persion = new Persion(Persion.GetMaleName());
+			if (m_MaleDict.ContainsKey (persion.GetName ())) 
 			{
 				i--;
 				continue;
 			}
 
-            m_PersionDict.Add(persion.GetName(), persion);
+            m_MaleDict.Add(persion.GetName(), persion);
         }
 
-		InitOfficeResponse ();
+        for (int i = 0; i < Enum.GetValues(typeof(FEIPIN)).Length; i++)
+        {
+            Persion persion = new Persion(Persion.GetMaleName());
+            if (m_MaleDict.ContainsKey(persion.GetName()))
+            {
+                i--;
+                continue;
+            }
+
+            m_MaleDict.Add(persion.GetName(), persion);
+        }
+
+        InitOfficeResponse ();
         InitFactionReleation();
 		
 	}
@@ -173,7 +198,8 @@ public class GameData : ISerializationCallbackReceiver
 	{
 		serialOffice = new List<Office> (m_OfficeDict.Values);
 		serialFaction = new List<Faction> (m_FactionDict.Values);
-		serialPersion = new List<Persion> (m_PersionDict.Values);
+		serialPersion = new List<Persion> (m_MaleDict.Values);
+
 	}
 
 	public void OnAfterDeserialize()
@@ -190,14 +216,14 @@ public class GameData : ISerializationCallbackReceiver
 
 		foreach (Persion persion in serialPersion)
 		{
-			m_PersionDict.Add (persion.GetName (), persion);
+			m_MaleDict.Add (persion.GetName (), persion);
 		}
 	}
 
 
 	private void InitOfficeResponse()
 	{
-		List<Persion> listPersion = new List<Persion> (m_PersionDict.Values);
+		List<Persion> listPersion = new List<Persion> (m_MaleDict.Values);
 		listPersion.Sort ((p1,p2)=> -(p1.m_score.CompareTo(p2.m_score)));
 
 		int i = 0;
@@ -219,7 +245,7 @@ public class GameData : ISerializationCallbackReceiver
         persion = m_officeResponse.GetPersionByOffice(OFFICE.TaiW.ToString());
         m_factionReleation.Set(persion.GetName(), FACTION.XunG.ToString());
 
-        foreach(String name in m_PersionDict.Keys)
+        foreach(String name in m_MaleDict.Keys)
         {
             if(m_factionReleation.GetFactionByPersion(name) == null)
             {
@@ -235,10 +261,13 @@ public class GameData : ISerializationCallbackReceiver
     public GameDate m_Date;
 
     public Dictionary<string, Office>  m_OfficeDict;
-	public Dictionary<string, Faction> m_FactionDict;
-	public Dictionary<string, Persion> m_PersionDict;
+    public Dictionary<string, Office>  m_HougongOfficeDict;
+    public Dictionary<string, Faction> m_FactionDict;
+	public Dictionary<string, Persion> m_MaleDict;
+    public Dictionary<string, Persion> m_FemaleDict;
 
-	public OfficeResponse m_officeResponse;
+    public OfficeResponse m_officeResponse;
+    public OfficeResponse m_HougongOfficeResponse;
     public FactionReleation m_factionReleation;
 
 	[SerializeField]
@@ -326,7 +355,7 @@ public class Persion
         return m_score.ToString();
     }
 
-    public static String GetRandomFullName()
+    public static String GetMaleName()
     {
         int rowCount = Tools.Probability.GetRandomNum(1, cvsXings.RowLength() - 1);
         String xingshi = cvsXings.Get(rowCount.ToString(), "CHI");
@@ -336,6 +365,17 @@ public class Persion
 
         return xingshi + mingzi;
     }
+
+    public static String GetFemaleName()
+    {
+        int rowCount = Tools.Probability.GetRandomNum(1, cvsXings.RowLength() - 1);
+        String xingshi = cvsXings.Get(rowCount.ToString(), "CHI");
+
+        String mingzi = cvsMingz.Get("0", "CHI");
+
+        return xingshi + mingzi;
+    }
+
 
     public string m_name;
     public int m_score;
@@ -384,7 +424,7 @@ public class OfficeResponse
 			{
                 String str = m_list[i].persion;
 
-                Persion persion = Global.GetGameData().m_PersionDict[str];
+                Persion persion = Global.GetGameData().m_MaleDict[str];
                 return persion;
 			}
 		}
@@ -460,7 +500,7 @@ public class FactionReleation
             {
                 foreach (string persionName in m_list[i].persionList)
                 {
-                    persionList.Add(Global.GetGameData().m_PersionDict[persionName]);
+                    persionList.Add(Global.GetGameData().m_MaleDict[persionName]);
                 }
                 break;
             }
