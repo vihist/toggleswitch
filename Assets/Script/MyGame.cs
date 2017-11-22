@@ -23,7 +23,8 @@ public class MyGame
 
 		//m_msgGenerater.Register(typeof(TestMessage));
 		m_msgGenerater.Register (typeof(JsMsgBox));
-	}
+        m_msgGenerater.Register(typeof(TX_yinghuoshouxin));
+    }
 
 	public bool IsEnd()
 	{

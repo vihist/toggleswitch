@@ -95,6 +95,8 @@ namespace Tools
 	{
 		public Cvs(string filename)
 		{
+            this.filename = filename;
+
 			//读取csv二进制文件  
 			TextAsset binAsset = Resources.Load (filename, typeof(TextAsset)) as TextAsset;         
 
