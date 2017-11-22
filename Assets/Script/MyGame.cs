@@ -102,6 +102,15 @@ enum FEIPIN
     GuiF1,
     GuiF2,
     GuiF3,
+    Feib1,
+    Feib2,
+    Feib3,
+    Feib4,
+    Feib5,
+    Feib6,
+    Feib7,
+    Feib8,
+    Feib9,
 }
 
 enum FACTION

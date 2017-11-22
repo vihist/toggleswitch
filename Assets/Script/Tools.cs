@@ -75,7 +75,7 @@ namespace Tools
 				{
 					resultList.Add (list [i] - 0);
 				} 
-				else if (i == list.Count-1)
+				else if (i == list.Count)
 				{
 					resultList.Add (100 - list [i - 1]);
 				}
@@ -131,7 +131,7 @@ namespace Tools
             }
             catch(Exception e)
             {
-                Debug.Log(row + "," + column);
+                Debug.Log(filename + ":" + row + "," + column);
                 throw;
             }
         }
@@ -144,7 +144,9 @@ namespace Tools
 		private string[] m_rowIndex;
 		private string[] m_colIndex;
 		private string[][] m_ArrayData;
-	}
+        private string filename;
+
+    }
 		
 	[Serializable]
 	public class SerialDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
