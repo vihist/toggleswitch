@@ -177,19 +177,25 @@ public class GameData : ISerializationCallbackReceiver
             m_MaleDict.Add(persion.GetName(), persion);
         }
 
+		List<int> listScore = Tools.Probability.GetRandomNumArrayWithStableSum (Enum.GetNames(typeof(FEIPIN)).Length, 100);
+
         for (int i = 0; i < Enum.GetValues(typeof(FEIPIN)).Length; i++)
         {
-            Persion persion = new Persion(Persion.GetMaleName());
-            if (m_MaleDict.ContainsKey(persion.GetName()))
+			Persion persion = new Persion(Persion.GetFemaleName());
+			if (m_FemaleDict.ContainsKey(persion.GetName()))
             {
                 i--;
                 continue;
             }
-
-            m_MaleDict.Add(persion.GetName(), persion);
+			persion.m_score = listScore [i];
+			m_FemaleDict.Add(persion.GetName(), persion);
         }
 
+
+
         InitOfficeResponse ();
+		InitHougongOfficeResponse ();
+
         InitFactionReleation();
 		
 	}
@@ -197,8 +203,11 @@ public class GameData : ISerializationCallbackReceiver
 	public void OnBeforeSerialize()
 	{
 		serialOffice = new List<Office> (m_OfficeDict.Values);
+		serialHougongOffice = new List<Office> (m_HougongOfficeDict.Values);
+
 		serialFaction = new List<Faction> (m_FactionDict.Values);
-		serialPersion = new List<Persion> (m_MaleDict.Values);
+		serialMale = new List<Persion> (m_MaleDict.Values);
+		serialFemale = new List<Persion> (m_FemaleDict.Values);
 
 	}
 
@@ -209,15 +218,27 @@ public class GameData : ISerializationCallbackReceiver
 			m_OfficeDict.Add (office.GetName (), office);
 		}
 
+		foreach(Office office in serialHougongOffice)
+		{
+			m_HougongOfficeDict.Add (office.GetName (), office);
+		}
+
 		foreach (Faction faction in serialFaction) 
 		{
 			m_FactionDict.Add (faction.GetName(), faction);
 		}
 
-		foreach (Persion persion in serialPersion)
+		foreach (Persion persion in serialMale)
 		{
 			m_MaleDict.Add (persion.GetName (), persion);
 		}
+
+		foreach (Persion persion in serialFemale)
+		{
+			m_FemaleDict.Add (persion.GetName (), persion);
+		}
+
+
 	}
 
 
@@ -232,6 +253,18 @@ public class GameData : ISerializationCallbackReceiver
             m_officeResponse.Set(eOffice.ToString(), listPersion[i].GetName());
 			i++;
         }
+	}
+
+	private void InitHougongOfficeResponse()
+	{
+		List<Persion> listPersion = new List<Persion> (m_FemaleDict.Values);
+
+		int i = 0;
+		foreach (FEIPIN eOffice in Enum.GetValues(typeof(FEIPIN)))
+		{
+			m_HougongOfficeResponse.Set(eOffice.ToString(), listPersion[i].GetName());
+			i++;
+		}
 	}
 
     private void InitFactionReleation()
@@ -253,6 +286,15 @@ public class GameData : ISerializationCallbackReceiver
                 m_factionReleation.Set(name, eFaction.ToString());
             }
         }
+
+		foreach(String name in m_FemaleDict.Keys)
+		{
+			if(m_factionReleation.GetFactionByPersion(name) == null)
+			{
+				FACTION eFaction = (FACTION)(Tools.Probability.GetRandomNum(0, 2));
+				m_factionReleation.Set(name, eFaction.ToString());
+			}
+		}
     }
 
 	public int tm;
@@ -274,10 +316,16 @@ public class GameData : ISerializationCallbackReceiver
 	private List<Office> serialOffice;
 
 	[SerializeField]
+	private List<Office> serialHougongOffice;
+
+	[SerializeField]
 	private List<Faction> serialFaction;
 
 	[SerializeField]
-	private List<Persion> serialPersion;
+	private List<Persion> serialMale;
+
+	[SerializeField]
+	private List<Persion> serialFemale;
 
 }
 
@@ -297,6 +345,7 @@ public class Office
 	[SerializeField]
 	public string m_name;
 }
+
 
 [Serializable]
 public class Faction
@@ -424,8 +473,15 @@ public class OfficeResponse
 			{
                 String str = m_list[i].persion;
 
-                Persion persion = Global.GetGameData().m_MaleDict[str];
-                return persion;
+				if (Global.GetGameData ().m_MaleDict.ContainsKey (str)) 
+				{
+					return Global.GetGameData ().m_MaleDict [str];
+				}
+                
+				if (Global.GetGameData ().m_FemaleDict.ContainsKey (str)) 
+				{
+					return Global.GetGameData ().m_FemaleDict [str];
+				}
 			}
 		}
 
@@ -438,7 +494,17 @@ public class OfficeResponse
 		{
 			if (m_list[i].persion == persion)
 			{
-				return Global.GetGameData().m_OfficeDict[m_list[i].office];
+				String str = m_list [i].office;
+
+				if (Global.GetGameData ().m_OfficeDict.ContainsKey (str)) 
+				{
+					return Global.GetGameData ().m_OfficeDict [str];
+				}
+
+				if (Global.GetGameData ().m_HougongOfficeDict.ContainsKey (str)) 
+				{
+					return Global.GetGameData ().m_HougongOfficeDict [str];
+				}
 			}
 		}
 

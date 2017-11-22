@@ -52,6 +52,42 @@ namespace Tools
             return false;
         }
 
+		public static List<int> GetRandomNumArrayWithStableSum(int count, int sum)
+		{
+			List<int> list = new List<int> ();
+			while(list.Count != count-1)
+			{
+				int random = GetRandomNum (0, sum);
+				if (list.Contains (random)) 
+				{
+					continue;
+				}
+
+				list.Add (random);
+			}
+
+			list.Sort ();
+
+			List<int> resultList = new List<int> ();
+			for (int i = 0; i < list.Count+1; i++)
+			{
+				if (i == 0) 
+				{
+					resultList.Add (list [i] - 0);
+				} 
+				else if (i == list.Count-1)
+				{
+					resultList.Add (100 - list [i - 1]);
+				}
+				else
+				{
+					resultList.Add (list [i] - list [i - 1]);
+				}
+			}
+
+			return resultList;
+		}
+
         static int seed = 1;
 	}
 
