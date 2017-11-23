@@ -24,6 +24,7 @@ public class MyGame
 		//m_msgGenerater.Register(typeof(TestMessage));
 		m_msgGenerater.Register (typeof(JsMsgBox));
         m_msgGenerater.Register(typeof(TX_yinghuoshouxin));
+        m_msgGenerater.Register(typeof(TestMessage2));
     }
 
 	public bool IsEnd()
@@ -35,16 +36,12 @@ public class MyGame
     {
         m_ListMessageBox.Clear();
 
-		ArrayList lstMsgBox = m_msgGenerater.Generate ();
-
-		foreach(object obj in lstMsgBox)
-		{
-			MessageBox testMsg =  obj as MessageBox;
-			if (testMsg != null)
-			{
-				m_ListMessageBox.Add(testMsg);
-			} 
-		}
+        MessageBox testMsg = m_msgGenerater.GenerateEvent() as MessageBox;
+        if (testMsg != null)
+        {
+            m_ListMessageBox.Add(testMsg);
+            return;
+        }
 
         m_GameData.m_Date.Increase();
     }

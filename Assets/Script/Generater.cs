@@ -35,5 +35,26 @@ public class Generater
 		return arrList;
     }
 
+    public Object GenerateEvent()
+    {
+        for(int i= iStatic; i< listEventType.Count; i++)
+        {
+
+            MethodInfo mthInfo = listEventType[i].GetMethod("PreCondition");
+            bool isValid = (bool)mthInfo.Invoke(null, null);
+            if (!isValid)
+            {
+                continue;
+            }
+
+            iStatic = i+1;
+            return Activator.CreateInstance(listEventType[i]);
+        }
+
+        iStatic = 0;
+        return null;
+    }
+
     private List<Type> listEventType;
+    private int iStatic = 0;
 }

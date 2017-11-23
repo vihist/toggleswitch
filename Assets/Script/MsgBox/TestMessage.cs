@@ -35,7 +35,12 @@ public class TestMessage2 : MessageBox
 
 	public static bool PreCondition()
 	{
-		return true;
+		if(Global.GetGameData().tm == 5000)
+        {
+            return true;
+        }
+
+        return false;
 	}
 
 	private void  OnOption1()
