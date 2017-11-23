@@ -122,7 +122,7 @@ namespace Tools
 		{
             try
             {
-#if UNITY_EDITOR_OSX
+#if UNITY_EDITO_OSX
 			    return row+"_"+column;
 #else
                 int iRow = Array.FindIndex(m_rowIndex, s => s == row);

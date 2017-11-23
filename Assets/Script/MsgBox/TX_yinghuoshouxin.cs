@@ -13,6 +13,7 @@ class TX_yinghuoshouxin : MessageBox
         arrOption.Add(new Option { strDesc = m_cvs.Get("TX_YHSX", "OPT1"), delegOnBtnClick = OnOption1 });
         arrOption.Add(new Option { strDesc = m_cvs.Get("TX_YHSX", "OPT2"), delegOnBtnClick = OnOption1 });
         arrOption.Add(new Option { strDesc = m_cvs.Get("TX_YHSX", "OPT3"), delegOnBtnClick = OnOption1 });
+		arrOption.Add(new Option { strDesc = m_cvs.Get("TX_YHSX", "OPT4"), delegOnBtnClick = OnOption1 });
     }
 
     public static bool PreCondition()

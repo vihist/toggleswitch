@@ -58,14 +58,15 @@
      <Compile Include="Assets\Script\MainScene.cs" />
      <Compile Include="Assets\Script\MsgBox\JsMsgBox.cs" />
      <Compile Include="Assets\Script\MsgBox\MessageBox.cs" />
+     <Compile Include="Assets\Script\MsgBox\TX_yinghuoshouxin.cs" />
      <Compile Include="Assets\Script\MsgBox\TestMessage.cs" />
      <Compile Include="Assets\Script\MyGame.cs" />
      <Compile Include="Assets\Script\StartScene.cs" />
      <Compile Include="Assets\Script\TianXScene.cs" />
      <Compile Include="Assets\Script\Tools.cs" />
      <None Include="Assets\Resources\text\uidesc.txt" />
-     <None Include="Assets\Resources\text\xingshi.txt" />
      <None Include="Assets\Resources\text\msgdef.txt" />
+     <None Include="Assets\Resources\text\xingshi.txt" />
      <None Include="Assets\Resources\text\mingzi.txt" />
  <Reference Include="UnityEngine.Analytics">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
