@@ -90,6 +90,7 @@
     <Compile Include="Assets\Script\Global.cs" />
     <Compile Include="Assets\Script\HouGScene.cs" />
     <Compile Include="Assets\Script\MainScene.cs" />
+    <Compile Include="Assets\Script\MsgBox\CT_zhongchenyiwaisiwang.cs" />
     <Compile Include="Assets\Script\MsgBox\JsMsgBox.cs" />
     <Compile Include="Assets\Script\MsgBox\MessageBox.cs" />
     <Compile Include="Assets\Script\MsgBox\TestMessage.cs" />

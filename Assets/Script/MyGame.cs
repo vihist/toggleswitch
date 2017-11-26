@@ -152,6 +152,8 @@ public class GameData : ISerializationCallbackReceiver
         m_officeResponse = new OfficeResponse ();
         m_factionReleation = new FactionReleation();
         m_HougongOfficeResponse = new OfficeResponse();
+
+        emperor = new Emperor();
     }
 
 	public void Init()
@@ -318,8 +320,9 @@ public class GameData : ISerializationCallbackReceiver
     public OfficeResponse m_officeResponse;
     public OfficeResponse m_HougongOfficeResponse;
     public FactionReleation m_factionReleation;
+    public Emperor emperor;
 
-	[SerializeField]
+    [SerializeField]
 	private List<Office> serialOffice;
 
 	[SerializeField]
@@ -334,6 +337,18 @@ public class GameData : ISerializationCallbackReceiver
 	[SerializeField]
 	private List<Persion> serialFemale;
 
+}
+[Serializable]
+public class Emperor
+{
+    public int heath;
+    public int despress;
+
+    public Emperor()
+    {
+        heath = Tools.Probability.GetRandomNum(1,10);
+        despress = Tools.Probability.GetRandomNum(1,10);
+    }
 }
 
 [Serializable]
