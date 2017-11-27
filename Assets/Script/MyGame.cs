@@ -164,7 +164,7 @@ public class GameData : ISerializationCallbackReceiver
 
         foreach (OFFICE eOffice in Enum.GetValues(typeof(OFFICE)))
         {
-            Office office = new Office(eOffice.ToString());
+            Office office = new Office(eOffice);
             m_OfficeDict.Add(office.GetName(), office);
         }
 
@@ -354,18 +354,44 @@ public class Emperor
 [Serializable]
 public class Office
 {
-	public Office(string name)
+	public Office(OFFICE eOffice)
 	{
-		m_name = name;
+		this.eOffice = eOffice;
 	}
 
 	public string GetName()
 	{
-		return m_name;
+		return eOffice.ToString();
 	}
 
+	public int GetPower()
+	{
+		switch (eOffice)
+		{
+		case OFFICE.ChengX:
+			return 15;
+		case OFFICE.TaiW:
+			return 13;
+		case OFFICE.YuSDF:
+			return 12;
+		case OFFICE.TaiC:
+			return 10;
+		case OFFICE.TaiP:
+		case OFFICE.WeiW:
+		case OFFICE.GuangL:
+		case OFFICE.TingW:
+		case OFFICE.DaH:
+		case OFFICE.ZhongZ:
+		case OFFICE.DaS:
+		case OFFICE.ShaoF:
+			return 5;
+
+		}
+	}
+
+
 	[SerializeField]
-	public string m_name;
+	public OFFICE eOffice;
 }
 
 
@@ -616,6 +642,26 @@ public class FactionReleation
 
         return null;
     }
+
+	public int GetFactionsPower(String factionName)
+	{
+		int result = 0;
+		for (int i = 0; i < m_list.Count; i++)
+		{
+			if (m_list [i].fationName != factionName) 
+			{
+				continue;
+			}
+
+			for (int j = 0; j < m_list[i].persionList.Count; j++)
+			{
+				Office office = Global.GetGameData ().m_officeResponse.GetOfficeByPersion (m_list [i].persionList [j]);
+				result += office.GetPower ();
+			}
+		}
+
+		return result;
+	}
 
     [Serializable]
     struct ELEMENT
