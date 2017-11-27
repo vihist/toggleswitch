@@ -83,14 +83,14 @@ enum OFFICE
 	Jizhou=ZHOUMING.Jizhou,
 	Bingzhou=ZHOUMING.Bingzhou,
 	Yuzhou=ZHOUMING.Yuzhou,
-	Yanzhou=ZHOUMING.Yanzhou,
+	//Yanzhou=ZHOUMING.Yanzhou,
 	Qingzhou=ZHOUMING.Qingzhou,
 	Xuzhou=ZHOUMING.Xuzhou,
 	Yangzhou=ZHOUMING.Yangzhou,
 	Yongzhou=ZHOUMING.Yongzhou,
-	Liangzhou=ZHOUMING.Liangzhou,
+	//Liangzhou=ZHOUMING.Liangzhou,
 	Jingzhou=ZHOUMING.Jingzhou,
-	Sizhou=ZHOUMING.Sizhou,
+	//Sizhou=ZHOUMING.Sizhou,
 	Yizhou=ZHOUMING.Yizhou
 }
 
@@ -124,14 +124,14 @@ enum ZHOUMING
     Jizhou,
     Bingzhou,
     Yuzhou,
-    Yanzhou,
+    //Yanzhou,
     Qingzhou,
     Xuzhou,
     Yangzhou,
     Yongzhou,
-    Liangzhou,
+    //Liangzhou,
     Jingzhou,
-    Sizhou,
+    //Sizhou,
     Yizhou
 }
 
@@ -164,7 +164,7 @@ public class GameData : ISerializationCallbackReceiver
 
         foreach (OFFICE eOffice in Enum.GetValues(typeof(OFFICE)))
         {
-            Office office = new Office(eOffice);
+            Office office = new Office(eOffice.ToString());
             m_OfficeDict.Add(office.GetName(), office);
         }
 
@@ -354,28 +354,29 @@ public class Emperor
 [Serializable]
 public class Office
 {
-	public Office(OFFICE eOffice)
+	public Office(String office)
 	{
-		this.eOffice = eOffice;
+		this.office = office;
 	}
 
 	public string GetName()
 	{
-		return eOffice.ToString();
+		return office;
 	}
 
 	public int GetPower()
 	{
-		switch (eOffice)
+        OFFICE eOffice = (OFFICE)Enum.Parse(typeof(OFFICE), office);
+
+        switch (eOffice)
 		{
 		case OFFICE.ChengX:
-			return 15;
-		case OFFICE.TaiW:
-			return 13;
-		case OFFICE.YuSDF:
-			return 12;
-		case OFFICE.TaiC:
 			return 10;
+		case OFFICE.TaiW:
+			return 8;
+		case OFFICE.YuSDF:
+			return 7;
+		case OFFICE.TaiC:
 		case OFFICE.TaiP:
 		case OFFICE.WeiW:
 		case OFFICE.GuangL:
@@ -385,13 +386,27 @@ public class Office
 		case OFFICE.DaS:
 		case OFFICE.ShaoF:
 			return 5;
-
-		}
+        case OFFICE.Youzhou:
+	    case OFFICE.Jizhou:
+        case OFFICE.Bingzhou:
+        case OFFICE.Yuzhou:
+        //case OFFICE.Yanzhou:
+        case OFFICE.Qingzhou:
+        case OFFICE.Xuzhou:
+        case OFFICE.Yangzhou:
+        case OFFICE.Yongzhou:
+        //case OFFICE.Liangzhou:
+        case OFFICE.Jingzhou:
+        //case OFFICE.Sizhou:
+        case OFFICE.Yizhou:
+            return 3;
+        default:
+            return -1;
+        }
 	}
 
-
 	[SerializeField]
-	public OFFICE eOffice;
+	public String office;
 }
 
 

@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.6.3f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -93,9 +91,10 @@
     <Compile Include="Assets\Script\MsgBox\CT_zhongchenyiwaisiwang.cs" />
     <Compile Include="Assets\Script\MsgBox\JsMsgBox.cs" />
     <Compile Include="Assets\Script\MsgBox\MessageBox.cs" />
-    <Compile Include="Assets\Script\MsgBox\TestMessage.cs" />
     <Compile Include="Assets\Script\MsgBox\TX_yinghuoshouxin.cs" />
+    <Compile Include="Assets\Script\MsgBox\TestMessage.cs" />
     <Compile Include="Assets\Script\MyGame.cs" />
+    <Compile Include="Assets\Script\PieGraph.cs" />
     <Compile Include="Assets\Script\StartScene.cs" />
     <Compile Include="Assets\Script\TianXScene.cs" />
     <Compile Include="Assets\Script\Tools.cs" />
