@@ -296,14 +296,14 @@ public class GameData : ISerializationCallbackReceiver
             }
         }
 
-		foreach(String name in m_FemaleDict.Keys)
-		{
-			if(m_factionReleation.GetFactionByPersion(name) == null)
-			{
-				FACTION eFaction = (FACTION)(Tools.Probability.GetRandomNum(0, 2));
-				m_factionReleation.Set(name, eFaction.ToString());
-			}
-		}
+//		foreach(String name in m_FemaleDict.Keys)
+//		{
+//			if(m_factionReleation.GetFactionByPersion(name) == null)
+//			{
+//				FACTION eFaction = (FACTION)(Tools.Probability.GetRandomNum(0, 2));
+//				m_factionReleation.Set(name, eFaction.ToString());
+//			}
+//		}
     }
 
 	public int tm;

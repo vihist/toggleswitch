@@ -9,7 +9,8 @@ public class ChaoTScene : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-		GameObject sanGong= GameObject.Find(OFFICE_GROUP.SanG.ToString());
+
+        GameObject sanGong= GameObject.Find(OFFICE_GROUP.SanG.ToString());
 		sanGong.transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc(OFFICE_GROUP.SanG.ToString());
 
         for (int i=0; i<3; i++)

@@ -23,3 +23,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HouGScene.unity
     guid: 22be22da975204003ac7594cef859a81
+  - enabled: 1
+    path: Assets/Scenes/StaticScene.unity
+    guid: a878ac935ba30614ea14b8b3549e0aa2

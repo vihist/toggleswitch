@@ -35,6 +35,7 @@ public class MainScene : MonoBehaviour
 	public void OnValueChanged1(bool bCheck)
 	{
 		//Debug.Log("toggle1" + bCheck);
+		Debug.Log(total);
 
 		if (bCheck)
 		{
@@ -69,7 +70,18 @@ public class MainScene : MonoBehaviour
 		}
 	}
 
-	private void OnRefreshData()
+    public void OnValueChanged4(bool bCheck)
+    {
+        if (bCheck)
+        {
+            SceneManager.UnloadSceneAsync(m_currSceneName);
+
+            m_currSceneName = "StaticScene";
+            SceneManager.LoadSceneAsync(m_currSceneName, LoadSceneMode.Additive);
+        }
+    }
+
+    private void OnRefreshData()
 	{
 		GameObject UIRoot = GameObject.Find("ResInfo");
 
