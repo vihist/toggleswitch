@@ -80,6 +80,20 @@ public class MainScene : MonoBehaviour
         }
     }
 
+    public void onEmperorButtonClick()
+    {
+        Debug.Log("onEmperorButtonClick");
+
+        GameObject UIRoot = GameObject.Find("Canvas");
+        GameObject dialog = Instantiate(Resources.Load("EasyMenu/_Prefabs/Dialog_Emperor"), UIRoot.transform) as GameObject;
+
+        Button btnSave = dialog.transform.Find("Button").GetComponent<Button>();
+        btnSave.onClick.AddListener(delegate ()
+        {
+            Destroy(dialog);
+        });
+    }
+
     private void OnRefreshData()
 	{
 		GameObject UIRoot = GameObject.Find("ResInfo");
