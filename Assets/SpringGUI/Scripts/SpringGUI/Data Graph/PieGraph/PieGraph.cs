@@ -19,11 +19,14 @@ namespace SpringGUI
     {
         public float Percent;
         public Color Color;
+		public string Desc;
+
         public PieData(){}
-        public PieData(float percent,Color color0)
+		public PieData(float percent,Color color0, string desc)
         {
             Percent = percent / 100.0f;
             Color = color0;
+			Desc = desc;
         }
 
         public PieData(float percent)
@@ -86,13 +89,13 @@ namespace SpringGUI
         private List<PieText> _pieText = null;
         private Vector3 _realPosition;
 
-        public void Inject( IList<float> percents,IList<Color> colors )
-        {
-            IList<PieData> piedatas= new List<PieData>();
-            for ( int i = 0 ; i < percents.Count ; i++ )
-                piedatas.Add(new PieData(percents[i] , colors[i]));
-            Inject(piedatas);
-        }
+//        public void Inject( IList<float> percents,IList<Color> colors )
+//        {
+//            IList<PieData> piedatas= new List<PieData>();
+//            for ( int i = 0 ; i < percents.Count ; i++ )
+//                piedatas.Add(new PieData(percents[i] , colors[i]));
+//            Inject(piedatas);
+//        }
         public void Inject( IList<float> percents )
         {
             IList<PieData> piedatas = new List<PieData>();
@@ -188,14 +191,14 @@ namespace SpringGUI
                         five = third + new Vector2(-brokenLineLength , 0);
                         six = four + new Vector2(-brokenLineLength , 0);
                         // right text
-                        _pieText.Add(new PieText(data.Percent * 100 + "%" , six , false));
+						_pieText.Add(new PieText(data.Desc + ":" + data.Percent * 100 + "%" , six , false));
                     }
                     else
                     {
                         five = third + new Vector2(brokenLineLength , 0);
                         six = four + new Vector2(brokenLineLength , 0);
                         // left text
-                        _pieText.Add(new PieText(data.Percent * 100 + "%" , six ,true));
+						_pieText.Add(new PieText(data.Desc + ":" + data.Percent * 100 + "%" , six ,true));
                     }
 
                     vertexs.Add(GetUIVertex(first , data.Color));

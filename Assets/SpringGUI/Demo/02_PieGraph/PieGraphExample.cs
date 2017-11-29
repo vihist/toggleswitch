@@ -13,6 +13,13 @@ public class PieGraphExample : MonoBehaviour
 {
     public PieGraph PieGraph = null;
 
+	struct Triplet
+	{
+		public int value;
+		public String strName;
+		public Color color;
+	}
+
     private void Start()
     {
         // method 1:
@@ -23,17 +30,13 @@ public class PieGraphExample : MonoBehaviour
 
         // method 2:
 
-		List<int> list = new List<int> ();
+		List<PieData> list = new List<PieData> ();
 		foreach (Faction faction in Global.GetGameData().m_FactionDict.Values)
 		{
-			list.Add (Global.GetGameData ().m_factionReleation.GetFactionsPower (faction.GetName ()));
+			list.Add (new PieData (Global.GetGameData ().m_factionReleation.GetFactionsPower (faction.GetName ()), GetColor(faction.GetName ()), UIFrame.GetUiDesc(faction.GetName ())));
 		}
 
-        PieGraph.Inject(new List<PieData>()
-        {
-				new PieData(list[0],Color.magenta),
-				new PieData(list[1] ,Color.red),
-        });
+		PieGraph.Inject(list);
 
         //// method 3:
         //PieGraph.Inject(
@@ -43,4 +46,19 @@ public class PieGraphExample : MonoBehaviour
         //// method 4:
         //PieGraph.Inject(new List<float>() { 8 , 7 });
     }
+
+	private Color GetColor(String str)
+	{
+		FACTION eFaction = (FACTION)Enum.Parse(typeof(FACTION), str);
+
+		switch (eFaction)
+		{
+		case FACTION.ShiDF:
+			return Color.green;
+		case FACTION.XunG:
+			return Color.red;
+		default:
+			return Color.black;
+		}
+	}
 }

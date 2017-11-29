@@ -35,7 +35,6 @@ public class MainScene : MonoBehaviour
 	public void OnValueChanged1(bool bCheck)
 	{
 		//Debug.Log("toggle1" + bCheck);
-		Debug.Log(total);
 
 		if (bCheck)
 		{
