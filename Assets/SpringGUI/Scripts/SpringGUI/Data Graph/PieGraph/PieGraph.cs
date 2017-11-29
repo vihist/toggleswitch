@@ -191,14 +191,14 @@ namespace SpringGUI
                         five = third + new Vector2(-brokenLineLength , 0);
                         six = four + new Vector2(-brokenLineLength , 0);
                         // right text
-						_pieText.Add(new PieText(data.Desc + ":" + data.Percent * 100 + "%" , six , false));
+						_pieText.Add(new PieText(data.Desc + "：" + data.Percent * 100 + "%" , six , false));
                     }
                     else
                     {
                         five = third + new Vector2(brokenLineLength , 0);
                         six = four + new Vector2(brokenLineLength , 0);
                         // left text
-						_pieText.Add(new PieText(data.Desc + ":" + data.Percent * 100 + "%" , six ,true));
+						_pieText.Add(new PieText(data.Desc + "：" + data.Percent * 100 + "%" , six ,true));
                     }
 
                     vertexs.Add(GetUIVertex(first , data.Color));

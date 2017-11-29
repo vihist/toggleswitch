@@ -33,7 +33,7 @@ public class PieGraphExample : MonoBehaviour
 		List<PieData> list = new List<PieData> ();
 		foreach (Faction faction in Global.GetGameData().m_FactionDict.Values)
 		{
-			list.Add (new PieData (Global.GetGameData ().m_factionReleation.GetFactionsPower (faction.GetName ()), GetColor(faction.GetName ()), UIFrame.GetUiDesc(faction.GetName ())));
+			list.Add (new PieData (Global.GetGameData ().m_factionReleation.GetFactionsPower (faction.GetName ()), GetColor(faction.GetName ()), UIFrame.GetUiDesc(faction.GetFullName ())));
 		}
 
 		PieGraph.Inject(list);

@@ -1,12 +1,17 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/SpringGUI/Demo/02_PieGraph/PieGraphExample.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\MsgBox\TX_yinghuoshouxin.cs">
     <Files>
-      <File FileName="Assets/Script/MainScene.cs" Line="37" Column="35" />
-      <File FileName="Assets/SpringGUI/Demo/02_PieGraph/PieGraphExample.cs" Line="36" Column="175" />
-      <File FileName="Assets/SpringGUI/Scripts/SpringGUI/Data Graph/PieGraph/PieGraph.cs" Line="92" Column="3" />
-      <File FileName="Assets/Script/MyGame.cs" Line="369" Column="1" />
-      <File FileName="Assets/Script/ChaoTScene.cs" Line="61" Column="19" />
+      <File FileName="Assets\Script\MainScene.cs" Line="153" Column="117" />
+      <File FileName="Assets\SpringGUI\Demo\02_PieGraph\PieGraphExample.cs" Line="36" Column="170" />
+      <File FileName="Assets\SpringGUI\Scripts\SpringGUI\Data Graph\PieGraph\PieGraph.cs" Line="201" Column="46" />
+      <File FileName="Assets\Script\MyGame.cs" Line="436" Column="21" />
+      <File FileName="Assets\Script\ChaoTScene.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\StartScene.cs" Line="1" Column="1" />
+      <File FileName="Assets\Resources\text\uidesc.txt" Line="8" Column="12" />
+      <File FileName="Assets\Script\MsgBox\TX_yinghuoshouxin.cs" Line="72" Column="37" />
+      <File FileName="Assets\Script\MsgBox\MessageBox.cs" Line="15" Column="6" />
+      <File FileName="Assets\Script\MsgBox\TestMessage.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

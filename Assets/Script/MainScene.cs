@@ -150,6 +150,7 @@ public class MainScene : MonoBehaviour
 		TogglePanel.transform.Find("TianX").transform.Find("Label").GetComponent<Text>().text = UIFrame.GetUiDesc ("TianX");
 		TogglePanel.transform.Find("ChaoT").transform.Find("Label").GetComponent<Text>().text = UIFrame.GetUiDesc ("ChaoT");
         TogglePanel.transform.Find("HouG").transform.Find("Label").GetComponent<Text>().text = UIFrame.GetUiDesc("HouG");
+		TogglePanel.transform.Find("Static").transform.Find("Label").GetComponent<Text>().text = UIFrame.GetUiDesc("Static");
     }
 
 

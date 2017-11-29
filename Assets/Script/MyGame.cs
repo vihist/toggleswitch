@@ -423,6 +423,11 @@ public class Faction
 		return m_name;
 	}
 
+	public string GetFullName()
+	{
+		return m_name+"_FULL";
+	}
+
 	[SerializeField]
 	private string m_name;
 }
