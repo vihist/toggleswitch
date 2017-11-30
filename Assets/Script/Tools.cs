@@ -11,7 +11,7 @@ namespace Tools
         {
             int prb = (int)(prob * 10000);
 
-            System.Random ra = new System.Random(seed++);
+            System.Random ra = new System.Random(GetRandomSeed());
             int result = ra.Next(1, 10000);
             if (result <= prb)
             {
@@ -24,16 +24,14 @@ namespace Tools
         public static int GetRandomNum(int min, int max)
         {
 
-            System.Random ra = new System.Random(seed + (int)DateTime.Now.Ticks);
-            seed += 1000;
+            System.Random ra = new System.Random(GetRandomSeed());
             return ra.Next(min, max);
 
         }
 
         public static int GetGaussianRandomNum(int min, int max)
         {
-            System.Random ra = new System.Random(seed + (int)DateTime.Now.Ticks);
-            seed += 1000;
+            System.Random ra = new System.Random(GetRandomSeed());
 
             int[] iResult = { ra.Next(min, max), ra.Next(min, max), ra.Next(min, max) };
 
@@ -42,7 +40,7 @@ namespace Tools
 
         public static bool Calc(int iRate)
         {
-            System.Random ran = new System.Random(seed++);
+            System.Random ran = new System.Random(GetRandomSeed());
             int RandKey = ran.Next(1, 100);
             if (RandKey <= iRate)
             {
@@ -89,7 +87,15 @@ namespace Tools
 		}
 
         static int seed = 1;
-	}
+
+        private static int GetRandomSeed()
+        {
+            byte[] bytes = new byte[4];
+            System.Security.Cryptography.RNGCryptoServiceProvider rng = new System.Security.Cryptography.RNGCryptoServiceProvider();
+            rng.GetBytes(bytes);
+            return BitConverter.ToInt32(bytes, 0);
+        }
+    }
 
 	public class Cvs
 	{
