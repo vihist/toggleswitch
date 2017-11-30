@@ -21,7 +21,9 @@ public class MainScene : MonoBehaviour
 		OnUiInit ();
 
 		m_currSceneName = "TianXScene";
-		SceneManager.LoadSceneAsync (m_currSceneName, LoadSceneMode.Additive);
+        m_isEmperorShow = false;
+
+        SceneManager.LoadSceneAsync (m_currSceneName, LoadSceneMode.Additive);
 
 	}
 	
@@ -84,14 +86,21 @@ public class MainScene : MonoBehaviour
     {
         Debug.Log("onEmperorButtonClick");
 
-        GameObject UIRoot = GameObject.Find("Canvas");
-        GameObject dialog = Instantiate(Resources.Load("EasyMenu/_Prefabs/Dialog_Emperor"), UIRoot.transform) as GameObject;
-
-        Button btnSave = dialog.transform.Find("Button").GetComponent<Button>();
-        btnSave.onClick.AddListener(delegate ()
+        if (!m_isEmperorShow)
         {
+            GameObject UIRoot = GameObject.Find("Canvas");
+            GameObject dialog = Instantiate(Resources.Load("EasyMenu/_Prefabs/Dialog_Emperor"), UIRoot.transform) as GameObject;
+            dialog.transform.SetAsFirstSibling();
+
+            m_isEmperorShow = true;
+        }
+        else
+        {
+            GameObject dialog = GameObject.Find("Canvas").transform.Find("Dialog_Emperor(Clone)").gameObject;
             Destroy(dialog);
-        });
+
+            m_isEmperorShow = false;
+        }
     }
 
     private void OnRefreshData()
@@ -170,4 +179,5 @@ public class MainScene : MonoBehaviour
 
 	private float m_fWaitTime;
 	private String m_currSceneName;
+    private bool m_isEmperorShow;
 }
