@@ -25,6 +25,8 @@ public class MainScene : MonoBehaviour
 
         SceneManager.LoadSceneAsync (m_currSceneName, LoadSceneMode.Additive);
 
+		GameObject.Find ("Canvas").transform.Find ("Emperor").Find ("name").GetComponent<Text> ().text = Global.GetGameData ().emperor.GetName ();
+
 	}
 	
 	// Update is called once per frame
@@ -111,6 +113,14 @@ public class MainScene : MonoBehaviour
 		UIRoot.transform.Find ("FK").transform.Find ("value").GetComponent<Text> ().text = Global.GetGameData ().fk.ToString();
 		UIRoot.transform.Find ("WB").transform.Find ("value").GetComponent<Text> ().text = Global.GetGameData ().wb.ToString();
         UIRoot.transform.Find("Time").GetComponent<Text>().text = Global.GetGameData().m_Date.ToString();
+
+
+		Transform dialog = GameObject.Find("Canvas").transform.Find("Dialog_Emperor(Clone)");
+		if (dialog != null) 
+		{
+			dialog.Find ("Age").Find ("Value").GetComponent<Text> ().text = Global.GetGameData ().emperor.age.ToString();
+			dialog.Find ("Heath").Find("Slider").GetComponent<Slider> ().value = Global.GetGameData ().emperor.heath;
+		}
     }
 
 	private void OnKeyBoard()

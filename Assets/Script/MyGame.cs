@@ -341,11 +341,20 @@ public class GameData : ISerializationCallbackReceiver
 [Serializable]
 public class Emperor
 {
+	public int age;
     public int heath;
     public int despress;
+	public String familyName;
+	public String selfName;
+
+	public String GetName()
+	{
+		return "Test";//familyName + selfName;
+	}
 
     public Emperor()
     {
+		age = Tools.Probability.GetGaussianRandomNum (16, 40);
         heath = Tools.Probability.GetRandomNum(1,10);
         despress = Tools.Probability.GetRandomNum(1,10);
     }
