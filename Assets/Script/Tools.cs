@@ -38,6 +38,37 @@ namespace Tools
             return (iResult[0] + iResult[1] + iResult[2]) / 3;
         }
 
+		public static int gaussrand(int E, int V, int L)
+		{
+			int R;
+			do {
+				
+				double V1, V2, S, X;
+				int phase = 0;
+
+				System.Random ra = new System.Random (GetRandomSeed ());
+
+					do {
+						double U1 = (double)ra.NextDouble();
+						double U2 = (double)ra.NextDouble();
+
+						V1 = 2 * U1 - 1;
+						V2 = 2 * U2 - 1;
+						S = V1 * V1 + V2 * V2;
+					} while(S >= 1 || S == 0);
+
+					X = V1 * Math.Sqrt (-2 * Math.Log (S) / S);
+	
+
+
+				X = X * V + E;
+				R = (int)X;
+
+			} while(R <= E + L && R >= E - L);
+
+			return R;
+		}
+
         public static bool Calc(int iRate)
         {
             System.Random ran = new System.Random(GetRandomSeed());
