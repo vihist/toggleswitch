@@ -92,6 +92,8 @@ public class MainScene : MonoBehaviour
         {
             Transform UIRoot = GameObject.Find("Canvas").transform.Find("Emperor");
             GameObject dialog = Instantiate(Resources.Load("EasyMenu/_Prefabs/Dialog_Emperor"), UIRoot) as GameObject;
+            dialog.transform.Find("Age").Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc("Age");
+            dialog.transform.Find("Heath").Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc("Heath");
             dialog.transform.SetAsFirstSibling();
 
             m_isEmperorShow = true;
@@ -184,6 +186,10 @@ public class MainScene : MonoBehaviour
 		TogglePanel.transform.Find("ChaoT").transform.Find("Label").GetComponent<Text>().text = UIFrame.GetUiDesc ("ChaoT");
         TogglePanel.transform.Find("HouG").transform.Find("Label").GetComponent<Text>().text = UIFrame.GetUiDesc("HouG");
 		TogglePanel.transform.Find("Static").transform.Find("Label").GetComponent<Text>().text = UIFrame.GetUiDesc("Static");
+
+        GameObject Emperor = GameObject.Find("Emperor");
+        Emperor.transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc("Emperor");
+
     }
 
 
