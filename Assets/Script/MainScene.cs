@@ -90,15 +90,15 @@ public class MainScene : MonoBehaviour
 
         if (!m_isEmperorShow)
         {
-            GameObject UIRoot = GameObject.Find("Canvas");
-            GameObject dialog = Instantiate(Resources.Load("EasyMenu/_Prefabs/Dialog_Emperor"), UIRoot.transform) as GameObject;
+            Transform UIRoot = GameObject.Find("Canvas").transform.Find("Emperor");
+            GameObject dialog = Instantiate(Resources.Load("EasyMenu/_Prefabs/Dialog_Emperor"), UIRoot) as GameObject;
             dialog.transform.SetAsFirstSibling();
 
             m_isEmperorShow = true;
         }
         else
         {
-            GameObject dialog = GameObject.Find("Canvas").transform.Find("Dialog_Emperor(Clone)").gameObject;
+            GameObject dialog = GameObject.Find("Canvas").transform.Find("Emperor").Find("Dialog_Emperor(Clone)").gameObject;
             Destroy(dialog);
 
             m_isEmperorShow = false;
@@ -115,7 +115,7 @@ public class MainScene : MonoBehaviour
         UIRoot.transform.Find("Time").GetComponent<Text>().text = Global.GetGameData().m_Date.ToString();
 
 
-		Transform dialog = GameObject.Find("Canvas").transform.Find("Dialog_Emperor(Clone)");
+		Transform dialog = GameObject.Find("Canvas").transform.Find("Emperor").Find("Dialog_Emperor(Clone)");
 		if (dialog != null) 
 		{
 			dialog.Find ("Age").Find ("Value").GetComponent<Text> ().text = Global.GetGameData ().emperor.age.ToString();
