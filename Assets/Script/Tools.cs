@@ -195,7 +195,8 @@ namespace Tools
 		public static Cvs UiDesc = new Tools.Cvs ("text/uidesc");
 		public static Cvs MsgDesc = new Tools.Cvs ("text/msgdef");
 		public static Cvs Guohao = new Tools.Cvs ("text/guohao");
-		public static Cvs Nianhao = new Tools.Cvs ("text/nianhao");
+        public static Cvs Nianhao1 = new Tools.Cvs("text/nianhao1");
+        public static Cvs Nianhao2 = new Tools.Cvs ("text/nianhao2");
     }
 		
 	[Serializable]

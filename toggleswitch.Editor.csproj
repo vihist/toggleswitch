@@ -128,8 +128,11 @@
     <Compile Include="Assets\SpringGUI\Editor\SpringGUI\UITree\UITreeEditor.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Resources\text\guohao.txt" />
     <None Include="Assets\Resources\text\mingzi.txt" />
     <None Include="Assets\Resources\text\msgdef.txt" />
+    <None Include="Assets\Resources\text\nianhao1.txt" />
+    <None Include="Assets\Resources\text\nianhao2.txt" />
     <None Include="Assets\Resources\text\uidesc.txt" />
     <None Include="Assets\Resources\text\xingshi.txt" />
     <None Include="Assets\SpringGUI\Scripts\SpringGUI\Icons\SpringGUI Icon Doc.txt" />

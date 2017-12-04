@@ -88,6 +88,7 @@
     <Compile Include="Assets\Script\Global.cs" />
     <Compile Include="Assets\Script\HouGScene.cs" />
     <Compile Include="Assets\Script\MainScene.cs" />
+    <Compile Include="Assets\Script\MsgBox\CT_ZhongchenBingCi.cs" />
     <Compile Include="Assets\Script\MsgBox\CT_zhongchenyiwaisiwang.cs" />
     <Compile Include="Assets\Script\MsgBox\JsMsgBox.cs" />
     <Compile Include="Assets\Script\MsgBox\MessageBox.cs" />
@@ -158,8 +159,11 @@
     <Compile Include="Assets\SpringShader\Demo\01_LowPoly\LowPoly.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Resources\text\guohao.txt" />
     <None Include="Assets\Resources\text\mingzi.txt" />
     <None Include="Assets\Resources\text\msgdef.txt" />
+    <None Include="Assets\Resources\text\nianhao1.txt" />
+    <None Include="Assets\Resources\text\nianhao2.txt" />
     <None Include="Assets\Resources\text\uidesc.txt" />
     <None Include="Assets\Resources\text\xingshi.txt" />
     <None Include="Assets\SpringGUI\Scripts\SpringGUI\Icons\SpringGUI Icon Doc.txt" />

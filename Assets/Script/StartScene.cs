@@ -89,7 +89,8 @@ public class StartScene : MonoBehaviour {
 
 	private String GetRandomYearName()
 	{
-		int rowCount = Tools.Probability.GetRandomNum(1, Cvs.Nianhao.RowLength() - 1);
-		return Cvs.Nianhao.Get(rowCount.ToString());
+		int rowCount1 = Tools.Probability.GetRandomNum(1, Cvs.Nianhao1.RowLength() - 1);
+        int rowCount2 = Tools.Probability.GetRandomNum(1, Cvs.Nianhao2.RowLength() - 1);
+        return Cvs.Nianhao1.Get(rowCount1.ToString()) + Cvs.Nianhao2.Get(rowCount2.ToString());
 	}
 }
