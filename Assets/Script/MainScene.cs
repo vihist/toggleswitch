@@ -167,7 +167,10 @@ public class MainScene : MonoBehaviour
 				Global.GetMyGame().m_ListMessageBox.InsertRange(i+1, msgbox.m_listNext);
 			}
 
-			yield return new WaitForSeconds(m_fWaitTime);
+			if (Global.GetMyGame ().m_ListMessageBox.Count == 0)
+			{
+				yield return new WaitForSeconds (m_fWaitTime);
+			}
 		}
 
 		GameFrame.GetInstance ().OnEnd();

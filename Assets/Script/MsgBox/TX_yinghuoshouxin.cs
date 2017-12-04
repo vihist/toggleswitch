@@ -36,14 +36,16 @@ class TX_yinghuoshouxin : MessageBox
 
     private void OnOption1()
     {
-        Global.GetGameData().tm = 5000;
+        //Global.GetGameData().tm = 5000;
 
-
-
-        if (Tools.Probability.Calc(100))
+        if (Tools.Probability.Calc(50))
         {
-
+			NextMsgBox (new CT_zhongchenyiwaisiwang(OFFICE.ChengX));
         }
+		else
+		{
+			NextMsgBox (new CT_ZhongchenBingCi(OFFICE.ChengX));
+		}
 
         //Global.GetGameData ().Init ();
         //NextMsgBox (new TestMessage2());

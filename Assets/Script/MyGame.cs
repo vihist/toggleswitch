@@ -387,7 +387,7 @@ public class Office
 
 	public int GetPower()
 	{
-        OFFICE eOffice = (OFFICE)Enum.Parse(typeof(OFFICE), office);
+		OFFICE eOffice = GetEnum ();
 
         switch (eOffice)
 		{
@@ -424,6 +424,11 @@ public class Office
         default:
             return -1;
         }
+	}
+
+	private OFFICE GetEnum()
+	{
+		return (OFFICE)Enum.Parse(typeof(OFFICE), office);
 	}
 
 	[SerializeField]
@@ -515,6 +520,27 @@ public class Persion
 		return Tools.Cvs.Mingz.Get(rowCount.ToString(), "CHI");
 	}
 
+	public void Die()
+	{
+		Office office = Global.GetGameData ().m_officeResponse.GetOfficeByPersion (GetName());
+
+		Global.GetGameData ().m_officeResponse.Set (office.GetName(), "");
+		Global.GetGameData ().m_factionReleation.RemovePersion (m_name);
+
+		Global.GetGameData ().m_MaleDict.Remove (m_name);
+	}
+
+	public  void Quit()
+	{
+		Office office = Global.GetGameData ().m_officeResponse.GetOfficeByPersion (GetName());
+
+		Global.GetGameData ().m_officeResponse.Set (office.GetName(), "");
+		Global.GetGameData ().m_factionReleation.RemovePersion (m_name);
+
+		Global.GetGameData ().m_MaleDict.Remove (m_name);
+
+	}
+
     public string m_name;
     public int m_score;
 	private static System.Random ran=new System.Random();
@@ -536,12 +562,16 @@ public class OfficeResponse
 			ELEMENT elem = m_list [i];
 			if (elem.persion == persion)
 			{
-				elem.persion = null;
+				elem.persion = "";
+
+				m_list [i] = elem;
 			}
 
 			if (elem.office == office) 
 			{
 				elem.persion = persion;
+				m_list [i] = elem;
+
 				bfind = true;
 			}
 		}
@@ -634,6 +664,8 @@ public class FactionReleation
             if (elem.fationName == factionName)
             {
                 elem.persionList.Add(persionName);
+
+				m_list [i] = elem;
                 return;
             }
         }
@@ -642,6 +674,16 @@ public class FactionReleation
         elem2.persionList.Add(persionName);
         m_list.Add (elem2);
     }
+
+	public void RemovePersion(String persionName)
+	{
+		for(int i=0; i<m_list.Count; i++)
+		{
+			ELEMENT elem = m_list [i];
+			elem.persionList.Remove(persionName);
+		}
+
+	}
 
     public List<Persion> GetPersionByOffice(String factionName)
     {

@@ -52,14 +52,22 @@ public class ChaoTScene : MonoBehaviour {
 	{
 		Persion persion = Global.GetGameData ().m_officeResponse.GetPersionByOffice(enOffice.ToString());
 
-		if (persion != null) 
-		{
+		if (persion != null) {
 			Transform officeGameObj = GameObject.Find (enofficeGroup.ToString ()).transform.Find (enOffice.ToString ());
 			officeGameObj.Find ("Persion").transform.Find ("Text").GetComponent<Text> ().text = persion.GetName ();
 
-			officeGameObj.Find ("Persion").transform.Find ("Score").transform.Find("Text").GetComponent<Text> ().text = persion.GetScore ();
-			officeGameObj.Find ("Persion").transform.Find ("Faction").transform.Find("Text").GetComponent<Text>().text 
-                = Cvs.UiDesc.Get(Global.GetGameData().m_factionReleation.GetFactionByPersion(persion.GetName()).GetName());
-        }
+			officeGameObj.Find ("Persion").transform.Find ("Score").transform.Find ("Text").GetComponent<Text> ().text = persion.GetScore ();
+			officeGameObj.Find ("Persion").transform.Find ("Faction").transform.Find ("Text").GetComponent<Text> ().text 
+                = Cvs.UiDesc.Get (Global.GetGameData ().m_factionReleation.GetFactionByPersion (persion.GetName ()).GetName ());
+		} 
+		else
+		{
+			Transform officeGameObj = GameObject.Find (enofficeGroup.ToString ()).transform.Find (enOffice.ToString ());
+			officeGameObj.Find ("Persion").transform.Find ("Text").GetComponent<Text> ().text = "--";
+
+			officeGameObj.Find ("Persion").transform.Find ("Score").transform.Find ("Text").GetComponent<Text> ().text = "0";
+			officeGameObj.Find ("Persion").transform.Find ("Faction").transform.Find ("Text").GetComponent<Text> ().text 
+			= "-";
+		}
 	}
 }
