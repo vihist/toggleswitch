@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Tools;
 
 public class TianXScene : MonoBehaviour {
 
@@ -13,7 +14,7 @@ public class TianXScene : MonoBehaviour {
 
         foreach (ZHOUMING Zhouming in Enum.GetValues(typeof(ZHOUMING)))
         {
-            UIRoot.transform.Find(Zhouming.ToString()).transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc(Zhouming.ToString());
+            UIRoot.transform.Find(Zhouming.ToString()).transform.Find("Text").GetComponent<Text>().text = Cvs.UiDesc.Get(Zhouming.ToString());
         }
     }
 
@@ -41,7 +42,7 @@ public class TianXScene : MonoBehaviour {
 
 			officeGameObj.Find ("Persion").transform.Find ("score").transform.Find("Text").GetComponent<Text> ().text = persion.GetScore ();
 			officeGameObj.Find ("Persion").transform.Find ("faction").transform.Find("Text").GetComponent<Text>().text 
-			= UIFrame.GetUiDesc(Global.GetGameData().m_factionReleation.GetFactionByPersion(persion.GetName()).GetName());
+			= Cvs.UiDesc.Get(Global.GetGameData().m_factionReleation.GetFactionByPersion(persion.GetName()).GetName());
 		}
 	}
 }

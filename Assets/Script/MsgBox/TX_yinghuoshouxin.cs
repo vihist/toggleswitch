@@ -2,30 +2,31 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Tools;
 
 class TX_yinghuoshouxin : MessageBox
 {
     public TX_yinghuoshouxin()
     {
-        strTitile = m_cvs.Get("TX_YHSX", "TITLE");
-        strContent = m_cvs.Get("TX_YHSX", "CONTENT");
+		strTitile = Cvs.MsgDesc.Get("TX_YHSX", "TITLE");
+		strContent = Cvs.MsgDesc.Get("TX_YHSX", "CONTENT");
 
         Persion taiChang = Global.GetGameData().m_officeResponse.GetPersionByOffice(OFFICE.TaiC.ToString());
         if (taiChang == null)
         {
-            arrOption.Add(new Option { strDesc = m_cvs.Get("TX_YHSX", "OPT5"), delegOnBtnClick = OnOption5 });
+			arrOption.Add(new Option { strDesc = Cvs.MsgDesc.Get("TX_YHSX", "OPT5"), delegOnBtnClick = OnOption5 });
             return;
         }
 
         Persion chengXiang = Global.GetGameData().m_officeResponse.GetPersionByOffice(OFFICE.ChengX.ToString());
         if (chengXiang != null)
         {
-            arrOption.Add(new Option { strDesc = m_cvs.Get("TX_YHSX", "OPT1"), delegOnBtnClick = OnOption1 });
+			arrOption.Add(new Option { strDesc = Cvs.MsgDesc.Get("TX_YHSX", "OPT1"), delegOnBtnClick = OnOption1 });
         }
 
-        arrOption.Add(new Option { strDesc = m_cvs.Get("TX_YHSX", "OPT2"), delegOnBtnClick = OnOption2 });
-        arrOption.Add(new Option { strDesc = m_cvs.Get("TX_YHSX", "OPT3"), delegOnBtnClick = OnOption3 });
-		arrOption.Add(new Option { strDesc = m_cvs.Get("TX_YHSX", "OPT4"), delegOnBtnClick = OnOption4 });
+		arrOption.Add(new Option { strDesc = Cvs.MsgDesc.Get("TX_YHSX", "OPT2"), delegOnBtnClick = OnOption2 });
+		arrOption.Add(new Option { strDesc = Cvs.MsgDesc.Get("TX_YHSX", "OPT3"), delegOnBtnClick = OnOption3 });
+		arrOption.Add(new Option { strDesc = Cvs.MsgDesc.Get("TX_YHSX", "OPT4"), delegOnBtnClick = OnOption4 });
     }
 
     public static bool PreCondition()
@@ -69,7 +70,7 @@ class TX_yinghuoshouxin : MessageBox
     private void OnOption5()
     {
         Global.GetGameData().tm--;
-        Global.GetGameData().emperor.despress++;
+        Global.GetGameData().m_Emperor.despress++;
     }
 
 }

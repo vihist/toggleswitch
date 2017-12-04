@@ -130,7 +130,7 @@ namespace Tools
 
 	public class Cvs
 	{
-		public Cvs(string filename)
+		private Cvs(string filename)
 		{
             this.filename = filename;
 
@@ -175,6 +175,11 @@ namespace Tools
             }
         }
 
+		public string Get(string row)
+		{
+			return Get (row, "CHI");
+		}
+			
         public int RowLength()
         {
             return m_rowIndex.Length;
@@ -185,6 +190,12 @@ namespace Tools
 		private string[][] m_ArrayData;
         private string filename;
 
+		public static Cvs Xings = new Cvs("text/xingshi");
+		public static Cvs Mingz = new Cvs("text/mingzi");
+		public static Cvs UiDesc = new Tools.Cvs ("text/uidesc");
+		public static Cvs MsgDesc = new Tools.Cvs ("text/msgdef");
+		public static Cvs Guohao = new Tools.Cvs ("text/guohao");
+		public static Cvs Nianhao = new Tools.Cvs ("text/nianhao");
     }
 		
 	[Serializable]
@@ -208,6 +219,25 @@ namespace Tools
 			{
 				this.Add(keys[i], values[i]);
 			}
+		}
+	}
+
+	public class StringT 
+	{
+		public bool isChinese(string str)
+		{
+			char[] ch = str.ToCharArray();
+			if (str != null)
+			{
+				for (int i = 0; i < ch.Length; i++)
+				{
+					if (ch[i] >= 0x4E00 && ch[i]<= 0x9FA5)
+					{
+						return true;
+					}
+				}
+			}
+			return false;
 		}
 	}
 }

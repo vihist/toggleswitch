@@ -17,9 +17,9 @@ public class GameFrame
 		return m_Instance;
 	}
 
-	public void OnNew()
+	public void OnNew(String countryName, String yearName, String familyName, String selfName)
 	{
-        Global.SetMyGame (new MyGame ());
+		Global.SetMyGame (new MyGame (countryName, yearName, familyName, selfName));
         Global.GetGameData().Init();
 
 		SceneManager.LoadSceneAsync("MainScene");

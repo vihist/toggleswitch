@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Tools;
 
 public delegate void DelegOnBtnClick();
 
@@ -28,5 +29,4 @@ public abstract class MessageBox
 	}
 
 	public List<MessageBox> m_listNext;
-	protected static Tools.Cvs m_cvs = new Tools.Cvs ("text/msgdef");
 }

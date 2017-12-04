@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Tools;
 
 public class MainScene : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class MainScene : MonoBehaviour
 
         SceneManager.LoadSceneAsync (m_currSceneName, LoadSceneMode.Additive);
 
-		GameObject.Find ("Canvas").transform.Find ("Emperor").Find ("name").GetComponent<Text> ().text = Global.GetGameData ().emperor.GetName ();
+		GameObject.Find ("Canvas").transform.Find ("Emperor").Find ("name").GetComponent<Text> ().text = Global.GetGameData ().m_Emperor.GetName ();
 
 	}
 	
@@ -92,8 +93,8 @@ public class MainScene : MonoBehaviour
         {
             Transform UIRoot = GameObject.Find("Canvas").transform.Find("Emperor");
             GameObject dialog = Instantiate(Resources.Load("EasyMenu/_Prefabs/Dialog_Emperor"), UIRoot) as GameObject;
-            dialog.transform.Find("Age").Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc("Age");
-            dialog.transform.Find("Heath").Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc("Heath");
+            dialog.transform.Find("Age").Find("Text").GetComponent<Text>().text = Cvs.UiDesc.Get("Age");
+            dialog.transform.Find("Heath").Find("Text").GetComponent<Text>().text = Cvs.UiDesc.Get("Heath");
             dialog.transform.SetAsFirstSibling();
 
             m_isEmperorShow = true;
@@ -114,14 +115,14 @@ public class MainScene : MonoBehaviour
 		UIRoot.transform.Find ("TM").transform.Find ("value").GetComponent<Text> ().text = Global.GetGameData ().tm.ToString();
 		UIRoot.transform.Find ("FK").transform.Find ("value").GetComponent<Text> ().text = Global.GetGameData ().fk.ToString();
 		UIRoot.transform.Find ("WB").transform.Find ("value").GetComponent<Text> ().text = Global.GetGameData ().wb.ToString();
-        UIRoot.transform.Find("Time").GetComponent<Text>().text = Global.GetGameData().m_Date.ToString();
+		UIRoot.transform.Find("Time").GetComponent<Text>().text = Global.GetGameData().m_CountryName + Global.GetGameData().m_YearName + Global.GetGameData().m_Date.ToString();
 
 
 		Transform dialog = GameObject.Find("Canvas").transform.Find("Emperor").Find("Dialog_Emperor(Clone)");
 		if (dialog != null) 
 		{
-			dialog.Find ("Age").Find ("Value").GetComponent<Text> ().text = Global.GetGameData ().emperor.age.ToString();
-			dialog.Find ("Heath").Find("Slider").GetComponent<Slider> ().value = Global.GetGameData ().emperor.heath;
+			dialog.Find ("Age").Find ("Value").GetComponent<Text> ().text = Global.GetGameData ().m_Emperor.age.ToString();
+			dialog.Find ("Heath").Find("Slider").GetComponent<Slider> ().value = Global.GetGameData ().m_Emperor.heath;
 		}
     }
 
@@ -177,18 +178,18 @@ public class MainScene : MonoBehaviour
 	{
 		GameObject ResInfo = GameObject.Find("ResInfo");
 
-		ResInfo.transform.Find("TM").GetComponent<Text>().text = UIFrame.GetUiDesc ("TM");
-		ResInfo.transform.Find("FK").GetComponent<Text>().text = UIFrame.GetUiDesc ("FK");
-		ResInfo.transform.Find("WB").GetComponent<Text>().text = UIFrame.GetUiDesc ("WB");
+		ResInfo.transform.Find("TM").GetComponent<Text>().text = Cvs.UiDesc.Get ("TM");
+		ResInfo.transform.Find("FK").GetComponent<Text>().text = Cvs.UiDesc.Get ("FK");
+		ResInfo.transform.Find("WB").GetComponent<Text>().text = Cvs.UiDesc.Get ("WB");
 
 		GameObject TogglePanel = GameObject.Find ("TogglePanel");
-		TogglePanel.transform.Find("TianX").transform.Find("Label").GetComponent<Text>().text = UIFrame.GetUiDesc ("TianX");
-		TogglePanel.transform.Find("ChaoT").transform.Find("Label").GetComponent<Text>().text = UIFrame.GetUiDesc ("ChaoT");
-        TogglePanel.transform.Find("HouG").transform.Find("Label").GetComponent<Text>().text = UIFrame.GetUiDesc("HouG");
-		TogglePanel.transform.Find("Static").transform.Find("Label").GetComponent<Text>().text = UIFrame.GetUiDesc("Static");
+		TogglePanel.transform.Find("TianX").transform.Find("Label").GetComponent<Text>().text = Cvs.UiDesc.Get ("TianX");
+		TogglePanel.transform.Find("ChaoT").transform.Find("Label").GetComponent<Text>().text = Cvs.UiDesc.Get ("ChaoT");
+        TogglePanel.transform.Find("HouG").transform.Find("Label").GetComponent<Text>().text = Cvs.UiDesc.Get("HouG");
+		TogglePanel.transform.Find("Static").transform.Find("Label").GetComponent<Text>().text = Cvs.UiDesc.Get("Static");
 
         GameObject Emperor = GameObject.Find("Emperor");
-        Emperor.transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc("Emperor");
+        Emperor.transform.Find("Text").GetComponent<Text>().text = Cvs.UiDesc.Get("Emperor");
 
     }
 

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Tools;
 
 public class ChaoTScene : MonoBehaviour {
 
@@ -11,22 +12,22 @@ public class ChaoTScene : MonoBehaviour {
     {
 
         GameObject sanGong= GameObject.Find(OFFICE_GROUP.SanG.ToString());
-		sanGong.transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc(OFFICE_GROUP.SanG.ToString());
+		sanGong.transform.Find("Text").GetComponent<Text>().text = Cvs.UiDesc.Get(OFFICE_GROUP.SanG.ToString());
 
         for (int i=0; i<3; i++)
         {
             OFFICE eOffice = (OFFICE)i;
-            sanGong.transform.Find(eOffice.ToString()).transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc(eOffice.ToString());
+            sanGong.transform.Find(eOffice.ToString()).transform.Find("Text").GetComponent<Text>().text = (eOffice.ToString());
 
         }
 
         GameObject jiuQing = GameObject.Find(OFFICE_GROUP.JiuQ.ToString());
-        jiuQing.transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc(OFFICE_GROUP.JiuQ.ToString());
+        jiuQing.transform.Find("Text").GetComponent<Text>().text = Cvs.UiDesc.Get(OFFICE_GROUP.JiuQ.ToString());
 
         for (int i = 3; i < 3+9; i++)
         {
             OFFICE eOffice = (OFFICE)i;
-            jiuQing.transform.Find(eOffice.ToString()).transform.Find("Text").GetComponent<Text>().text = UIFrame.GetUiDesc(eOffice.ToString());
+            jiuQing.transform.Find(eOffice.ToString()).transform.Find("Text").GetComponent<Text>().text = Cvs.UiDesc.Get(eOffice.ToString());
         }
 
     }
@@ -58,7 +59,7 @@ public class ChaoTScene : MonoBehaviour {
 
 			officeGameObj.Find ("Persion").transform.Find ("Score").transform.Find("Text").GetComponent<Text> ().text = persion.GetScore ();
 			officeGameObj.Find ("Persion").transform.Find ("Faction").transform.Find("Text").GetComponent<Text>().text 
-                = UIFrame.GetUiDesc(Global.GetGameData().m_factionReleation.GetFactionByPersion(persion.GetName()).GetName());
+                = Cvs.UiDesc.Get(Global.GetGameData().m_factionReleation.GetFactionByPersion(persion.GetName()).GetName());
         }
 	}
 }

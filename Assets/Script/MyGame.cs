@@ -9,23 +9,29 @@ public class MyGame
 	public delegate void DelegMsgBox(string strTitle, string strContent, ArrayList arrOption);
 	public DelegMsgBox m_delegPopMsgBox;
 
-	public MyGame(GameData gameData = null)
+	public MyGame(GameData gameData)
+	{
+		m_GameData = gameData;
+		InitGame ();
+    }
+
+	public MyGame(String countryName, String yearName, String familyName, String selfName)
+	{
+		m_GameData = new GameData (countryName, yearName, familyName, selfName);
+		InitGame ();
+	}
+
+	public void InitGame()
 	{
 		m_bEnd = false;
 		m_ListMessageBox = new List<MessageBox>();
 		m_msgGenerater = new Generater ();
 
-		m_GameData = gameData;
-		if (m_GameData == null) 
-		{
-			m_GameData = new GameData ();
-		}
-
 		//m_msgGenerater.Register(typeof(TestMessage));
 		m_msgGenerater.Register (typeof(JsMsgBox));
-        m_msgGenerater.Register(typeof(TX_yinghuoshouxin));
-        m_msgGenerater.Register(typeof(TestMessage2));
-    }
+		m_msgGenerater.Register(typeof(TX_yinghuoshouxin));
+		m_msgGenerater.Register(typeof(TestMessage2));
+	}
 
 	public bool IsEnd()
 	{
@@ -139,7 +145,7 @@ enum ZHOUMING
 public class GameData : ISerializationCallbackReceiver
 {
 
-	public GameData()
+	public GameData(String countryName, String yearName, String familyName, String selfName)
 	{
         m_Date = new GameDate();
         m_OfficeDict = new Tools.SerialDictionary<string, Office> ();
@@ -153,7 +159,9 @@ public class GameData : ISerializationCallbackReceiver
         m_factionReleation = new FactionReleation();
         m_HougongOfficeResponse = new OfficeResponse();
 
-        emperor = new Emperor();
+		m_Emperor = new Emperor(familyName, selfName);
+		m_CountryName = countryName;
+		m_YearName = yearName;
     }
 
 	public void Init()
@@ -305,6 +313,8 @@ public class GameData : ISerializationCallbackReceiver
 //			}
 //		}
     }
+	public String m_CountryName;
+	public String m_YearName;
 
 	public int tm;
 	public int fk;
@@ -320,7 +330,7 @@ public class GameData : ISerializationCallbackReceiver
     public OfficeResponse m_officeResponse;
     public OfficeResponse m_HougongOfficeResponse;
     public FactionReleation m_factionReleation;
-    public Emperor emperor;
+    public Emperor m_Emperor;
 
     [SerializeField]
 	private List<Office> serialOffice;
@@ -349,14 +359,16 @@ public class Emperor
 
 	public String GetName()
 	{
-		return "Test";//familyName + selfName;
+		return familyName + selfName;
 	}
 
-    public Emperor()
+	public Emperor(String familyName, String selfName)
     {
 		age = Tools.Probability.GetGaussianRandomNum (16, 40);
         heath = Tools.Probability.GetRandomNum(1,10);
         despress = Tools.Probability.GetRandomNum(1,10);
+		this.familyName = familyName;
+		this.selfName = selfName;
     }
 }
 
@@ -483,32 +495,29 @@ public class Persion
 
     public static String GetMaleName()
     {
-        int rowCount = Tools.Probability.GetRandomNum(1, cvsXings.RowLength() - 1);
-        String xingshi = cvsXings.Get(rowCount.ToString(), "CHI");
-
-        rowCount = Tools.Probability.GetRandomNum(1, cvsMingz.RowLength() - 1);
-        String mingzi = cvsMingz.Get(rowCount.ToString(), "CHI");
-
-        return xingshi + mingzi;
+		return GetFamilyName() + GetSelfName();
     }
 
     public static String GetFemaleName()
     {
-        int rowCount = Tools.Probability.GetRandomNum(1, cvsXings.RowLength() - 1);
-        String xingshi = cvsXings.Get(rowCount.ToString(), "CHI");
-
-        String mingzi = cvsMingz.Get("0", "CHI");
-
-        return xingshi + mingzi;
+		return GetFamilyName() + Tools.Cvs.Mingz.Get("0", "CHI");
     }
 
+	public static String GetFamilyName()
+	{
+		int rowCount = Tools.Probability.GetRandomNum(1, Tools.Cvs.Xings.RowLength() - 1);
+		return Tools.Cvs.Xings.Get(rowCount.ToString(), "CHI");
+	}
+
+	public static String GetSelfName()
+	{
+		int rowCount = Tools.Probability.GetRandomNum(1, Tools.Cvs.Mingz.RowLength() - 1);
+		return Tools.Cvs.Mingz.Get(rowCount.ToString(), "CHI");
+	}
 
     public string m_name;
     public int m_score;
 	private static System.Random ran=new System.Random();
-
-    private static Tools.Cvs cvsXings = new Tools.Cvs("text/xingshi");
-    private static Tools.Cvs cvsMingz = new Tools.Cvs("text/mingzi");
 }
 
 [Serializable]
