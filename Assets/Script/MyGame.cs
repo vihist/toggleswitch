@@ -144,22 +144,26 @@ enum ZHOUMING
 [Serializable]
 public class GameData : ISerializationCallbackReceiver
 {
-
-	public GameData(String countryName, String yearName, String familyName, String selfName)
+	public GameData()
 	{
-        m_Date = new GameDate();
-        m_OfficeDict = new Tools.SerialDictionary<string, Office> ();
-        m_HougongOfficeDict = new Dictionary<string, Office>();
-        m_FactionDict = new Dictionary<string, Faction> ();
+		m_Date = new GameDate();
+		m_OfficeDict = new Tools.SerialDictionary<string, Office> ();
+		m_HougongOfficeDict = new Dictionary<string, Office>();
+		m_FactionDict = new Dictionary<string, Faction> ();
 
 		m_MaleDict = new Dictionary<string, Persion> ();
-        m_FemaleDict = new Dictionary<string, Persion>();
+		m_FemaleDict = new Dictionary<string, Persion>();
 
-        m_officeResponse = new OfficeResponse ();
-        m_factionReleation = new FactionReleation();
-        m_HougongOfficeResponse = new OfficeResponse();
+		m_officeResponse = new OfficeResponse ();
+		m_factionReleation = new FactionReleation();
+		m_HougongOfficeResponse = new OfficeResponse();
 
-		m_Emperor = new Emperor(familyName, selfName);
+		m_Emperor = new Emperor ();
+
+	}
+	public GameData(String countryName, String yearName, String familyName, String selfName):this()
+	{
+		m_Emperor.Init(familyName, selfName);
 		m_CountryName = countryName;
 		m_YearName = yearName;
     }
@@ -357,18 +361,22 @@ public class Emperor
 	public String familyName;
 	public String selfName;
 
+	public void Init(String familyName, String selfName)
+	{
+		this.familyName = familyName;
+		this.selfName = selfName;
+	}
+
 	public String GetName()
 	{
 		return familyName + selfName;
 	}
 
-	public Emperor(String familyName, String selfName)
+	public Emperor()
     {
 		age = Tools.Probability.GetGaussianRandomNum (16, 40);
         heath = Tools.Probability.GetRandomNum(1,10);
         despress = Tools.Probability.GetRandomNum(1,10);
-		this.familyName = familyName;
-		this.selfName = selfName;
     }
 }
 

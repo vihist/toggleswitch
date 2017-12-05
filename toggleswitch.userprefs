@@ -1,27 +1,21 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/MainScene.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/MyGame.cs">
     <Files>
-      <File FileName="Assets/Script/StartScene.cs" Line="90" Column="36" />
-      <File FileName="Assets/Script/Tools.cs" Line="198" Column="59" />
-      <File FileName="Assets/Script/MyGame.cs" Line="514" Column="67" />
-      <File FileName="Assets/Script/GameScene.cs" Line="10" Column="1" />
-      <File FileName="Assets/Script/MsgBox/MessageBox.cs" Line="5" Column="3" />
-      <File FileName="Assets/Script/ChaoTScene.cs" Line="15" Column="74" />
-      <File FileName="Assets/Script/HouGScene.cs" Line="7" Column="1" />
-      <File FileName="Assets/Script/MainScene.cs" Line="41" Column="3" />
-      <File FileName="Assets/SpringGUI/Scripts/SpringGUI/ColorPicker/Mesh/MultiColoredTape.cs" Line="43" Column="1" />
-      <File FileName="Assets/Script/MsgBox/CT_zhongchenyiwaisiwang.cs" Line="14" Column="51" />
-      <File FileName="Assets/Script/MsgBox/JsMsgBox.cs" Line="11" Column="52" />
-      <File FileName="Assets/Script/MsgBox/TX_yinghuoshouxin.cs" Line="29" Column="51" />
-      <File FileName="Assets/Script/TianXScene.cs" Line="8" Column="6" />
-      <File FileName="Assets/SpringGUI/Demo/02_PieGraph/PieGraphExample.cs" Line="12" Column="1" />
+      <File FileName="Assets/Script/StartScene.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/Tools.cs" Line="172" Column="14" />
+      <File FileName="Assets/Script/MyGame.cs" Line="540" Column="52" />
+      <File FileName="Assets/Script/MainScene.cs" Line="185" Column="57" />
+      <File FileName="Assets/Script/MsgBox/TX_yinghuoshouxin.cs" Line="50" Column="41" />
+      <File FileName="Assets/Script/MsgBox/CT_zhongchenyiwaisiwang.cs" Line="26" Column="2" />
+      <File FileName="Assets/Script/MsgBox/TestMessage.cs" Line="22" Column="3" />
+      <File FileName="Assets/Script/MsgBox/CT_ZhongchenBingCi.cs" Line="21" Column="2" />
+      <File FileName="Assets/Script/ChaoTScene.cs" Line="68" Column="116" />
+      <File FileName="Assets/Script/Global.cs" Line="22" Column="20" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <RunToCursorBreakpoint file="/Users/fang/Documents/GitHub/toggleswitch/Assets/Script/Tools.cs" line="233" column="18" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
