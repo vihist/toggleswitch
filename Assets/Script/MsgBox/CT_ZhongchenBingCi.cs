@@ -7,11 +7,13 @@ class CT_ZhongchenBingCi : MessageBox
 	{
 		m_office = office;
 
-		strTitile = Cvs.MsgDesc.Get("CT_ZCYWSW", "TITLE");
-		strContent = Cvs.MsgDesc.Get("CT_ZCYWSW", "CONTENT");
+        Persion persion = Global.GetGameData().m_officeResponse.GetPersionByOffice(m_office.ToString());
 
-		arrOption.Add(new Option { strDesc = Cvs.MsgDesc.Get("CT_ZCYWSW", "OPT1"), delegOnBtnClick = OnOption1 });
-	}
+        strTitile = Cvs.MsgDesc.Get("CT_ZCBC", "TITLE");
+        strContent = String.Format(Cvs.MsgDesc.Get("CT_ZCBC", "CONTENT"), Cvs.UiDesc.Get(m_office.ToString()), persion.GetName());
+
+        arrOption.Add(new Option { strDesc = Cvs.MsgDesc.Get("CT_ZCBC", "OPT1"), delegOnBtnClick = OnOption1 });
+    }
 
 	void OnOption1()
 	{

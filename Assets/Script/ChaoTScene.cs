@@ -17,7 +17,7 @@ public class ChaoTScene : MonoBehaviour {
         for (int i=0; i<3; i++)
         {
             OFFICE eOffice = (OFFICE)i;
-            sanGong.transform.Find(eOffice.ToString()).transform.Find("Text").GetComponent<Text>().text = (eOffice.ToString());
+            sanGong.transform.Find(eOffice.ToString()).transform.Find("Text").GetComponent<Text>().text = Cvs.UiDesc.Get(eOffice.ToString());
 
         }
 

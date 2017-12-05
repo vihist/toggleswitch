@@ -20,7 +20,8 @@ class TX_yinghuoshouxin : MessageBox
 
 		strContent = String.Format (Cvs.MsgDesc.Get ("TX_YHSX", "CONTENT"), taiChang.GetName ());
 
-		for (int i=0; i<3; i++)
+        List<OFFICE> lstOffice = new List<OFFICE>();
+        for (int i=0; i<3; i++)
 		{
 			OFFICE eOffice = (OFFICE)i;
 			Persion persion = Global.GetGameData().m_officeResponse.GetPersionByOffice(eOffice.ToString());
@@ -29,27 +30,27 @@ class TX_yinghuoshouxin : MessageBox
 				continue;
 			}
 
-			if (Global.GetGameData ().m_factionReleation.GetFactionByPersion (persion.GetName ()) != Global.GetGameData ().m_factionReleation.GetFactionByPersion (taiChang.GetName ())) 
-			{
-				effOffice = eOffice;
-				break;
-			}
+            lstOffice.Add(eOffice);
 
-			if (i == 2) 
+            if (Global.GetGameData ().m_factionReleation.GetFactionByPersion (persion.GetName ()) != Global.GetGameData ().m_factionReleation.GetFactionByPersion (taiChang.GetName ())) 
 			{
 				effOffice = eOffice;
 				break;
 			}
 		}
 
-		if (effOffice != null)
+        if (effOffice == null && lstOffice.Count != 0)
+        {
+            effOffice = lstOffice[lstOffice.Count - 1];
+        }
+
+        if (effOffice != null)
         {
 			arrOption.Add(new Option { strDesc = String.Format(Cvs.MsgDesc.Get("TX_YHSX", "OPT1"), Cvs.UiDesc.Get(effOffice.ToString())), delegOnBtnClick = OnOption1 });
         }
 
 		arrOption.Add(new Option { strDesc = Cvs.MsgDesc.Get("TX_YHSX", "OPT2"), delegOnBtnClick = OnOption2 });
 		arrOption.Add(new Option { strDesc = Cvs.MsgDesc.Get("TX_YHSX", "OPT3"), delegOnBtnClick = OnOption3 });
-		arrOption.Add(new Option { strDesc = Cvs.MsgDesc.Get("TX_YHSX", "OPT4"), delegOnBtnClick = OnOption4 });
     }
 
     public static bool PreCondition()
@@ -73,23 +74,22 @@ class TX_yinghuoshouxin : MessageBox
         //Global.GetGameData ().Init ();
         //NextMsgBox (new TestMessage2());
     }
+
     private void OnOption2()
     {
-        //Global.GetGameData().tm = 2000;
-        //Global.GetGameData ().Init ();
-        //NextMsgBox (new TestMessage2());
+        Global.GetGameData().tm--;
     }
+
     private void OnOption3()
     {
-        //Global.GetGameData().tm = 2000;
-        //Global.GetGameData ().Init ();
-        //NextMsgBox (new TestMessage2());
-    }
-    private void OnOption4()
-    {
-        //Global.GetGameData().tm = 2000;
-        //Global.GetGameData ().Init ();
-        //NextMsgBox (new TestMessage2());
+        if (Tools.Probability.Calc(50))
+        {
+            Global.GetGameData().tm--;
+        }
+        if (Tools.Probability.Calc(50))
+        {
+            Global.GetGameData().m_Emperor.heath--;
+        }
     }
 
     private void OnOption5()
