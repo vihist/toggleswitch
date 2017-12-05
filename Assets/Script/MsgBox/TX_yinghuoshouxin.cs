@@ -9,19 +9,42 @@ class TX_yinghuoshouxin : MessageBox
     public TX_yinghuoshouxin()
     {
 		strTitile = Cvs.MsgDesc.Get("TX_YHSX", "TITLE");
-		strContent = Cvs.MsgDesc.Get("TX_YHSX", "CONTENT");
-
+	
         Persion taiChang = Global.GetGameData().m_officeResponse.GetPersionByOffice(OFFICE.TaiC.ToString());
         if (taiChang == null)
         {
-			arrOption.Add(new Option { strDesc = Cvs.MsgDesc.Get("TX_YHSX", "OPT5"), delegOnBtnClick = OnOption5 });
+			strContent = Cvs.MsgDesc.Get("TX_YHSX_TXKQ", "CONTENT");
+			arrOption.Add(new Option { strDesc = Cvs.MsgDesc.Get("TX_YHSX_TXKQ", "OPT1"), delegOnBtnClick = OnOption5 });
             return;
         }
 
-        Persion chengXiang = Global.GetGameData().m_officeResponse.GetPersionByOffice(OFFICE.ChengX.ToString());
-        if (chengXiang != null)
+		strContent = String.Format (Cvs.MsgDesc.Get ("TX_YHSX", "CONTENT"), taiChang.GetName ());
+
+		for (int i=0; i<3; i++)
+		{
+			OFFICE eOffice = (OFFICE)i;
+			Persion persion = Global.GetGameData().m_officeResponse.GetPersionByOffice(eOffice.ToString());
+			if(persion == null)
+			{
+				continue;
+			}
+
+			if (Global.GetGameData ().m_factionReleation.GetFactionByPersion (persion.GetName ()) != Global.GetGameData ().m_factionReleation.GetFactionByPersion (taiChang.GetName ())) 
+			{
+				effOffice = eOffice;
+				break;
+			}
+
+			if (i == 2) 
+			{
+				effOffice = eOffice;
+				break;
+			}
+		}
+
+		if (effOffice != null)
         {
-			arrOption.Add(new Option { strDesc = Cvs.MsgDesc.Get("TX_YHSX", "OPT1"), delegOnBtnClick = OnOption1 });
+			arrOption.Add(new Option { strDesc = String.Format(Cvs.MsgDesc.Get("TX_YHSX", "OPT1"), Cvs.UiDesc.Get(effOffice.ToString())), delegOnBtnClick = OnOption1 });
         }
 
 		arrOption.Add(new Option { strDesc = Cvs.MsgDesc.Get("TX_YHSX", "OPT2"), delegOnBtnClick = OnOption2 });
@@ -40,11 +63,11 @@ class TX_yinghuoshouxin : MessageBox
 
         if (Tools.Probability.Calc(50))
         {
-			NextMsgBox (new CT_zhongchenyiwaisiwang(OFFICE.ChengX));
+			NextMsgBox (new CT_zhongchenyiwaisiwang((OFFICE)effOffice));
         }
 		else
 		{
-			NextMsgBox (new CT_ZhongchenBingCi(OFFICE.ChengX));
+			NextMsgBox (new CT_ZhongchenBingCi((OFFICE)effOffice));
 		}
 
         //Global.GetGameData ().Init ();
@@ -52,19 +75,19 @@ class TX_yinghuoshouxin : MessageBox
     }
     private void OnOption2()
     {
-        Global.GetGameData().tm = 2000;
+        //Global.GetGameData().tm = 2000;
         //Global.GetGameData ().Init ();
         //NextMsgBox (new TestMessage2());
     }
     private void OnOption3()
     {
-        Global.GetGameData().tm = 2000;
+        //Global.GetGameData().tm = 2000;
         //Global.GetGameData ().Init ();
         //NextMsgBox (new TestMessage2());
     }
     private void OnOption4()
     {
-        Global.GetGameData().tm = 2000;
+        //Global.GetGameData().tm = 2000;
         //Global.GetGameData ().Init ();
         //NextMsgBox (new TestMessage2());
     }
@@ -74,5 +97,7 @@ class TX_yinghuoshouxin : MessageBox
         Global.GetGameData().tm--;
         Global.GetGameData().m_Emperor.despress++;
     }
+
+	private OFFICE? effOffice = null;
 
 }

@@ -5,6 +5,8 @@ class CT_ZhongchenBingCi : MessageBox
 {
 	public CT_ZhongchenBingCi(OFFICE office)
 	{
+		m_office = office;
+
 		strTitile = Cvs.MsgDesc.Get("CT_ZCYWSW", "TITLE");
 		strContent = Cvs.MsgDesc.Get("CT_ZCYWSW", "CONTENT");
 
