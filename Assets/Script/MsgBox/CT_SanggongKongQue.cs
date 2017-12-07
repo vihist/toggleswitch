@@ -45,7 +45,7 @@ public class CT_SanggongKongQue : MessageBox
 			Office  curOffice = Global.GetGameData ().m_officeResponse.GetOfficeByPersion (persion.GetName ());
 
 			arrOption.Add(new Option { 
-				strDesc = String.Format(Cvs.MsgDesc.Get("CT_ZCBC", "OPT"+index.ToString()), Cvs.UiDesc.Get(faction.ToString()), Cvs.UiDesc.Get(curOffice.GetName(), persion.GetName())), 
+				strDesc = String.Format(Cvs.MsgDesc.Get("CT_SGKQ", "OPT1"), Cvs.UiDesc.Get(curOffice.GetName()), persion.GetName(), Cvs.UiDesc.Get(Global.GetGameData().m_FactionDict[faction.ToString()].GetFullName())), 
 				delegOnBtnClick = delegArray[index]});
 
 			m_lstSelectPersion.Add (persion);
