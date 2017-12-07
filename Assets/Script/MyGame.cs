@@ -28,6 +28,7 @@ public class MyGame
 		m_msgGenerater = new Generater ();
 
 		//m_msgGenerater.Register(typeof(TestMessage));
+		m_msgGenerater.Register(typeof(CT_SanggongKongQue));
 		m_msgGenerater.Register (typeof(JsMsgBox));
 		m_msgGenerater.Register(typeof(TX_yinghuoshouxin));
 		m_msgGenerater.Register(typeof(TestMessage2));
@@ -69,7 +70,7 @@ enum OFFICE_GROUP
 	JiuQ
 }
 
-enum OFFICE
+public enum OFFICE
 {
 	ChengX,
 	TaiW,
@@ -434,7 +435,7 @@ public class Office
         }
 	}
 
-	private OFFICE GetEnum()
+    public OFFICE GetEnum()
 	{
 		return (OFFICE)Enum.Parse(typeof(OFFICE), office);
 	}
@@ -693,7 +694,7 @@ public class FactionReleation
 
 	}
 
-    public List<Persion> GetPersionByOffice(String factionName)
+	public List<Persion> GetPersionByFaction(String factionName)
     {
         List<Persion> persionList = new List<Persion>();
         for(int i=0; i<m_list.Count; i++)

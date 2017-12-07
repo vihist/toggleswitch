@@ -156,9 +156,10 @@ public class MainScene : MonoBehaviour
 
 			for(int i=0; i<Global.GetMyGame().m_ListMessageBox.Count; i++)
 			{
+				yield return new WaitForSeconds (0.5F);
+
 				MessageBox msgbox = Global.GetMyGame().m_ListMessageBox[i];
      
-
                 CheckDialog Dialog = GameObject.Find("Canvas").transform.Find("Background").gameObject.AddComponent<CheckDialog> ();
 				Dialog.Initial (msgbox.strTitile, msgbox.strContent, msgbox.arrOption);
 

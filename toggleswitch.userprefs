@@ -1,20 +1,22 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/MsgBox/CT_ZhongchenBingCi.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/MsgBox/CT_SanggongKongQue.cs">
     <Files>
-      <File FileName="Assets/Script/StartScene.cs" Line="44" Column="41" />
-      <File FileName="Assets/Script/Tools.cs" Line="162" Column="5" />
-      <File FileName="Assets/Script/MyGame.cs" Line="164" Column="44" />
-      <File FileName="Assets/Script/MainScene.cs" Line="185" Column="57" />
-      <File FileName="Assets/Script/MsgBox/TX_yinghuoshouxin.cs" Line="70" Column="38" />
+      <File FileName="Assets/Script/StartScene.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/Tools.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/MyGame.cs" Line="491" Column="1" />
+      <File FileName="Assets/Script/MainScene.cs" Line="159" Column="42" />
+      <File FileName="Assets/Script/MsgBox/TX_yinghuoshouxin.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/MsgBox/CT_zhongchenyiwaisiwang.cs" Line="12" Column="3" />
-      <File FileName="Assets/Script/MsgBox/TestMessage.cs" Line="22" Column="3" />
-      <File FileName="Assets/Script/MsgBox/CT_ZhongchenBingCi.cs" Line="9" Column="3" />
-      <File FileName="Assets/Script/ChaoTScene.cs" Line="25" Column="69" />
-      <File FileName="Assets/Script/Global.cs" Line="22" Column="20" />
+      <File FileName="Assets/Script/MsgBox/TestMessage.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/MsgBox/CT_ZhongchenBingCi.cs" Line="6" Column="1" />
+      <File FileName="Assets/Script/ChaoTScene.cs" Line="2" Column="1" />
+      <File FileName="Assets/Script/Global.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/CheckDialog.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/GameFrame.cs" Line="22" Column="31" />
-      <File FileName="Assets/Resources/text/msgdef.txt" Line="4" Column="85" />
+      <File FileName="Assets/Script/GameFrame.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/text/msgdef.txt" Line="1" Column="1" />
+      <File FileName="Assets/Script/MsgBox/CT_SanggongKongQue.cs" Line="38" Column="3" />
+      <File FileName="Assets/Script/HouGScene.cs" Line="26" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
