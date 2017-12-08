@@ -48,6 +48,20 @@ public class PieGraphExample : MonoBehaviour
         //PieGraph.Inject(new List<float>() { 8 , 7 });
     }
 
+	// Update is called once per frame
+	void Update()
+	{
+		List<PieData> list = new List<PieData> ();
+		foreach (Faction faction in Global.GetGameData().m_FactionDict.Values)
+		{
+			list.Add (new PieData (Global.GetGameData ().m_factionReleation.GetFactionsPower (faction.GetName ()), GetColor(faction.GetName ()), Cvs.UiDesc.Get(faction.GetFullName ())));
+		}
+
+		PieGraph.Refresh (list);
+
+		PieGraph.SetNativeSize();
+	}
+
 	private Color GetColor(String str)
 	{
 		FACTION eFaction = (FACTION)Enum.Parse(typeof(FACTION), str);

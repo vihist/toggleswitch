@@ -53,6 +53,13 @@ namespace SpringGUI
             foreach (PieData pieData in piedatas.PieDatas )
                 PieDatas.Add(pieData);
         }
+
+		public void RefreshData(IList<PieData> piedatas)
+		{
+			PieDatas.Clear ();
+			foreach (PieData pieData in piedatas )
+				PieDatas.Add(pieData);
+		}
     };
 
     //GUI Text information for pie Graph
@@ -111,6 +118,14 @@ namespace SpringGUI
         {
             PieData.AddPieData(pies);
         }
+
+
+		public void Refresh( IList<PieData> pieData)
+		{
+			PieData.RefreshData (pieData);
+			UpdateMaterial ();
+			UpdateGeometry ();
+		}
 
         #region draw pie
 
