@@ -12,9 +12,6 @@ public class CT_SanggongKongQue : MessageBox
 		strTitile = Cvs.MsgDesc.Get("CT_SGKQ", "TITLE");
 		strContent = String.Format(Cvs.MsgDesc.Get("CT_SGKQ", "CONTENT"), Cvs.UiDesc.Get(m_office.ToString()));
 
-
-		//DelegOnBtnClick[] delegArray = {OnOption1, OnOption2, OnOption3, OnOption4, OnOption5};
-
 		m_lstSelectPersion = GetSelectionPersion ();
 
 		int index = 0;
@@ -30,13 +27,13 @@ public class CT_SanggongKongQue : MessageBox
 
 	public static bool PreCondition()
 	{
-		for(int i=0; i<3; i++)
+        List<OFFICE> offList = Global.GetGameData().GetOfficeEnum(OFFICE_GROUP.SanGong);
+        foreach (OFFICE eOffice in offList)
 		{
-			OFFICE office = (OFFICE)i;
-			Persion persion = Global.GetGameData ().m_officeResponse.GetPersionByOffice (office.ToString());
+			Persion persion = Global.GetGameData ().m_officeResponse.GetPersionByOffice (eOffice.ToString());
 			if(persion == null)
 			{
-				m_office = office;
+				m_office = eOffice;
 				return true;
 			}
 		}
@@ -46,7 +43,7 @@ public class CT_SanggongKongQue : MessageBox
 
 	private List<Persion> GetSelectionPersion()
 	{
-		List<Persion> jiuqingList = Global.GetGameData ().GetJiuqing ();
+        List<Persion> jiuqingList = Global.GetGameData ().GetPersionByOfficeGroup (OFFICE_GROUP.JiuQing);
 
 		Dictionary<String, List<Persion>> factionDict = new Dictionary<string, List<Persion>> ();
 		foreach(Persion p in jiuqingList)
@@ -73,36 +70,6 @@ public class CT_SanggongKongQue : MessageBox
 		}
 
 		return selectPersionList;
-	}
-
-	private void OnOption1()
-	{
-		int i = 0;
-		OnSelect (i);
-	}
-
-	private void OnOption2()
-	{
-		int i = 1;
-		OnSelect (i);
-	}
-
-	private void OnOption3()
-	{
-		int i = 2;
-		OnSelect (i);
-	}
-
-	private void OnOption4()
-	{
-		int i = 3;
-		OnSelect (i);
-	}
-
-	private void OnOption5()
-	{
-		int i = 4;
-		OnSelect (i);
 	}
 
 	private void OnSelect(int i)

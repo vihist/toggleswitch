@@ -29,9 +29,10 @@ public class MyGame
 
 		//m_msgGenerater.Register(typeof(TestMessage));
 		m_msgGenerater.Register(typeof(CT_SanggongKongQue));
-		m_msgGenerater.Register (typeof(JsMsgBox));
+		m_msgGenerater.Register(typeof(JsMsgBox));
 		m_msgGenerater.Register(typeof(TX_yinghuoshouxin));
 		m_msgGenerater.Register(typeof(TestMessage2));
+        m_msgGenerater.Register(typeof(CT_JiuqingKongQue));
 	}
 
 	public bool IsEnd()
@@ -64,10 +65,11 @@ public class MyGame
     public List<MessageBox> m_ListMessageBox;
 }
 
-enum OFFICE_GROUP
+public enum OFFICE_GROUP
 {
-	SanG,
-	JiuQ
+	SanGong,
+	JiuQing,
+    CiShi,
 }
 
 public enum OFFICE
@@ -262,13 +264,42 @@ public class GameData : ISerializationCallbackReceiver
 
 	}
 
-	public List<Persion> GetJiuqing()
+    public List<OFFICE> GetOfficeEnum(OFFICE_GROUP eGroup)
+    {
+        switch (eGroup)
+        {
+            case OFFICE_GROUP.SanGong:
+                {
+                    List<OFFICE> offList = new List<OFFICE> { OFFICE.ChengX, OFFICE.TaiW, OFFICE.YuSDF };
+                    return offList;
+                }
+                break;
+            case OFFICE_GROUP.JiuQing:
+                {
+                    List<OFFICE> offList = new List<OFFICE> { OFFICE.TaiC, OFFICE.TaiP, OFFICE.GuangL, OFFICE.TingW, OFFICE.DaH, OFFICE.ZhongZ, OFFICE.DaS, OFFICE.ShaoF };
+                    return offList;
+                }
+                break;
+            case OFFICE_GROUP.CiShi:
+                {
+                    List<OFFICE> offList = new List<OFFICE> { OFFICE.Youzhou, OFFICE.Jizhou, OFFICE.Bingzhou, OFFICE.Yuzhou, OFFICE.Qingzhou, OFFICE.Xuzhou, OFFICE.Yangzhou, OFFICE.Yongzhou, OFFICE.Jingzhou, OFFICE.Yizhou };
+                    return offList;
+                }
+                break;
+            default:
+                return null;
+        }
+
+    }
+
+    public List<Persion> GetPersionByOfficeGroup(OFFICE_GROUP eGroup)
 	{
-		List<Persion> persionList = new List<Persion> ();
-		for (int i = 3; i < 9; i++)
+        List<OFFICE> offList = GetOfficeEnum(eGroup);
+
+        List<Persion> persionList = new List<Persion> ();
+		foreach (OFFICE eOffice in offList)
 		{
-			OFFICE office = (OFFICE)i;
-			Persion persion = m_officeResponse.GetPersionByOffice (office.ToString ());
+			Persion persion = m_officeResponse.GetPersionByOffice (eOffice.ToString ());
 			if (persion != null) 
 			{
 				persionList.Add (persion);

@@ -610,7 +610,7 @@ GameObject:
   - component: {fileID: 105886133}
   - component: {fileID: 105886132}
   m_Layer: 5
-  m_Name: SanG
+  m_Name: SanGong
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4949,7 +4949,7 @@ GameObject:
   - component: {fileID: 1406223682}
   - component: {fileID: 1406223681}
   m_Layer: 5
-  m_Name: JiuQ
+  m_Name: JiuQing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

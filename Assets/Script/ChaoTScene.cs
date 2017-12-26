@@ -11,8 +11,8 @@ public class ChaoTScene : MonoBehaviour {
 	void Start ()
     {
 
-        GameObject sanGong= GameObject.Find(OFFICE_GROUP.SanG.ToString());
-		sanGong.transform.Find("Text").GetComponent<Text>().text = Cvs.UiDesc.Get(OFFICE_GROUP.SanG.ToString());
+        GameObject sanGong= GameObject.Find(OFFICE_GROUP.SanGong.ToString());
+		sanGong.transform.Find("Text").GetComponent<Text>().text = Cvs.UiDesc.Get(OFFICE_GROUP.SanGong.ToString());
 
         for (int i=0; i<3; i++)
         {
@@ -21,8 +21,8 @@ public class ChaoTScene : MonoBehaviour {
 
         }
 
-        GameObject jiuQing = GameObject.Find(OFFICE_GROUP.JiuQ.ToString());
-        jiuQing.transform.Find("Text").GetComponent<Text>().text = Cvs.UiDesc.Get(OFFICE_GROUP.JiuQ.ToString());
+        GameObject jiuQing = GameObject.Find(OFFICE_GROUP.JiuQing.ToString());
+        jiuQing.transform.Find("Text").GetComponent<Text>().text = Cvs.UiDesc.Get(OFFICE_GROUP.JiuQing.ToString());
 
         for (int i = 3; i < 3+9; i++)
         {
@@ -38,13 +38,13 @@ public class ChaoTScene : MonoBehaviour {
         for (int i = 0; i < 3; i++)
         {
             OFFICE eOffice = (OFFICE)i;
-            RefreshOfficeResposne(OFFICE_GROUP.SanG, eOffice);
+            RefreshOfficeResposne(OFFICE_GROUP.SanGong, eOffice);
         }
 
         for (int i = 3; i < 3+9; i++)
         {
             OFFICE eOffice = (OFFICE)i;
-            RefreshOfficeResposne(OFFICE_GROUP.JiuQ, eOffice);
+            RefreshOfficeResposne(OFFICE_GROUP.JiuQing, eOffice);
         }
     }
 
