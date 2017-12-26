@@ -98,7 +98,7 @@ public enum OFFICE
 	//Liangzhou=ZHOUMING.Liangzhou,
 	Jingzhou=ZHOUMING.Jingzhou,
 	//Sizhou=ZHOUMING.Sizhou,
-	Yizhou=ZHOUMING.Yizhou
+	Yizhou=ZHOUMING.Yizhou,
 }
 
 enum FEIPIN
@@ -260,9 +260,23 @@ public class GameData : ISerializationCallbackReceiver
 			m_FemaleDict.Add (persion.GetName (), persion);
 		}
 
-
 	}
 
+	public List<Persion> GetJiuqing()
+	{
+		List<Persion> persionList = new List<Persion> ();
+		for (int i = 3; i < 9; i++)
+		{
+			OFFICE office = (OFFICE)i;
+			Persion persion = m_officeResponse.GetPersionByOffice (office.ToString ());
+			if (persion != null) 
+			{
+				persionList.Add (persion);
+			}
+		}
+
+		return persionList;
+	}
 
 	private void InitOfficeResponse()
 	{
@@ -548,6 +562,18 @@ public class Persion
 
 		Global.GetGameData ().m_MaleDict.Remove (m_name);
 
+	}
+
+	public Office GetOffice()
+	{
+		Office office = Global.GetGameData ().m_officeResponse.GetOfficeByPersion (GetName());
+		return office;
+	}
+
+	public Faction GetFaction()
+	{
+		Faction faction = Global.GetGameData ().m_factionReleation.GetFactionByPersion (GetName());
+		return faction;
 	}
 
     public string m_name;

@@ -8,50 +8,24 @@ public class CT_SanggongKongQue : MessageBox
 
 	public CT_SanggongKongQue()
 	{
-		m_lstSelectPersion = new List<Persion> ();
 
 		strTitile = Cvs.MsgDesc.Get("CT_SGKQ", "TITLE");
 		strContent = String.Format(Cvs.MsgDesc.Get("CT_SGKQ", "CONTENT"), Cvs.UiDesc.Get(m_office.ToString()));
 
-		int[] a = {1,2,4};
 
-		DelegOnBtnClick[] delegArray = {OnOption1, OnOption2, OnOption3, OnOption4, OnOption5};
+		//DelegOnBtnClick[] delegArray = {OnOption1, OnOption2, OnOption3, OnOption4, OnOption5};
 
+		m_lstSelectPersion = GetSelectionPersion ();
 
 		int index = 0;
-		foreach (FACTION faction in Enum.GetValues(typeof(FACTION)))
+		foreach (Persion p in m_lstSelectPersion) 
 		{
-			List<Persion> lsrPersion = Global.GetGameData ().m_factionReleation.GetPersionByFaction(faction.ToString());
-			if (lsrPersion.Count == 0) 
-			{
-				continue;
-			}
-
-			lsrPersion.Sort ((x, y)=> -x.m_score.CompareTo(y.m_score));
-
-			int iIndex = 0;
-			for(int i=0; i<lsrPersion.Count; i++)
-			{
-				Office office = Global.GetGameData ().m_officeResponse.GetOfficeByPersion (lsrPersion [i].GetName ());
-				if (office.GetEnum() > m_office) 
-				{
-					iIndex = i;
-					break;
-				}
-			}
-
-			Persion persion = lsrPersion [iIndex];
-
-			Office  curOffice = Global.GetGameData ().m_officeResponse.GetOfficeByPersion (persion.GetName ());
-
 			arrOption.Add(new Option { 
-				strDesc = String.Format(Cvs.MsgDesc.Get("CT_SGKQ", "OPT1"), Cvs.UiDesc.Get(curOffice.GetName()), persion.GetName(), Cvs.UiDesc.Get(Global.GetGameData().m_FactionDict[faction.ToString()].GetFullName())), 
-				delegOnBtnClick = delegArray[index]});
+				strDesc = String.Format(Cvs.MsgDesc.Get("CT_SGKQ", "OPT1"), Cvs.UiDesc.Get(p.GetOffice().GetName()), p.GetName(), Cvs.UiDesc.Get(p.GetFaction().GetFullName())), 
+				delegOnBtnClick = OnSelect});
 
-			m_lstSelectPersion.Add (persion);
 			index++;
 		}
-
 	}
 
 	public static bool PreCondition()
@@ -68,6 +42,37 @@ public class CT_SanggongKongQue : MessageBox
 		}
 
 		return false;
+	}
+
+	private List<Persion> GetSelectionPersion()
+	{
+		List<Persion> jiuqingList = Global.GetGameData ().GetJiuqing ();
+
+		Dictionary<String, List<Persion>> factionDict = new Dictionary<string, List<Persion>> ();
+		foreach(Persion p in jiuqingList)
+		{
+			if (p.GetOffice ().GetEnum() == OFFICE.TaiC)
+			{
+				continue;
+			}
+
+			String factionName = p.GetFaction ().GetName ();
+			if (!factionDict.ContainsKey(factionName))
+			{
+				factionDict.Add (factionName, new List<Persion>());
+
+			}
+			factionDict [factionName].Add (p);
+		}
+
+		List<Persion> selectPersionList = new List<Persion> ();
+		foreach (List<Persion> persionList in factionDict.Values)
+		{
+			persionList.Sort ((x, y) => -x.m_score.CompareTo (y.m_score));
+			selectPersionList.Add (persionList [0]);
+		}
+
+		return selectPersionList;
 	}
 
 	private void OnOption1()

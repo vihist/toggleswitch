@@ -16,7 +16,7 @@ public class JsMsgBox : MessageBox
 		return Tools.Probability.Calc(100);
 	}
 
-	private void  OnOption1()
+	private void  OnOption1(int i)
 	{
 		Global.GetGameData ().tm = 2000;
 		//Global.GetGameData ().Init ();

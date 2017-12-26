@@ -15,7 +15,7 @@ class CT_ZhongchenBingCi : MessageBox
         arrOption.Add(new Option { strDesc = Cvs.MsgDesc.Get("CT_ZCBC", "OPT1"), delegOnBtnClick = OnOption1 });
     }
 
-	void OnOption1()
+	void OnOption1(int i)
 	{
 		Persion persion = Global.GetGameData ().m_officeResponse.GetPersionByOffice (m_office.ToString());
 		persion.Quit ();

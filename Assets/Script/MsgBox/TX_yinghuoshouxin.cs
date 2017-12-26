@@ -58,7 +58,7 @@ class TX_yinghuoshouxin : MessageBox
         return Tools.Probability.Calc(100);
     }
 
-    private void OnOption1()
+	private void OnOption1(int i)
     {
         //Global.GetGameData().tm = 5000;
 
@@ -75,12 +75,12 @@ class TX_yinghuoshouxin : MessageBox
         //NextMsgBox (new TestMessage2());
     }
 
-    private void OnOption2()
+	private void OnOption2(int i)
     {
         Global.GetGameData().tm--;
     }
 
-    private void OnOption3()
+	private void OnOption3(int i)
     {
         if (Tools.Probability.Calc(50))
         {
@@ -92,7 +92,7 @@ class TX_yinghuoshouxin : MessageBox
         }
     }
 
-    private void OnOption5()
+	private void OnOption5(int i)
     {
         Global.GetGameData().tm--;
         Global.GetGameData().m_Emperor.despress++;

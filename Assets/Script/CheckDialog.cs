@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 class CheckDialog : MonoBehaviour
 {
@@ -22,26 +23,38 @@ class CheckDialog : MonoBehaviour
 
 		bCheck = false;
 
-		for(int i=0; i<arrOption.Count; i++)
+		OptionAdaptor opAdaptor = new OptionAdaptor (arrOption, this);
+
+		for (int i = 0; i < opAdaptor.GetNum (); i++) 
 		{
-			Option option = (Option) arrOption[i];
 			Button Btn = dialog.transform.Find("Button"+i).GetComponent<Button>();
 
-			Text txBtn = Btn.transform.Find("Text").GetComponent<Text>();
-			txBtn.text = option.strDesc;
-
-			Btn.onClick.AddListener ( delegate () 
-				{
-					Debug.Log("OnClick");
-					option.delegOnBtnClick();
-
-					Destroy(dialog);
-
-					dialog = null;
-					bCheck = true;
-
-				});
+			Btn.transform.Find ("Text").GetComponent<Text> ().text = opAdaptor.GetText (i);
+			Btn.onClick.AddListener (opAdaptor.GetDelegate(i));
 		}
+
+//		int i = 0;
+//		for(; i<arrOption.Count; i++)
+//		{
+//			Option option = (Option) arrOption[i];
+//			Button Btn = dialog.transform.Find("Button"+i).GetComponent<Button>();
+//
+//			Text txBtn = Btn.transform.Find("Text").GetComponent<Text>();
+//			txBtn.text = option.strDesc;
+//
+//			Btn.onClick.AddListener ( delegate () 
+//				{
+//					int t = i;
+//					Debug.Log("OnClick"+t.ToString());
+//					option.delegOnBtnClick(t);
+//
+//					Destroy(dialog);
+//
+//					dialog = null;
+//					bCheck = true;
+//
+//				});
+//		}
 			
 	}
 
@@ -56,5 +69,40 @@ class CheckDialog : MonoBehaviour
 
 	private GameObject dialog;
 	private bool bCheck;
+
+	class OptionAdaptor
+	{
+		public OptionAdaptor(ArrayList arrOption, CheckDialog dialog)
+		{
+			this.arrOption = arrOption;
+			this.dialog = dialog;
+		}
+
+		public int GetNum()
+		{
+			return arrOption.Count;
+		}
+
+		public String GetText(int i)
+		{
+			Option option = (Option) arrOption[i];
+			return option.strDesc;
+		}
+
+		public UnityAction GetDelegate(int i)
+		{
+			return new UnityAction (delegate () {
+				Debug.Log ("OnClick" + i.ToString ());
+				Option option = (Option)arrOption [i];
+				option.delegOnBtnClick (i);
+				Destroy (dialog.dialog);
+				dialog.dialog= null;
+				dialog.bCheck = true;
+			});
+		}
+
+		ArrayList arrOption;
+		CheckDialog dialog;
+	}
 
 }

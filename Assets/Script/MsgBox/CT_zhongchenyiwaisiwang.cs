@@ -19,7 +19,7 @@ class CT_zhongchenyiwaisiwang : MessageBox
 
     }
 
-    void OnOption1()
+	void OnOption1(int i)
     {
 		Persion persion = Global.GetGameData ().m_officeResponse.GetPersionByOffice (m_office.ToString());
 		persion.Die ();

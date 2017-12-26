@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Tools;
 
-public delegate void DelegOnBtnClick();
+public delegate void DelegOnBtnClick(int iIndex);
 
 public struct Option
 {

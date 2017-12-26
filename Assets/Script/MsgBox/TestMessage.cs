@@ -16,7 +16,7 @@ public class TestMessage : MessageBox
         return true;
     }
 
-	private void  OnOption1()
+	private void  OnOption1(int i)
     {
 		Global.GetGameData ().tm = 1000;
 		NextMsgBox (new TestMessage2());
@@ -43,7 +43,7 @@ public class TestMessage2 : MessageBox
         return false;
 	}
 
-	private void  OnOption1()
+	private void  OnOption1(int i)
 	{
 		//GameFrame.GetInstance ().OnEnd();
 	}

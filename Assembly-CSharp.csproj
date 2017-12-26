@@ -56,6 +56,7 @@
      <Compile Include="Assets\Script\Global.cs" />
      <Compile Include="Assets\Script\HouGScene.cs" />
      <Compile Include="Assets\Script\MainScene.cs" />
+     <Compile Include="Assets\Script\MsgBox\CT_JiuqingKongQue.cs" />
      <Compile Include="Assets\Script\MsgBox\CT_SanggongKongQue.cs" />
      <Compile Include="Assets\Script\MsgBox\CT_ZhongchenBingCi.cs" />
      <Compile Include="Assets\Script\MsgBox\CT_zhongchenyiwaisiwang.cs" />
