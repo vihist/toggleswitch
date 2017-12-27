@@ -33,7 +33,8 @@ public class MyGame
 		m_msgGenerater.Register(typeof(TX_yinghuoshouxin));
 		m_msgGenerater.Register(typeof(TestMessage2));
         m_msgGenerater.Register(typeof(CT_JiuqingKongQue));
-	}
+        m_msgGenerater.Register(typeof(DF_CishiKongQue));
+    }
 
 	public bool IsEnd()
 	{

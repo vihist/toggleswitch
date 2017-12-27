@@ -19,7 +19,7 @@ public class DF_CishiKongQue : MessageBox
 		{
 			arrOption.Add(new Option
 				{
-					strDesc = String.Format(Cvs.MsgDesc.Get("DF_CSKQ", "OPT1"), Cvs.UiDesc.Get(p.GetOffice().GetName()), p.GetName(), Cvs.UiDesc.Get(p.GetFaction().GetFullName())),
+					strDesc = String.Format(Cvs.MsgDesc.Get("DF_CSKQ", "OPT1"), "", p.GetName(), Cvs.UiDesc.Get(Global.GetGameData().m_FactionDict[m_faction].GetFullName())),
 					delegOnBtnClick = OnSelect
 				});
 
@@ -76,7 +76,8 @@ public class DF_CishiKongQue : MessageBox
 	private void OnSelect(int i)
 	{
 		Persion persion = m_lstSelectPersion[i];
-		Global.GetGameData().m_officeResponse.Set(m_office.ToString(), persion.m_name);
+        Global.GetGameData().m_MaleDict.Add(persion.GetName(), persion);
+		Global.GetGameData().m_officeResponse.Set(m_office.ToString(), persion.GetName());
 		Global.GetGameData ().m_factionReleation.Set (persion.GetName(), m_faction.ToString());
 	}
 
