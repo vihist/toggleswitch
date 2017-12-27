@@ -30,6 +30,12 @@ public class CT_JiuqingKongQue : MessageBox
 
     public static bool PreCondition()
     {
+		Persion persionChengx = Global.GetGameData ().GetPersionByOffice (OFFICE.ChengX);
+		if (persionChengx == null)
+		{
+			return false;
+		}
+
         List<OFFICE> offList = Global.GetGameData().GetOfficeEnum(OFFICE_GROUP.JiuQing);
         foreach (OFFICE eOffice in offList)
         {
@@ -47,32 +53,26 @@ public class CT_JiuqingKongQue : MessageBox
     private List<Persion> GetSelectionPersion()
     {
         List<Persion> cishiList = Global.GetGameData().GetPersionByOfficeGroup(OFFICE_GROUP.CiShi);
+		cishiList.Sort (
+			delegate(Persion x, Persion y) 
+			{ 
+				int xScore = x.m_score;
+				int yScore = y.m_score;
 
-        Dictionary<String, List<Persion>> factionDict = new Dictionary<string, List<Persion>>();
-        foreach (Persion p in cishiList)
-        {
-            if (p.GetOffice().GetEnum() == OFFICE.TaiC)
-            {
-                continue;
-            }
+				Persion persionChengx = Global.GetGameData ().GetPersionByOffice (OFFICE.ChengX);
+				if(x.GetFaction() != persionChengx.GetFaction())
+				{
+					xScore = (int)(xScore*0.8);
+				}
+				if(y.GetFaction() != persionChengx.GetFaction())
+				{
+					yScore = (int)(yScore*0.8);
+				}
+				return -(xScore.CompareTo(yScore));
+			});
 
-            String factionName = p.GetFaction().GetName();
-            if (!factionDict.ContainsKey(factionName))
-            {
-                factionDict.Add(factionName, new List<Persion>());
-
-            }
-            factionDict[factionName].Add(p);
-        }
-
-        List<Persion> selectPersionList = new List<Persion>();
-        foreach (List<Persion> persionList in factionDict.Values)
-        {
-            persionList.Sort((x, y) => -x.m_score.CompareTo(y.m_score));
-            selectPersionList.Add(persionList[0]);
-        }
-
-        return selectPersionList;
+		List<Persion> selectPersionList = cishiList.GetRange(0, Math.Min(3, cishiList.Count()));
+		return selectPersionList;
     }
 
     private void OnSelect(int i)
@@ -80,7 +80,6 @@ public class CT_JiuqingKongQue : MessageBox
         Persion persion = m_lstSelectPersion[i];
         Global.GetGameData().m_officeResponse.Set(m_office.ToString(), persion.m_name);
     }
-
 
     private static OFFICE? m_office = null;
     private List<Persion> m_lstSelectPersion;

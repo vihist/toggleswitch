@@ -60,6 +60,7 @@
      <Compile Include="Assets\Script\MsgBox\CT_SanggongKongQue.cs" />
      <Compile Include="Assets\Script\MsgBox\CT_ZhongchenBingCi.cs" />
      <Compile Include="Assets\Script\MsgBox\CT_zhongchenyiwaisiwang.cs" />
+     <Compile Include="Assets\Script\MsgBox\DF_CishiKongQue.cs" />
      <Compile Include="Assets\Script\MsgBox\JsMsgBox.cs" />
      <Compile Include="Assets\Script\MsgBox\MessageBox.cs" />
      <Compile Include="Assets\Script\MsgBox\TX_yinghuoshouxin.cs" />

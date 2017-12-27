@@ -309,6 +309,11 @@ public class GameData : ISerializationCallbackReceiver
 		return persionList;
 	}
 
+	public Persion GetPersionByOffice(OFFICE eOffice)
+	{
+		return m_officeResponse.GetPersionByOffice (eOffice.ToString ());
+	}
+
 	private void InitOfficeResponse()
 	{
 		List<Persion> listPersion = new List<Persion> (m_MaleDict.Values);
@@ -536,10 +541,16 @@ public class GameEnv
 [Serializable]
 public class Persion
 {
-	public Persion(String name)
+	public Persion(String name, int score = -1)
 	{
 		m_name = name;
-		m_score = ran.Next(1,100);
+		m_score = score;
+
+		if (m_score == -1)
+		{
+			m_score = ran.Next(1,100);
+		}
+		
 	}
 
 	public string GetName()
