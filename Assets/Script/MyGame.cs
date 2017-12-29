@@ -121,11 +121,12 @@ enum FEIPIN
     Feib9,
 }
 
-enum FACTION
+public enum FACTION
 {
     ShiDF,
     XunG,
-    HuanG,
+    //HuanG,
+	WaiQ,
 }
 
 enum ZHOUMING
@@ -315,6 +316,11 @@ public class GameData : ISerializationCallbackReceiver
 		return m_officeResponse.GetPersionByOffice (eOffice.ToString ());
 	}
 
+	public Faction GetFaction(FACTION eFaction)
+	{
+		return m_FactionDict [eFaction.ToString ()];
+	}
+
 	private void InitOfficeResponse()
 	{
 		List<Persion> listPersion = new List<Persion> (m_MaleDict.Values);
@@ -387,6 +393,8 @@ public class GameData : ISerializationCallbackReceiver
     public OfficeResponse m_HougongOfficeResponse;
     public FactionReleation m_factionReleation;
     public Emperor m_Emperor;
+
+	public Persion m_persionWaitWQ;
 
     [SerializeField]
 	private List<Office> serialOffice;
@@ -512,6 +520,11 @@ public class Faction
 	public string GetFullName()
 	{
 		return m_name+"_FULL";
+	}
+
+	public FACTION GetEnum()
+	{
+		return (FACTION)Enum.Parse(typeof(FACTION), m_name);
 	}
 
 	[SerializeField]

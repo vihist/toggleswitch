@@ -1,33 +1,22 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/MsgBox/DF_CishiKongQue.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/MsgBox/CT_SanggongKongQue.cs">
     <Files>
+      <File FileName="Assets/Script/CheckDialog.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/MsgBox/CT_ZhongchenBingCi.cs" Line="18" Column="22" />
       <File FileName="Assets/Script/MsgBox/CT_zhongchenyiwaisiwang.cs" Line="5" Column="13" />
       <File FileName="Assets/Script/MsgBox/JsMsgBox.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/MsgBox/MessageBox.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/MsgBox/TestMessage.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/MsgBox/TX_yinghuoshouxin.cs" Line="95" Column="30" />
-      <File FileName="Assets/Script/MsgBox/CT_JiuqingKongQue.cs" Line="16" Column="52" />
-      <File FileName="Assets/Script/MyGame.cs" Line="357" Column="84" />
-      <File FileName="Assets/Script/MsgBox/DF_CishiKongQue.cs" Line="86" Column="2" />
-      <File FileName="Assets/Script/Tools.cs" Line="72" Column="9" />
+      <File FileName="Assets/Script/MsgBox/TX_yinghuoshouxin.cs" Line="52" Column="87" />
+      <File FileName="Assets/Script/MsgBox/CT_JiuqingKongQue.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/MsgBox/CT_SanggongKongQue.cs" Line="1" Column="1" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="toggleswitch" expanded="True">
-            <Node name="Assembly-CSharp" expanded="True" />
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Catchpoint exceptionName="System.NullReferenceException" includeSubclasses="True" />
-      <Breakpoint file="/Users/fang/Documents/GitHub/toggleswitch/Assets/Script/MyGame.cs" line="241" column="1" />
+      <Breakpoint file="/Users/fang/Documents/GitHub/toggleswitch/Assets/Script/MyGame.cs" line="242" column="1" />
       <Breakpoint file="/Users/fang/Documents/GitHub/toggleswitch/Assets/SpringGUI/Scripts/SpringGUI/Data Graph/PieGraph/PieGraph.cs" line="164" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
